@@ -19,7 +19,7 @@ try{var q=new URLSearchParams(location.search).get('mode');if(q==='day'||q==='ni
 d.setAttribute('data-mode',m);
 var tc=document.querySelector('meta[name=theme-color]');if(tc)tc.content=m==='day'?'#FBF6EC':'#17100A';
 var sm=window.matchMedia&&matchMedia('(max-width:760px)').matches,pl=document.createElement('link');pl.rel='preload';pl.as='image';
-pl.href=m==='day'?(sm?'assets/ig/day-hero-1-m.webp':'assets/ig/day-hero-1.webp'):(sm?'assets/ig/hero-video-poster-m.webp':'assets/ig/hero-video-poster.webp');
+pl.href=sm?'assets/ig/hero-video-poster-m.webp':'assets/ig/hero-video-poster.webp';
 document.head.appendChild(pl);})();
 </script>
 <title>Casa Dulce — After-Dark Cocktails &amp; Desserts · Las Vegas</title>
@@ -694,6 +694,42 @@ html[data-mode="day"] .hero-media::before{background:linear-gradient(90deg,rgba(
 /* gentle cross-fade when the look changes */
 html.mode-anim body,html.mode-anim .carta,html.mode-anim .terraza,html.mode-anim .feed,html.mode-anim .marquee,html.mode-anim .mbar-status{transition:background-color .7s ease,color .7s ease}
 @media(max-width:760px){.mode-toggle{width:46px;height:46px}}
+
+/* ================= FOOD & DRINK FEATURE SLIDES ================= */
+.slide-feature{background:#17100A}
+.slide-feature .sf-bg{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;filter:brightness(.42) saturate(1.15)}
+.slide-feature .sf-pat{position:absolute;inset:0;background:url(assets/terrazzo.svg) 0 0/360px 360px repeat;opacity:.13}
+.slide-feature .sf-photo{position:absolute;right:9vw;top:45%;transform:translateY(-50%);height:min(58vh,560px);aspect-ratio:3/4;margin:0;border-radius:999px 999px 16px 16px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.55);outline:1px solid rgba(217,184,118,.55);outline-offset:10px;z-index:3}
+.slide-feature .sf-photo img{width:100%;height:100%;object-fit:cover}
+.hero-slides .slide-feature.is-on .sf-bg{animation:none}
+.slide-feature .sf-photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:3rem 1rem 1.2rem;text-align:center;background:linear-gradient(transparent,rgba(14,9,5,.86));color:var(--cream);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;line-height:1.6}
+.hero::after{transition:opacity 1.2s ease}
+.hero.feature-on::after{opacity:.45}
+.hero-fact{transition:opacity .8s ease}
+.hero.feature-on .hero-fact{opacity:0}
+@media(max-width:1100px){.slide-feature .sf-photo{right:5vw;height:min(52vh,480px)}}
+@media(max-width:760px){
+  .slide-feature .sf-photo{left:0;right:0;top:0;transform:none;width:100%;height:62%;aspect-ratio:auto;border-radius:0;outline:0;box-shadow:none}
+  .slide-feature .sf-photo img{-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+  .slide-feature .sf-photo figcaption{display:none}
+  .hero.feature-on::after{opacity:.8}
+}
+
+/* ================= TERRAZZO PATTERN (from the Casa Dulce badge) ================= */
+.casa,.carta,.salon,.terraza,.feed,.visita,footer{position:relative;isolation:isolate;overflow:hidden}
+.casa::before,.carta::before,.salon::before,.terraza::before,.feed::before,.visita::before,footer::before{
+  content:"";position:absolute;top:-360px;left:-360px;right:0;bottom:0;z-index:-1;pointer-events:none;
+  background:url(assets/terrazzo.svg) 0 0/360px 360px repeat;opacity:var(--pat-op,.16);
+  animation:terrazzo-drift var(--pat-speed,110s) linear infinite;animation-play-state:paused;will-change:transform}
+.pat-live::before{animation-play-state:running}
+.carta::before,.feed::before{animation-direction:reverse}
+.salon::before{--pat-speed:140s}
+.visita::before{--pat-speed:125s;animation-direction:reverse}
+@keyframes terrazzo-drift{to{transform:translate3d(360px,360px,0)}}
+/* darker grounds take a touch less */
+.carta,.terraza,.feed,footer{--pat-op:.13}
+html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"] .feed{--pat-op:.16}
+@media(prefers-reduced-motion:reduce){.casa::before,.carta::before,.salon::before,.terraza::before,.feed::before,.visita::before,footer::before{animation:none}}
 </style>
 </head>
 <body>
@@ -738,17 +774,39 @@ html.mode-anim body,html.mode-anim .carta,html.mode-anim .terraza,html.mode-anim
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <div class="hero-media hero-slides">
-    <div class="slide slide-video" data-night="1" data-day="3" data-label="the terrace at night">
-      <video muted playsinline preload="none" poster="assets/ig/hero-video-poster.webp" aria-hidden="true"></video>
+    <div class="slide slide-video" data-night="1" data-day="1" data-label="the terrace at night">
+      <video muted playsinline preload="auto" poster="assets/ig/hero-video-poster.webp" aria-hidden="true"></video>
     </div>
-    <picture class="slide" data-day="1" data-label="the lounge"><source media="(max-width:760px)" srcset="assets/ig/day-hero-1-m.webp"><img src="assets/ig/day-hero-1.webp" alt="The Casa Dulce lounge by day — cane chairs, a hand-tufted mural and the sign on hand-troweled plaster" loading="lazy"></picture>
+    <picture class="slide" data-night="2" data-label="Monkey Business and a citrus cocktail"><source media="(max-width:760px)" srcset="assets/ig/hero-3-m.webp"><img src="assets/ig/hero-3.webp" alt="A cinnamon-rimmed martini with a fried banana chip beside a chile-rimmed citrus cocktail on a wooden bar" loading="lazy"></picture>
     <picture class="slide" data-day="2" data-label="matcha and espresso martinis"><source media="(max-width:760px)" srcset="assets/ig/day-hero-2-m.webp"><img src="assets/ig/day-hero-2.webp" alt="A matcha martini, an espresso martini and a chile-rimmed citrus cocktail on a sunlit patio table" loading="lazy"></picture>
-    <picture class="slide" data-night="2" data-label="the entrance"><source media="(max-width:760px)" srcset="assets/ig/hero-1-m.webp"><img src="assets/ig/hero-1.webp" alt="The Casa Dulce sign glowing over the entrance at The Distrikt, string lights overhead" loading="lazy"></picture>
-    <picture class="slide" data-night="3" data-label="the bar"><source media="(max-width:760px)" srcset="assets/ig/hero-2-m.webp"><img src="assets/ig/hero-2.webp" alt="The back bar at night — glassware overhead, shelves of tequila and mezcal, the Casa Dulce sign reflected in the glass" loading="lazy"></picture>
-    <picture class="slide" data-night="4" data-label="the cocktails"><source media="(max-width:760px)" srcset="assets/ig/hero-3-m.webp"><img src="assets/ig/hero-3.webp" alt="A cinnamon-rimmed martini with a fried banana chip beside a chile-rimmed citrus cocktail on a wooden bar" loading="lazy"></picture>
+    <div class="slide slide-feature" data-night="3" data-day="3" data-label="the chocolate sundae">
+      <img class="sf-bg" src="assets/ig/feat-sundae-bg.webp" alt="" aria-hidden="true" loading="lazy">
+      <span class="sf-pat" aria-hidden="true"></span>
+      <figure class="sf-photo"><img src="assets/ig/feat-sundae.webp" alt="Two scoops of chocolate ice cream with chocolate and white drizzle, crumble and a cherry" loading="lazy"><figcaption>Chocolate sundae · Latin-inspired ice cream</figcaption></figure>
+    </div>
+    <div class="slide slide-feature" data-day="4" data-label="the espresso martini">
+      <img class="sf-bg" src="assets/ig/feat-espresso-bg.webp" alt="" aria-hidden="true" loading="lazy">
+      <span class="sf-pat" aria-hidden="true"></span>
+      <figure class="sf-photo"><img src="assets/ig/feat-espresso.webp" alt="An espresso martini topped with three coffee beans on a sunlit wooden table" loading="lazy"><figcaption>Espresso martini · eight ways</figcaption></figure>
+    </div>
+    <div class="slide slide-feature" data-night="4" data-day="6" data-label="the sparkling mojito refresher">
+      <img class="sf-bg" src="assets/ig/feat-mojito-bg.webp" alt="" aria-hidden="true" loading="lazy">
+      <span class="sf-pat" aria-hidden="true"></span>
+      <figure class="sf-photo"><img src="assets/ig/feat-mojito.webp" alt="A mint and lime sparkling mojito with a dried lime wheel on the terrazzo bar beside the menu" loading="lazy"><figcaption>Sparkling mojito refresher · zero proof</figcaption></figure>
+    </div>
+    <div class="slide slide-feature" data-night="5" data-day="5" data-label="flan and mini tres leches">
+      <img class="sf-bg" src="assets/ig/feat-flan-bg.webp" alt="" aria-hidden="true" loading="lazy">
+      <span class="sf-pat" aria-hidden="true"></span>
+      <figure class="sf-photo"><img src="assets/ig/feat-flan.webp" alt="Flan in caramel sauce on a square plate behind a mini tres leches cake in a gold cup" loading="lazy"><figcaption>Flan · mini tres leches</figcaption></figure>
+    </div>
+    <div class="slide slide-feature" data-night="6" data-label="cocktails in good company">
+      <img class="sf-bg" src="assets/ig/feat-company-bg.webp" alt="" aria-hidden="true" loading="lazy">
+      <span class="sf-pat" aria-hidden="true"></span>
+      <figure class="sf-photo"><img src="assets/ig/feat-company.webp" alt="Hands reaching for a cinnamon-rimmed martini and a citrus cocktail on the wooden bar" loading="lazy"><figcaption>Monkey Business · good company</figcaption></figure>
+    </div>
   </div>
-  <script>(function(){var v=document.querySelector('.slide-video video'),m=matchMedia('(max-width:760px)').matches,n=document.documentElement.getAttribute('data-mode')!=='day';
-  v.poster=m?'assets/ig/hero-video-poster-m.webp':'assets/ig/hero-video-poster.webp';v.preload=n?'auto':'none';v.src=m?'assets/ig/hero-video-m.mp4':'assets/ig/hero-video.mp4';})();</script>
+  <script>(function(){var v=document.querySelector('.slide-video video'),m=matchMedia('(max-width:760px)').matches;
+  v.poster=m?'assets/ig/hero-video-poster-m.webp':'assets/ig/hero-video-poster.webp';v.src=m?'assets/ig/hero-video-m.mp4':'assets/ig/hero-video.mp4';})();</script>
   <div class="hero-dots" role="group" aria-label="Hero slides"></div>
   <div class="hero-inner">
     <p class="eyebrow"><span class="only-night">The Distrikt · Downtown Las Vegas</span><span class="only-day">Afternoons at The Distrikt · DTLV</span></p>
@@ -1079,7 +1137,7 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 // hero slideshow: the original video + real photos, ordered for the day or night look
 const Hero = (() => {
   const wrap = document.querySelector('.hero-slides'), dotsWrap = document.querySelector('.hero-dots');
-  const vid = wrap.querySelector('video');
+  const vid = wrap.querySelector('video'), heroEl = document.querySelector('.hero');
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const PHOTO_MS = 6500, VIDEO_PLAYS = 2;
   let slides = [], dots = [], i = 0, t = null, plays = 0;
@@ -1107,6 +1165,7 @@ const Hero = (() => {
     slides[i] && slides[i].classList.remove('is-on'); dots[i] && dots[i].removeAttribute('aria-current');
     i = (n + slides.length) % slides.length;
     slides[i].classList.add('is-on'); dots[i] && dots[i].setAttribute('aria-current', 'true');
+    heroEl.classList.toggle('feature-on', slides[i].classList.contains('slide-feature'));
     schedule();
   };
   const next = () => go(i + 1);
@@ -1122,6 +1181,7 @@ const Hero = (() => {
     dots = [...dotsWrap.children];
     dots.forEach((d, k) => d.addEventListener('click', () => go(k)));
     i = 0; slides[0].classList.add('is-on'); dots[0].setAttribute('aria-current', 'true');
+    heroEl.classList.toggle('feature-on', slides[0].classList.contains('slide-feature'));
     wrap.classList.add('ready');
     schedule();
   };
@@ -1134,6 +1194,14 @@ const Hero = (() => {
   document.addEventListener('visibilitychange', () => { if (document.hidden) { stop(); vid && vid.pause(); } else schedule(); });
   build();
   return { build };
+})();
+
+// terrazzo pattern drifts only while its section is on screen
+(() => {
+  const els = document.querySelectorAll('.casa,.carta,.salon,.terraza,.feed,.visita,footer');
+  if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('pat-live')); return; }
+  const o = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('pat-live', e.isIntersecting)), {rootMargin:'100px'});
+  els.forEach(e => o.observe(e));
 })();
 
 // day / night look: follows the Las Vegas sun; the toggle overrides it for this visit
