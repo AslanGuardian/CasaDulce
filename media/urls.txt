@@ -1,3 +1,9 @@
 day_first.png https://d8j0ntlcm91z4.cloudfront.net/user_3DXZlwbgLgDBWUthig6TtWWA3c1/hf_20261108_193549_afc6486c-5c18-4013-bff4-b1f54cc4c5d5.png
 day_last.png https://d8j0ntlcm91z4.cloudfront.net/user_3DXZlwbgLgDBWUthig6TtWWA3c1/hf_20261108_193549_eccde752-2673-4654-a732-3595994b7ffc.png
 day_video.mp4 https://d8j0ntlcm91z4.cloudfront.net/user_3DXZlwbgLgDBWUthig6TtWWA3c1/hf_20261108_193932_7da47a99-e8c6-45ce-9ffc-31dc24739afb.mp4
+ext_sundae.png https://d8j0ntlcm91z4.cloudfront.net/user_3DXZlwbgLgDBWUthig6TtWWA3c1/hf_20261108_201132_5f021058-e1de-4910-8a15-9e8c47dfdb03.png
+ext_mojito.png https://d8j0ntlcm91z4.cloudfront.net/user_3DXZlwbgLgDBWUthig6TtWWA3c1/hf_20261108_201133_87aca7bb-af31-4075-80e3-4bad3e081742.png
+ext_company.png https://d8j0ntlcm91z4.cloudfront.net/user_3DXZlwbgLgDBWUthig6TtWWA3c1/hf_20261108_201135_d2e19c7b-4e70-490e-924c-c7431d37e4f7.png
+ext_room.png https://d8j0ntlcm91z4.cloudfront.net/user_3DXZlwbgLgDBWUthig6TtWWA3c1/hf_20261108_201136_f28682bd-cf54-46db-86f2-9b1cbe640f6c.png
+ext_flan.png https://d8j0ntlcm91z4.cloudfront.net/user_3DXZlwbgLgDBWUthig6TtWWA3c1/hf_20261108_201138_9151d68c-964d-46a5-b9c3-15dd64aedaa0.png
+ext_patio.png https://d8j0ntlcm91z4.cloudfront.net/user_3DXZlwbgLgDBWUthig6TtWWA3c1/hf_20261108_201152_562c7e94-16f9-4457-b42d-69dde9a0f756.png
