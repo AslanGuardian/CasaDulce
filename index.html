@@ -833,6 +833,25 @@ html[data-mode="day"] .terraza .eyebrow{color:#74551F}
   .mbar-btn{font-size:.74rem;letter-spacing:.16em}
   .hero-cta .btn{font-size:.74rem;letter-spacing:.16em}
 }
+
+/* real menu: grouped lists with a shared price */
+.carta-grid{align-items:start}
+.pillar .grp{margin-top:1.7rem}
+.pillar .sub+.grp,.pillar .sig+.grp{margin-top:1.2rem}
+.pillar h4{display:flex;align-items:baseline;gap:.8rem;margin:0;padding-bottom:.55rem;border-bottom:1px solid rgba(198,163,95,.45);
+  font-family:var(--body);font-size:.75rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--brass-bright)}
+.pillar h4 .price{margin-left:auto;font-family:var(--display);font-size:1.05rem;letter-spacing:.02em;font-weight:500}
+.pillar .grp-note{font-size:.84rem;font-style:italic;opacity:.85;margin:.55rem 0 .1rem}
+.pillar .grp li{padding:.62rem 0}
+.pillar .grp li:first-child{border-top:none}
+.pillar .dish.np::before{display:none}
+.pillar .desc{line-height:1.45}
+.pillar .sig{border:1px solid rgba(198,163,95,.55);padding:.9rem 1rem 1rem;margin:0 0 .4rem}
+.pillar .sig-tag{display:block;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--brass-bright);margin-bottom:.35rem}
+html[data-mode="day"] .pillar h4,html[data-mode="day"] .pillar .sig-tag{color:var(--gold-ink)}
+html[data-mode="day"] .pillar h4{border-bottom-color:rgba(140,106,46,.4)}
+html[data-mode="day"] .pillar .sig{border-color:rgba(140,106,46,.45)}
+@media(max-width:760px){.pillar .grp li{padding:.55rem 0}}
 </style>
 </head>
 <body>
@@ -885,7 +904,7 @@ html[data-mode="day"] .terraza .eyebrow{color:#74551F}
     </div>
     <div class="slide slide-feature" data-night="2" data-label="Monkey Business">
       <span class="sf-pat" aria-hidden="true"></span>
-      <figure class="sf-photo win"><img src="assets/ig/w-monkey.webp" width="809" height="1079" alt="A cinnamon-rimmed martini with foam and a fried banana chip beside a chile-rimmed citrus cocktail on the wooden bar" loading="lazy"><figcaption>Monkey Business · fried banana martini</figcaption></figure>
+      <figure class="sf-photo win"><img src="assets/ig/w-monkey.webp" width="809" height="1079" alt="A cinnamon-rimmed martini with foam and a fried banana chip beside a chile-rimmed citrus cocktail on the wooden bar" loading="lazy"><figcaption>Monkey Business · banana espresso martini</figcaption></figure>
     </div>
     <div class="slide slide-feature" data-day="2" data-label="matcha, espresso and citrus">
       <span class="sf-pat" aria-hidden="true"></span>
@@ -893,7 +912,7 @@ html[data-mode="day"] .terraza .eyebrow{color:#74551F}
     </div>
     <div class="slide slide-feature" data-night="3" data-day="3" data-label="the chocolate sundae">
       <span class="sf-pat" aria-hidden="true"></span>
-      <figure class="sf-photo win"><img src="assets/ig/a-sundae.webp" width="900" height="1200" alt="A chocolate ice cream sundae with chocolate and white drizzle, crumble and a cherry, on a sunlit wooden table" loading="lazy"><figcaption>Chocolate sundae · Latin-inspired ice cream</figcaption></figure>
+      <figure class="sf-photo win"><img src="assets/ig/a-sundae.webp" width="900" height="1200" alt="A chocolate ice cream sundae with chocolate and white drizzle, crumble and a cherry, on a sunlit wooden table" loading="lazy"><figcaption>Abuela's Chocolate sundae</figcaption></figure>
     </div>
     <div class="slide slide-feature" data-night="4" data-day="4" data-label="the sparkling mojito refresher">
       <span class="sf-pat" aria-hidden="true"></span>
@@ -921,7 +940,7 @@ html[data-mode="day"] .terraza .eyebrow{color:#74551F}
     <p class="only-night">Dessert cocktails from top bartenders, chef-driven sweets and small-batch ice cream made for us in Mexico.<span class="lg-only"> The room you bring people to before everyone else finds out.</span></p>
     <div class="hero-cta">
       <a class="btn btn-solid" href="#carta"><span class="lg-only">See the menu</span><span class="sm-only">The menu</span></a>
-      <a class="btn btn-line only-night" href="#firma"><span class="lg-only">The Fried Banana Martini</span><span class="sm-only">The signature</span></a>
+      <a class="btn btn-line only-night" href="#firma"><span class="lg-only">Monkey Business</span><span class="sm-only">The signature</span></a>
       <a class="btn btn-line only-day" href="#visita"><span class="lg-only">Happy hour · 3:30–6</span><span class="sm-only">Happy hour</span></a>
     </div>
   </div>
@@ -951,7 +970,7 @@ html[data-mode="day"] .terraza .eyebrow{color:#74551F}
       <h2 class="only-day">Sunlight on plaster.<br>Something sweet in hand.</h2>
       <p class="lead only-day">By day, Casa Dulce is the bright corner of The Distrikt for craft coffee, matcha and Latin-inspired ice cream. You stop in for one latte and stay all afternoon.</p>
       <p class="lead only-night">Dinner is a reservation. What comes after is a scene. Casa Dulce is where the night goes once the plates are cleared: a candlelit room built for the last, best hours of the evening.</p>
-      <p>Every detail here is chosen on purpose. Our ice cream was developed with top chefs in Mexico and is made only for this house: all natural, imported directly, available nowhere else. Pastry comes out of our own ovens, and the bar builds every cocktail to order.</p>
+      <p>Every detail here is chosen on purpose. Our ice cream was developed with top chefs in Mexico and is made only for this house: all natural, imported directly, available nowhere else. Our syrups are made in house, and the bar builds every cocktail to order.</p>
       <p class="only-night">Terrazzo, oak and cane, hand-troweled plaster, low amber light. Dress well. Stay late.</p>
       <p class="only-day">Cane chairs, hand-troweled plaster, blue zellige and a mural made by hand. Bring a friend. Stay for happy hour.</p>
       <span class="es-line">Arrive sweet. Leave sweeter.</span>
@@ -972,55 +991,146 @@ html[data-mode="day"] .terraza .eyebrow{color:#74551F}
     <div class="carta-head reveal">
       <p class="eyebrow">The Menu</p>
       <h2>Handpicked by chefs.<br>Sourced like it matters.</h2>
-      <p>Three programs, each one obsessed over: small-batch ice cream, pastry from our own ovens, and a bar built around dessert cocktails you won't find anywhere else in the city.</p>
+      <p>Lattes built on housemade syrups, sundaes and scoops, and a bar of espresso martinis and Latin cocktails you won't find anywhere else in the city.</p>
     </div>
     <div class="carta-tabs" aria-label="Menu sections">
-      <button type="button" aria-pressed="true">Ice Cream</button>
-      <button type="button" aria-pressed="false">Pastry</button>
+      <button type="button" aria-pressed="true">Coffee</button>
+      <button type="button" aria-pressed="false">Ice Cream</button>
       <button type="button" aria-pressed="false">The Bar</button>
     </div>
     <div class="carta-grid">
 
-      <!-- ICE CREAM -->
+      <!-- COFFEE & MATCHA -->
       <article class="pillar reveal">
-        <figure class="pillar-photo win"><img src="assets/ig/a-sundae.webp" width="900" height="1200" alt="A chocolate ice cream sundae with chocolate drizzle and a cherry on top, on a sunlit wooden table" loading="lazy"></figure>
-        <h3>Ice Cream</h3>
-        <span class="sub">made only for us, in Mexico</span>
-        <ul>
-          <li><div class="dish"><span>Single-Origin Vanilla Bean</span><span class="price">9</span></div><p class="desc">whole Papantla vanilla, nothing else</p></li>
-          <li><div class="dish"><span>Burnt Goat's-Milk Caramel</span><span class="price">9</span></div><p class="desc">slow-cooked to the edge of bitter</p></li>
-          <li><div class="dish"><span>Stone-Ground Dark Chocolate</span><span class="price">9</span></div><p class="desc">single-estate cacao, hint of cinnamon</p></li>
-          <li><div class="dish"><span>Mango &amp; Chile</span><span class="price">9</span></div><p class="desc">ataulfo mango, a whisper of heat</p></li>
-          <li><div class="dish"><span>Strawberries &amp; Cream</span><span class="price">9</span></div><p class="desc">macerated berries, sweet cream</p></li>
-        </ul>
+        <figure class="pillar-photo win"><img src="assets/ig/a-lattes.webp" width="900" height="1200" alt="Three iced lattes with cold-foam tops, one with a fried banana chip, one with star anise, on the wooden bar" loading="lazy"></figure>
+        <h3>Coffee &amp; Matcha</h3>
+        <span class="sub">housemade syrups, cream tops</span>
+        <div class="grp">
+          <h4><span>Lattes</span><span class="price">8</span></h4>
+          <ul>
+            <li><div class="dish np"><span>Dirty Horchata</span></div><p class="desc">housemade horchata · vanilla cream top · brûléed cinnamon stick</p></li>
+            <li><div class="dish np"><span>Fried Banana</span></div><p class="desc">housemade cinnamon banana syrup · fried banana cream top</p></li>
+            <li><div class="dish np"><span>Latte de Olla</span></div><p class="desc">housemade café de olla · vanilla cream top · star anise dust</p></li>
+            <li><div class="dish np"><span>Mazapán</span></div><p class="desc">mazapán · vanilla bean · vanilla cream top</p></li>
+            <li><div class="dish np"><span>Mexican Mocha</span></div><p class="desc">Mexican cocoa with spices · vanilla cream top · cinnamon dust</p></li>
+            <li><div class="dish np"><span>Sweet Corn</span></div><p class="desc">housemade sweet corn syrup · sweet corn cream top · roasted corn</p></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <h4><span>Matcha</span><span class="price">8</span></h4>
+          <ul>
+            <li><div class="dish np"><span>Matchata</span></div><p class="desc">matcha · horchata · vanilla cream top</p></li>
+            <li><div class="dish np"><span>Matcha Latte</span></div><p class="desc">matcha · vanilla bean · vanilla cream top</p></li>
+            <li><div class="dish np"><span>Green Monkey</span></div><p class="desc">matcha · housemade cinnamon banana syrup · fried banana cream</p></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <h4><span>Refreshing drinks</span><span class="price">8</span></h4>
+          <ul>
+            <li><div class="dish np"><span>Sparkling Mojito Refresher</span></div><p class="desc">lime juice · agave · lemon · fresh mint · Mineragua</p></li>
+            <li><div class="dish np"><span>Watermelon Lemonade</span></div><p class="desc">watermelon · lemon · agave</p></li>
+            <li><div class="dish np"><span>Watermelon Citrus Fizz</span></div><p class="desc">watermelon · lemon · lime · agave · Mineragua</p></li>
+            <li><div class="dish np"><span>Agua de Jamaica</span></div><p class="desc">hibiscus tea · agave</p></li>
+            <li><div class="dish np"><span>Hibiscus Lemonade</span></div><p class="desc">hibiscus tea · lemon · agave</p></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <h4><span>Today's featured</span></h4>
+          <ul>
+            <li><div class="dish"><span>Drip Coffee</span><span class="price">5</span></div><p class="desc">ask for today's roast</p></li>
+            <li><div class="dish"><span>Iced Tea</span><span class="price">6</span></div><p class="desc">brewed fresh, changes daily</p></li>
+          </ul>
+        </div>
       </article>
 
-      <!-- PASTRY -->
+      <!-- ICE CREAM & SWEETS -->
       <article class="pillar reveal">
-        <figure class="pillar-photo win"><img src="assets/ig/a-flan.webp" width="900" height="1200" alt="Flan in caramel sauce and a mini tres leches cake in a gold cup, beside a gold candle holder" loading="lazy"></figure>
-        <h3>Pastry</h3>
-        <span class="sub">out of our ovens, every day</span>
-        <ul>
-          <li><div class="dish"><span>Warm Sugar-Shell Brioche</span><span class="price">7</span></div><p class="desc">vanilla or dark chocolate crust</p></li>
-          <li><div class="dish"><span>Churros, Fried to Order</span><span class="price">8</span></div><p class="desc">cinnamon sugar, dark chocolate dip</p></li>
-          <li><div class="dish"><span>Brown-Butter Wedding Cookies</span><span class="price">6</span></div><p class="desc">toasted pecan, powdered sugar</p></li>
-          <li><div class="dish"><span>Caramelized Palmier</span><span class="price">6</span></div><p class="desc">laminated, shatter-crisp</p></li>
-          <li><div class="dish"><span>Dark Spice Cookie</span><span class="price">6</span></div><p class="desc">raw cane sugar, ginger, soft-baked</p></li>
-        </ul>
+        <figure class="pillar-photo win"><img src="assets/ig/a-sundae.webp" width="900" height="1200" alt="Abuela's Chocolate sundae with chocolate and condensed milk drizzle, cookie crumble and a cherry, on a sunlit wooden table" loading="lazy"></figure>
+        <h3>Ice Cream &amp; Sweets</h3>
+        <span class="sub">sundaes, scoops and floats</span>
+        <div class="grp">
+          <h4><span>Ice cream sundaes</span><span class="price">9</span></h4>
+          <p class="grp-note">made with a double scoop of ice cream</p>
+          <ul>
+            <li><div class="dish np"><span>Churro</span></div><p class="desc">hot churro · dark chocolate sauce · condensed milk drizzle</p></li>
+            <li><div class="dish np"><span>Fried Banana</span></div><p class="desc">cinnamon · condensed milk drizzle · sweet plantain chip · cherry</p></li>
+            <li><div class="dish np"><span>Mango Passionfruit</span></div><p class="desc">dusted with Tajín · chamoy drizzle · fresh mint</p></li>
+            <li><div class="dish np"><span>Abuela's Chocolate</span></div><p class="desc">wedding cookie crumble · chocolate &amp; condensed milk · cherry</p></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <h4><span>Mexican Coke float</span><span class="price">11</span></h4>
+          <p class="grp-note">a scoop of any ice cream you like with Mexican Coke in the glass bottle</p>
+        </div>
+        <div class="grp">
+          <h4><span>Ice cream by the scoop</span></h4>
+          <ul>
+            <li><div class="dish"><span>Single Scoop</span><span class="price">6</span></div></li>
+            <li><div class="dish"><span>Double Scoop</span><span class="price">9</span></div></li>
+            <li><div class="dish"><span>Waffle Cone</span><span class="price">2</span></div><p class="desc">housemade batter with vanilla and cinnamon</p></li>
+            <li><div class="dish"><span>Any Topping</span><span class="price">.50</span></div></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <h4><span>Desserts</span></h4>
+          <ul>
+            <li><div class="dish"><span>Flan</span><span class="price">7</span></div></li>
+            <li><div class="dish"><span>Tres Leches Cake</span><span class="price">7</span></div></li>
+          </ul>
+        </div>
       </article>
 
       <!-- THE BAR -->
       <article class="pillar reveal">
-        <figure class="pillar-photo win"><img src="assets/ig/a-company.webp" width="900" height="1200" alt="Hands reaching for a cinnamon-rimmed martini and a chile-rimmed citrus cocktail on the wooden bar" loading="lazy"></figure>
+        <figure class="pillar-photo win"><img src="assets/ig/a-company.webp" width="900" height="1200" alt="Hands reaching for a cinnamon-rimmed Monkey Business and a chile-rimmed citrus cocktail on the wooden bar" loading="lazy"></figure>
         <h3>The Bar</h3>
-        <span class="sub">dessert cocktails, built to order</span>
-        <ul>
-          <li><div class="dish"><span>Fried Banana Martini</span><span class="price">21</span></div><p class="desc">our signature, more below</p></li>
-          <li><div class="dish"><span>Espresso Martini</span><span class="price">19</span></div><p class="desc">house-pulled espresso, vanilla liqueur, cacao</p></li>
-          <li><div class="dish"><span>Smoked Tamarind Margarita</span><span class="price">18</span></div><p class="desc">reposado, tamarind, chile-salt rim</p></li>
-          <li><div class="dish"><span>Slow-Brewed Spiced Coffee</span><span class="price">8</span></div><p class="desc">raw cane sugar, cinnamon, clove</p></li>
-          <li><div class="dish"><span>Horchata Latte</span><span class="price">9</span></div><p class="desc">specialty espresso, rice-almond cream</p></li>
-        </ul>
+        <span class="sub">espresso martinis &amp; cocktails</span>
+        <div class="sig">
+          <span class="sig-tag">Signature cocktail</span>
+          <div class="dish"><span>Jamaica Me Crazy</span><span class="price">18</span></div>
+          <p class="desc">hibiscus · watermelon · lime · Abuelitos tequila</p>
+        </div>
+        <div class="grp">
+          <h4><span>Espresso martinis</span><span class="price">16</span></h4>
+          <ul>
+            <li><div class="dish np"><span>El Clásico</span></div><p class="desc">fresh espresso · housemade vanilla bean syrup · vodka</p></li>
+            <li><div class="dish np"><span>Mazapán Mamí</span></div><p class="desc">mazapán · vanilla bean · peanut butter whiskey</p></li>
+            <li><div class="dish np"><span>Monkey Business</span></div><p class="desc">housemade cinnamon banana syrup · dark rum</p></li>
+            <li><div class="dish np"><span>Corny For You</span></div><p class="desc">housemade sweet corn syrup · vodka</p></li>
+            <li><div class="dish np"><span>Dirty Horchata</span></div><p class="desc">housemade horchata · vanilla bean · reposado tequila</p></li>
+            <li><div class="dish np"><span>Naughty Abuelita</span></div><p class="desc">Mexican spiced cocoa · mezcal</p></li>
+            <li><div class="dish np"><span>Olla Carajillo</span></div><p class="desc">café de olla spices · Licor 43</p></li>
+            <li><div class="dish np"><span>Matcha Daddy</span></div><p class="desc">ceremonial grade matcha · Japanese shochu</p></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <h4><span>Frozen cocktails</span><span class="price">16</span></h4>
+          <ul>
+            <li><div class="dish np"><span>Jamaica Daiquiri</span></div><p class="desc">strawberry hibiscus sorbet · vodka</p></li>
+            <li><div class="dish np"><span>Piña Colada</span></div><p class="desc">piña colada ice cream · dark rum · cherry on top</p></li>
+            <li><div class="dish np"><span>La Maracuyá</span></div><p class="desc">passionfruit &amp; mango sorbet · blanco tequila</p></li>
+            <li><div class="dish np"><span>Margarita Menta</span></div><p class="desc">lemon &amp; mint sorbet · lime · agave · blanco tequila</p></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <h4><span>Fruity cocktails</span><span class="price">16</span></h4>
+          <ul>
+            <li><div class="dish np"><span>Mojito</span></div><p class="desc">lime · agave · white rum · sprig of mint</p></li>
+            <li><div class="dish np"><span>El Cabrón</span></div><p class="desc">lime · watermelon · grapefruit · fresno chili pepper · blanco tequila</p></li>
+            <li><div class="dish np"><span>Margarita Clásico</span></div><p class="desc">lime · agave · triple sec · blanco tequila</p></li>
+            <li><div class="dish np"><span>Pink Paloma</span></div><p class="desc">grapefruit · lime · lemon · agave · blanco tequila</p></li>
+            <li><div class="dish np"><span>Cadillac</span></div><p class="desc">lime · agave · orange liqueur · reposado tequila</p></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <h4><span>To share</span></h4>
+          <ul>
+            <li><div class="dish"><span>Chips &amp; Salsa</span><span class="price">7</span></div><p class="desc">housemade fire-roasted salsa, smoky, mild heat</p></li>
+            <li><div class="dish"><span>Chips &amp; Guacamole</span><span class="price">9</span></div><p class="desc">housemade guacamole</p></li>
+            <li><div class="dish"><span>Chips, Salsa &amp; Guacamole</span><span class="price">13</span></div></li>
+          </ul>
+          <p class="grp-note">all served with blue corn tortilla chips</p>
+        </div>
       </article>
 
     </div>
@@ -1033,15 +1143,15 @@ html[data-mode="day"] .terraza .eyebrow{color:#74551F}
   <div class="wrap firma-grid">
     <div class="reveal">
       <div class="only-day">
-        <p class="eyebrow">The Signature · by day</p>
+        <p class="eyebrow">The Signature Martini · by day</p>
         <h2>The Matcha Daddy <span class="es">Martini.</span></h2>
-        <p>For the matcha lovers. Our matcha, shaken into a martini and poured up. The greenest way to start happy hour, and the drink everyone photographs first.</p>
-        <p>Not drinking? Try the Green Monkey: matcha over our homemade cinnamon-banana syrup, finished with fried banana cream. Add a scoop of churro or fried banana ice cream and the afternoon is handled.</p>
+        <p>For the matcha lovers. Ceremonial-grade matcha and Japanese shochu, shaken and poured up. The greenest way to start happy hour, and the drink everyone photographs first.</p>
+        <p>Not drinking? Try the Green Monkey: matcha over our housemade cinnamon banana syrup, finished with fried banana cream. Add a Churro or Fried Banana sundae and the afternoon is handled.</p>
         <p class="chip-line">Green, cold, poured up.</p>
       </div>
       <div class="only-night">
-      <p class="eyebrow">The Signature</p>
-      <h2>The Fried Banana <span class="es">Martini.</span></h2>
+      <p class="eyebrow">The Signature Martini</p>
+      <h2>Monkey <span class="es">Business.</span></h2>
       <p>The drink people will fly in for. Bananas fried in-house and reduced with cinnamon into a syrup, layered over aged Nicaraguan dark rum and a touch of milk. Crowned with fried banana and a cinnamon cold foam, dusted table-side.</p>
       <p>Then the move: a giant sweet plantain chip laid across the rim. Your spoon and your first bite in one. Scoop the foam. Eat the chip. Drink the martini. Order another.</p>
       <p class="chip-line">One drink, three textures, zero shortcuts.</p>
