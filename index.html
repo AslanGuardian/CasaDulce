@@ -22,10 +22,10 @@ var sm=window.matchMedia&&matchMedia('(max-width:760px)').matches,pl=document.cr
 pl.href='assets/ig/hero-arrival'+(m==='day'?'-day':'')+'-poster'+(sm?'-m':'')+'.webp';
 document.head.appendChild(pl);})();
 </script>
-<title>Casa Dulce — After-Dark Cocktails &amp; Desserts · Las Vegas</title>
-<meta name="description" content="Las Vegas's new after-dark address. Craft cocktails, chef-driven desserts and small-batch ice cream imported from Mexico. Casa Dulce.">
+<title>Casa Dulce · Dessert Cocktails, Coffee &amp; Ice Cream · Downtown Las Vegas</title>
+<meta name="description" content="Dessert cocktails, espresso martinis, coffee, matcha and small-batch ice cream made for us in Mexico. Casa Dulce at The Distrikt, Downtown Las Vegas.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Casa Dulce — Espresso Martini &amp; Cocktail Bar · DTLV">
+<meta property="og:title" content="Casa Dulce · Espresso Martini &amp; Cocktail Bar · DTLV">
 <meta property="og:description" content="Espresso martinis, craft cocktails, Latin-inspired ice cream, coffee and matcha at The Distrikt, Downtown Las Vegas.">
 <meta property="og:image" content="https://casa-dulce-lv.vercel.app/assets/ig/hero-1.webp">
 <meta name="twitter:card" content="summary_large_image">
@@ -797,6 +797,42 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
   .slide-video video{bottom:auto;height:min(100%,168vw);object-position:50% 50%;
     -webkit-mask-image:linear-gradient(180deg,#000 74%,transparent);mask-image:linear-gradient(180deg,#000 74%,transparent)}
 }
+
+/* ================= readability pass ================= */
+:root{--gold-ink:#7E5C22;--gold-deep:#8A6528;--olive-ink:#5E5934}
+/* body copy: regular weight, near-full strength */
+body,.hero p,.casa p,.casa p.lead,.carta-head p,.firma p,.salon-copy p,.terraza p,.vis-block p,.res-card p,.feed-head p,
+.pillar .desc,.glass .lyr-desc,.salon-card figcaption span{font-weight:400}
+.carta-head p,.terraza p,.res-card p,.feed-head p{opacity:.95}
+.pillar .desc{opacity:.88;font-size:.875rem}
+/* small caps labels: larger, less tracking */
+.eyebrow{font-size:.75rem;letter-spacing:.28em;font-weight:500}
+nav ul a{font-size:.75rem;letter-spacing:.26em;opacity:.95}
+.btn{font-size:.75rem;letter-spacing:.26em}
+.hero-media .sf-photo.win figcaption,.slide-feature .sf-photo figcaption{font-size:.74rem;letter-spacing:.2em}
+.hero-fact .lbl,.tstat .lbl{font-size:.75rem;letter-spacing:.22em;opacity:.9}
+.reel .cap span{font-size:.75rem;opacity:.9}
+.casa-photo figcaption{opacity:.85}
+.firma-photo figcaption{font-size:.75rem;letter-spacing:.22em;opacity:1}
+/* gold, orange and olive text on the light sections */
+.casa .eyebrow,.firma .eyebrow,.visita .eyebrow,.firma-photo figcaption,.vis-block a{color:var(--gold-ink)}
+.casa .es-line,.firma h2 .es{color:var(--gold-deep)}
+.salon .eyebrow{color:var(--olive-ink)}
+html[data-mode="day"] .carta .eyebrow,html[data-mode="day"] .terraza .eyebrow,html[data-mode="day"] .feed .eyebrow{color:var(--gold-ink)}
+html[data-mode="day"] .terraza .eyebrow{color:#74551F}
+/* terrazzo pattern: quieter behind paragraphs on the light grounds */
+.casa,.salon,.visita,html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"] .feed{--pat-op:.1}
+@media(max-width:760px){.casa,.salon,.visita,html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"] .feed{--pat-op:.08}}
+/* footer: was dimmed to 55% */
+.foot-base{opacity:1;color:rgba(239,230,210,.82)}
+.photo-credit{font-size:.8rem;opacity:1}
+@media(max-width:760px){
+  .eyebrow{font-size:.74rem;letter-spacing:.22em}
+  .tstat .lbl{font-size:.68rem;letter-spacing:.12em}
+  .vis-block .dir-link{font-size:.75rem;border-color:var(--gold-ink)}
+  .mbar-btn{font-size:.74rem;letter-spacing:.16em}
+  .hero-cta .btn{font-size:.74rem;letter-spacing:.16em}
+}
 </style>
 </head>
 <body>
@@ -853,7 +889,7 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
     </div>
     <div class="slide slide-feature" data-day="2" data-label="matcha, espresso and citrus">
       <span class="sf-pat" aria-hidden="true"></span>
-      <figure class="sf-photo win"><img src="assets/ig/w-trio.webp" width="714" height="952" alt="A matcha martini, an espresso martini and a chile-rimmed citrus cocktail on a sunlit patio table" loading="lazy"><figcaption>Matcha · espresso · citrus — in the sun</figcaption></figure>
+      <figure class="sf-photo win"><img src="assets/ig/w-trio.webp" width="714" height="952" alt="A matcha martini, an espresso martini and a chile-rimmed citrus cocktail on a sunlit patio table" loading="lazy"><figcaption>Matcha · espresso · citrus · in the sun</figcaption></figure>
     </div>
     <div class="slide slide-feature" data-night="3" data-day="3" data-label="the chocolate sundae">
       <span class="sf-pat" aria-hidden="true"></span>
@@ -869,7 +905,7 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
     </div>
     <div class="slide slide-feature" data-night="6" data-label="cocktails in good company">
       <span class="sf-pat" aria-hidden="true"></span>
-      <figure class="sf-photo win"><img src="assets/ig/a-company.webp" width="900" height="1200" alt="Hands reaching for a cinnamon-rimmed martini and a citrus cocktail on the wooden bar" loading="lazy"><figcaption>Monkey Business · good company</figcaption></figure>
+      <figure class="sf-photo win"><img src="assets/ig/a-company.webp" width="900" height="1200" alt="Hands reaching for a cinnamon-rimmed martini and a citrus cocktail on the wooden bar" loading="lazy"><figcaption>Cocktails in good company</figcaption></figure>
     </div>
   </div>
   <script>(function(){var m=matchMedia('(max-width:760px)').matches?'-m':'',day=document.documentElement.getAttribute('data-mode')==='day',
@@ -881,11 +917,11 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
   <div class="hero-inner">
     <p class="eyebrow"><span class="only-night">The Distrikt · Downtown Las Vegas</span><span class="only-day">Afternoons at The Distrikt · DTLV</span></p>
     <h1><span class="only-night">You found it <span class="es">first.</span></span><span class="only-day">Your afternoon, <span class="es">sweeter.</span></span></h1>
-    <p class="only-day">Craft coffee, matcha and Latin-inspired ice cream in the sunniest corner of Downtown — with half-off drinks every happy hour, 3:30 to 6.<span class="lg-only"> Espresso martinis are always on, too.</span></p>
-    <p class="only-night">Casa Dulce is the city's new after-dark obsession — dessert cocktails engineered by top bartenders, chef-driven sweets, and small-batch ice cream flavors created exclusively for us in Mexico.<span class="lg-only"> The kind of room you bring people to before everyone else knows about it.</span></p>
+    <p class="only-day">Craft coffee, matcha and Latin-inspired ice cream in the sunniest corner of Downtown. Happy hour runs 3:30 to 6, with half-off drinks.<span class="lg-only"> Espresso martinis are always on.</span></p>
+    <p class="only-night">Dessert cocktails from top bartenders, chef-driven sweets and small-batch ice cream made for us in Mexico.<span class="lg-only"> The room you bring people to before everyone else finds out.</span></p>
     <div class="hero-cta">
-      <a class="btn btn-solid" href="#carta"><span class="lg-only"><span class="only-night">See la carta</span><span class="only-day">See the menu</span></span><span class="sm-only">The Menu</span></a>
-      <a class="btn btn-line only-night" href="#firma"><span class="lg-only">The Fried Banana Martini</span><span class="sm-only">The Signature</span></a>
+      <a class="btn btn-solid" href="#carta"><span class="lg-only">See the menu</span><span class="sm-only">The menu</span></a>
+      <a class="btn btn-line only-night" href="#firma"><span class="lg-only">The Fried Banana Martini</span><span class="sm-only">The signature</span></a>
       <a class="btn btn-line only-day" href="#visita"><span class="lg-only">Happy hour · 3:30–6</span><span class="sm-only">Happy hour</span></a>
     </div>
   </div>
@@ -913,9 +949,9 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
       <p class="eyebrow">The House</p>
       <h2 class="only-night">Intimacy is<br>the new luxury.</h2>
       <h2 class="only-day">Sunlight on plaster.<br>Something sweet in hand.</h2>
-      <p class="lead only-day">By day, Casa Dulce is the bright corner of The Distrikt for craft coffee, matcha and Latin-inspired ice cream — the kind of place you stop for one latte and stay for the afternoon.</p>
-      <p class="lead only-night">Dinner is a reservation. What comes after is a scene. Casa Dulce is where the night migrates once the plates are cleared — a candlelit room built for the last, best hours of the evening.</p>
-      <p>Everything here is sourced like it matters, because it does. Our ice cream flavors were developed with top chefs in Mexico and are produced exclusively for this house — all natural, imported directly, available nowhere else. The pastry program runs out of our own ovens. The bar builds every cocktail to order, one perfect pour at a time.</p>
+      <p class="lead only-day">By day, Casa Dulce is the bright corner of The Distrikt for craft coffee, matcha and Latin-inspired ice cream. You stop in for one latte and stay all afternoon.</p>
+      <p class="lead only-night">Dinner is a reservation. What comes after is a scene. Casa Dulce is where the night goes once the plates are cleared: a candlelit room built for the last, best hours of the evening.</p>
+      <p>Every detail here is chosen on purpose. Our ice cream was developed with top chefs in Mexico and is made only for this house: all natural, imported directly, available nowhere else. Pastry comes out of our own ovens, and the bar builds every cocktail to order.</p>
       <p class="only-night">Terrazzo, oak and cane, hand-troweled plaster, low amber light. Dress well. Stay late.</p>
       <p class="only-day">Cane chairs, hand-troweled plaster, blue zellige and a mural made by hand. Bring a friend. Stay for happy hour.</p>
       <span class="es-line">Arrive sweet. Leave sweeter.</span>
@@ -936,7 +972,7 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
     <div class="carta-head reveal">
       <p class="eyebrow">The Menu</p>
       <h2>Handpicked by chefs.<br>Sourced like it matters.</h2>
-      <p>Three programs, each curated obsessively: ice cream created exclusively for us in Mexico, pastry from our own ovens, and a bar led by dessert cocktails you won't find anywhere else in the city.</p>
+      <p>Three programs, each one obsessed over: small-batch ice cream, pastry from our own ovens, and a bar built around dessert cocktails you won't find anywhere else in the city.</p>
     </div>
     <div class="carta-tabs" aria-label="Menu sections">
       <button type="button" aria-pressed="true">Ice Cream</button>
@@ -949,7 +985,7 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
       <article class="pillar reveal">
         <figure class="pillar-photo win"><img src="assets/ig/a-sundae.webp" width="900" height="1200" alt="A chocolate ice cream sundae with chocolate drizzle and a cherry on top, on a sunlit wooden table" loading="lazy"></figure>
         <h3>Ice Cream</h3>
-        <span class="sub">created exclusively for us in Mexico</span>
+        <span class="sub">made only for us, in Mexico</span>
         <ul>
           <li><div class="dish"><span>Single-Origin Vanilla Bean</span><span class="price">9</span></div><p class="desc">whole Papantla vanilla, nothing else</p></li>
           <li><div class="dish"><span>Burnt Goat's-Milk Caramel</span><span class="price">9</span></div><p class="desc">slow-cooked to the edge of bitter</p></li>
@@ -979,7 +1015,7 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
         <h3>The Bar</h3>
         <span class="sub">dessert cocktails, built to order</span>
         <ul>
-          <li><div class="dish"><span>Fried Banana Martini</span><span class="price">21</span></div><p class="desc">the signature — see below</p></li>
+          <li><div class="dish"><span>Fried Banana Martini</span><span class="price">21</span></div><p class="desc">our signature, more below</p></li>
           <li><div class="dish"><span>Espresso Martini</span><span class="price">19</span></div><p class="desc">house-pulled espresso, vanilla liqueur, cacao</p></li>
           <li><div class="dish"><span>Smoked Tamarind Margarita</span><span class="price">18</span></div><p class="desc">reposado, tamarind, chile-salt rim</p></li>
           <li><div class="dish"><span>Slow-Brewed Spiced Coffee</span><span class="price">8</span></div><p class="desc">raw cane sugar, cinnamon, clove</p></li>
@@ -999,7 +1035,7 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
       <div class="only-day">
         <p class="eyebrow">The Signature · by day</p>
         <h2>The Matcha Daddy <span class="es">Martini.</span></h2>
-        <p>For the matcha lovers. Our matcha, shaken into a martini and poured up — the greenest way to start happy hour, and the one everyone photographs first.</p>
+        <p>For the matcha lovers. Our matcha, shaken into a martini and poured up. The greenest way to start happy hour, and the drink everyone photographs first.</p>
         <p>Not drinking? Try the Green Monkey: matcha over our homemade cinnamon-banana syrup, finished with fried banana cream. Add a scoop of churro or fried banana ice cream and the afternoon is handled.</p>
         <p class="chip-line">Green, cold, poured up.</p>
       </div>
@@ -1007,7 +1043,7 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
       <p class="eyebrow">The Signature</p>
       <h2>The Fried Banana <span class="es">Martini.</span></h2>
       <p>The drink people will fly in for. Bananas fried in-house and reduced with cinnamon into a syrup, layered over aged Nicaraguan dark rum and a touch of milk. Crowned with fried banana and a cinnamon cold foam, dusted table-side.</p>
-      <p>Then the move: a giant sweet plantain chip laid across the rim — your spoon and your first bite in one. Scoop the foam. Eat the chip. Drink the martini. Order another.</p>
+      <p>Then the move: a giant sweet plantain chip laid across the rim. Your spoon and your first bite in one. Scoop the foam. Eat the chip. Drink the martini. Order another.</p>
       <p class="chip-line">One drink, three textures, zero shortcuts.</p>
       </div>
     </div>
@@ -1029,7 +1065,7 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
     <div class="salon-copy reveal">
       <p class="eyebrow">The Room</p>
       <h2>Designed to be photographed.<br>Built to be lived in.</h2>
-      <p>Every surface was commissioned like a piece of jewelry. A bar faced in river-stone terrazzo. Cane chairs and candlelit café tables. A hand-tufted mural on hand-troweled plaster, and a banquette wrapped in terracotta mosaic under blue zellige. This is the backdrop your night deserves.</p>
+      <p>Every surface was commissioned like a piece of jewelry. A bar faced in river-stone terrazzo. Cane chairs and candlelit café tables. A hand-tufted mural on plaster walls, and a banquette wrapped in terracotta mosaic under blue zellige. This is the backdrop your night deserves.</p>
       <div class="pucks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     </div>
     <p class="swipe-hint" aria-hidden="true">Swipe the room</p>
@@ -1040,7 +1076,7 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
       </figure>
       <figure class="salon-card win reveal">
         <img src="assets/ig/a-room.webp" width="900" height="1200" alt="Cane chairs and candlelit café tables beneath a hand-tufted mural and the glowing Casa sign" loading="lazy">
-        <figcaption><b>The room</b><span>Hand-troweled plaster, a hand-tufted mural, candlelight</span></figcaption>
+        <figcaption><b>The room</b><span>The mural, the banquette, the candlelight</span></figcaption>
       </figure>
       <figure class="salon-card win reveal">
         <img src="assets/ig/a-mojito.webp" width="900" height="1200" alt="A mint-and-lime sparkling mojito in a Casa Dulce cup on the river-stone terrazzo bar, menus beside it" loading="lazy">
@@ -1057,9 +1093,9 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
       <p class="eyebrow"><span class="only-night">The Terrace · Private Events</span><span class="only-day">The Patio · Private Events</span></p>
       <h2 class="only-night">String lights, night air, the tower glowing.</h2>
       <h2 class="only-day">Sun on the patio, an iced latte in hand.</h2>
-      <p class="only-day">Afternoons at The Distrikt run on cold foam and sunshine — Green Monkeys, Mexican mochas and café de olla made with our housemade syrups, out on the patio.</p>
-      <p class="only-night">The terrace is where the night opens up — cocktails under café lights, desert air, the STRAT lit up over your shoulder. A skyline view that feels like a secret, because for now it still is.</p>
-      <p>For the nights that matter, take the whole house. Product launches, birthdays that deserve better than bottle service, the dinner-after-the-dinner. The room, the terrace, the full bar and pastry program — yours.</p>
+      <p class="only-day">Afternoons at The Distrikt run on cold foam and sunshine: Green Monkeys, Mexican mochas and café de olla made with our housemade syrups, out on the patio.</p>
+      <p class="only-night">The terrace is where the night opens up: cocktails under café lights, desert air, the STRAT lit up over your shoulder. A skyline view that feels like a secret, because for now it still is.</p>
+      <p>For the nights that matter, take the whole house. Product launches, birthdays that deserve better than bottle service, the dinner-after-the-dinner. The room, the terrace, the full bar and the pastry program, all yours.</p>
       <div class="terraza-stats">
         <div class="tstat"><div class="num">Full</div><div class="lbl">House buyouts</div></div>
         <div class="tstat"><div class="num">Late</div><div class="lbl">We keep your hours</div></div>
@@ -1159,9 +1195,9 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
       <aside class="res-card reveal">
         <div class="shape" aria-hidden="true"></div>
         <h3 class="only-day">Afternoons are easy.</h3>
-        <p class="only-day">Walk right in for coffee, matcha and ice cream — no reservation needed. Tables fill fast once happy hour starts at 3:30, and the lounge books up on Friday and Saturday nights.</p>
+        <p class="only-day">Walk right in for coffee, matcha and ice cream. No reservation needed. Tables fill fast once happy hour starts at 3:30, and the lounge books up on Friday and Saturday nights.</p>
         <h3 class="only-night">The room fills by eight.</h3>
-        <p class="only-night">Walk-ins take their chances at the bar and terrace. For a table in the lounge — especially Friday and Saturday — reserve ahead. You'll want the banquette.</p>
+        <p class="only-night">Walk-ins take their chances at the bar and terrace. For a table in the lounge, especially on Friday and Saturday, reserve ahead. You'll want the banquette.</p>
         <a class="btn btn-solid" href="#">Reserve on Resy</a>
       </aside>
     </div>
