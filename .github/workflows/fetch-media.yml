@@ -1,0 +1,31 @@
+name: fetch-media
+on:
+  push:
+    branches: [media-intake]
+    paths: ['media/urls.txt']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download listed media
+        run: |
+          mkdir -p media/raw
+          rm -f media/raw/_failed.txt
+          while read -r name url; do
+            [ -z "$name" ] && continue
+            [ -s "media/raw/$name" ] && continue
+            curl -sSL --fail --retry 2 -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)" -o "media/raw/$name" "$url" \
+              || { echo "$name" >> media/raw/_failed.txt; rm -f "media/raw/$name"; }
+          done < media/urls.txt
+          ls -la media/raw
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
+          git add media/raw
+          git commit -m "Fetch media" || exit 0
+          git push
