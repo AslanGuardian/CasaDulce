@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Casa Dulce — After-Dark Cocktails &amp; Desserts · Las Vegas</title>
 <meta name="description" content="Las Vegas's new after-dark address. Craft cocktails, chef-driven desserts and small-batch ice cream imported from Mexico. Casa Dulce.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Casa Dulce — Espresso Martini &amp; Cocktail Bar · DTLV">
+<meta property="og:description" content="Espresso martinis, craft cocktails, Latin-inspired ice cream, coffee and matcha at The Distrikt, Downtown Las Vegas.">
+<meta property="og:image" content="https://casa-dulce-lv.vercel.app/assets/ig/hero-1.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="assets/ig/hero-1.webp" media="(min-width:761px)">
+<link rel="preload" as="image" href="assets/ig/hero-1-m.webp" media="(max-width:760px)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Mrs+Saint+Delafield&family=Jost:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -389,6 +396,57 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
   .hero-fact .num{font-size:4.6rem}
 }
 
+
+/* ============ REAL PHOTOGRAPHY — hero slideshow + Instagram feed ============ */
+.hero-slides .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.8s ease}
+.hero-slides .slide.is-on{opacity:1}
+.hero-slides .slide img{transform-origin:50% 45%}
+.hero-slides .slide.is-on img{animation:kb 9s ease-out forwards}
+@keyframes kb{from{transform:scale(1.1)}to{transform:scale(1)}}
+.hero-dots{position:absolute;left:6vw;bottom:4.2vh;display:flex;gap:.6rem;z-index:3}
+.hero-dots button{width:28px;height:2px;border:0;padding:0;background:rgba(239,230,210,.4);cursor:pointer;transition:background .4s}
+.hero-dots button[aria-current="true"]{background:var(--brass-bright)}
+@media(prefers-reduced-motion:reduce){.hero-slides .slide{transition:none}.hero-slides .slide.is-on img{animation:none}}
+
+.feed{background:var(--noir);color:var(--cream);padding:8.5rem 0;position:relative;overflow:hidden}
+.feed .eyebrow{color:var(--brass)}
+.feed-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:3.2rem}
+.feed-head p{font-weight:300;opacity:.85;max-width:46ch}
+.reels{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+.reel{position:relative;display:block;aspect-ratio:9/16;border-radius:999px 999px 14px 14px;overflow:hidden;color:var(--cream);text-decoration:none;box-shadow:0 26px 54px rgba(0,0,0,.5);outline-offset:6px}
+.reel img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.6,.2,1)}
+.reel:hover img,.reel:focus-visible img{transform:scale(1.05)}
+.reel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(14,9,5,.88))}
+.reel .play{position:absolute;left:50%;top:50%;width:62px;height:62px;margin:-31px 0 0 -31px;border-radius:50%;border:1px solid rgba(239,230,210,.85);background:rgba(14,9,5,.35);backdrop-filter:blur(6px);z-index:2;transition:background .3s,border-color .3s}
+.reel .play::before{content:"";position:absolute;left:25px;top:20px;border-left:16px solid var(--cream);border-top:11px solid transparent;border-bottom:11px solid transparent}
+.reel:hover .play{background:var(--brass);border-color:var(--brass)}
+.reel .cap{position:absolute;left:0;right:0;bottom:0;padding:1.3rem 1.2rem;z-index:2}
+.reel .cap b{display:block;font-family:var(--display);font-weight:400;font-size:1.15rem;line-height:1.2}
+.reel .cap span{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;opacity:.75}
+.ig-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-top:3.4rem}
+.ig-grid a{position:relative;display:block;aspect-ratio:1;overflow:hidden;border-radius:4px}
+.ig-grid img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.6,.2,1),filter .4s}
+.ig-grid a::after{content:attr(data-label);position:absolute;inset:auto 0 0 0;padding:1rem .9rem .8rem;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cream);background:linear-gradient(180deg,transparent,rgba(14,9,5,.85));opacity:0;transition:opacity .35s}
+.ig-grid a:hover img,.ig-grid a:focus-visible img{transform:scale(1.06)}
+.ig-grid a:hover::after,.ig-grid a:focus-visible::after{opacity:1}
+.feed-cta{margin-top:3rem;text-align:center}
+.reel-modal{border:0;padding:0;background:transparent;max-width:none;max-height:none;overflow:visible}
+.reel-modal::backdrop{background:rgba(10,6,3,.86);backdrop-filter:blur(4px)}
+.reel-modal .frame{width:min(420px,92vw);height:min(780px,86vh);background:#fff;border-radius:10px;overflow:hidden}
+.reel-modal iframe{width:100%;height:100%;border:0;display:block}
+.reel-modal .x{position:absolute;top:-44px;right:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(239,230,210,.6);background:transparent;color:var(--cream);font-size:1.3rem;line-height:1;cursor:pointer}
+.reel-modal .open-ig{display:block;margin-top:.8rem;text-align:center;color:var(--cream);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;opacity:.8}
+.photo-credit{font-size:.72rem;opacity:.55}
+.photo-credit a{text-decoration:none;border-bottom:1px solid rgba(239,230,210,.35)}
+/* legibility over the real photos: deepen the side the copy sits on */
+.hero-media::before{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,rgba(14,9,5,.72) 0%,rgba(14,9,5,.38) 38%,transparent 62%)}
+.hero .eyebrow{text-shadow:0 1px 3px rgba(0,0,0,.95),0 0 18px rgba(0,0,0,.85)}
+/* the terrace shot is a full-width sign: keep it whole instead of arching it */
+.terraza-photo img{border-radius:26px}
+@media(max-width:920px){.reels{grid-template-columns:repeat(2,1fr)}.ig-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.hero-media::before{background:linear-gradient(180deg,rgba(14,9,5,.55) 0%,rgba(14,9,5,.45) 40%,rgba(14,9,5,.2) 70%,transparent 100%)}}
+@media(max-width:520px){.reels{gap:.8rem}.reel .play{width:52px;height:52px;margin:-26px 0 0 -26px}.reel .play::before{left:21px;top:16px}.reel .cap{padding:1rem .9rem}.reel .cap span{display:none}.reel .cap b{font-size:1rem}}
+
 </style>
 </head>
 <body>
@@ -401,21 +459,26 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
     <li><a href="#carta">The Menu</a></li>
     <li><a href="#firma">The Signature</a></li>
     <li><a href="#terraza">The Terrace</a></li>
-    <li><a href="#visita">Reserve</a></li>
+    <li><a href="#feed">The Feed</a></li>
+    <li><a href="#visita">Visit</a></li>
   </ul>
   <a class="btn btn-line" href="#visita">Reserve</a>
 </nav>
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
-  <div class="hero-media">
-    <img src="assets/2e826ae220ce.webp" alt="The terrazzo bar at Casa Dulce, a cocktail being poured in low amber light">
-    <video autoplay muted loop playsinline poster="assets/2e826ae220ce.webp" aria-hidden="true">
-      <source src="assets/9c545e73b5f1.mp4" type="video/mp4">
-    </video>
+  <div class="hero-media hero-slides">
+    <picture class="slide is-on"><source media="(max-width:760px)" srcset="assets/ig/hero-1-m.webp"><img src="assets/ig/hero-1.webp" alt="The Casa Dulce sign glowing over the entrance at The Distrikt, string lights overhead" fetchpriority="high"></picture>
+    <picture class="slide"><source media="(max-width:760px)" srcset="assets/ig/hero-2-m.webp"><img src="assets/ig/hero-2.webp" alt="The back bar at night — glassware overhead, shelves of tequila and mezcal, the Casa Dulce sign reflected in the glass" decoding="async"></picture>
+    <picture class="slide"><source media="(max-width:760px)" srcset="assets/ig/hero-3-m.webp"><img src="assets/ig/hero-3.webp" alt="A cinnamon-rimmed martini with a fried banana chip beside a chile-rimmed citrus cocktail on a wooden bar" decoding="async"></picture>
+  </div>
+  <div class="hero-dots" role="group" aria-label="Hero photos">
+    <button type="button" aria-label="Photo 1: the entrance" aria-current="true"></button>
+    <button type="button" aria-label="Photo 2: the bar"></button>
+    <button type="button" aria-label="Photo 3: the cocktails"></button>
   </div>
   <div class="hero-inner">
-    <p class="eyebrow">Las Vegas · After Dark</p>
+    <p class="eyebrow">The Distrikt · Downtown Las Vegas</p>
     <h1>You found it <span class="es">first.</span></h1>
     <p>Casa Dulce is the city's new after-dark obsession — dessert cocktails engineered by top bartenders, chef-driven sweets, and small-batch ice cream flavors created exclusively for us in Mexico. The kind of room you bring people to before everyone else knows about it.</p>
     <div class="hero-cta">
@@ -424,16 +487,16 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
     </div>
   </div>
   <div class="hero-fact">
-    <div class="num">12<span style="font-size:.4em">AM</span></div>
-    <div class="lbl">The night runs late</div>
+    <div class="num">½<span style="font-size:.4em">OFF</span></div>
+    <div class="lbl">Happy hour · 3:30–6 pm</div>
   </div>
 </header>
 
 <!-- ============ MARQUEE ============ -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>Dessert Cocktails <i>◆</i> Chef-Driven Sweets <i>◆</i> Small-Batch Ice Cream <i>◆</i> Specialty Coffee <i>◆</i> Open Late <i>◆</i> </span>
-    <span>Dessert Cocktails <i>◆</i> Chef-Driven Sweets <i>◆</i> Small-Batch Ice Cream <i>◆</i> Specialty Coffee <i>◆</i> Open Late <i>◆</i> </span>
+    <span>Dessert Cocktails <i>◆</i> Chef-Driven Sweets <i>◆</i> Small-Batch Ice Cream <i>◆</i> Specialty Coffee <i>◆</i> Happy Hour 3:30–6 <i>◆</i> </span>
+    <span>Dessert Cocktails <i>◆</i> Chef-Driven Sweets <i>◆</i> Small-Batch Ice Cream <i>◆</i> Specialty Coffee <i>◆</i> Happy Hour 3:30–6 <i>◆</i> </span>
   </div>
 </div>
 <div class="stone-band" aria-hidden="true"></div>
@@ -450,8 +513,8 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
       <span class="es-line">Arrive sweet. Leave sweeter.</span>
     </div>
     <figure class="casa-photo reveal">
-      <img src="assets/20bafb7adec6.webp" alt="The Casa Dulce lounge at night — the wordmark glowing over a full room, espresso martinis in hand">
-      <figcaption>The wordmark · the banquette · the regulars</figcaption>
+      <img src="assets/ig/casa-regulars.webp" alt="A guest holds up two Casa Dulce cocktails in the low light of the bar" loading="lazy">
+      <figcaption>Two in hand · the bar · the regulars</figcaption>
     </figure>
   </div>
 </section>
@@ -468,7 +531,7 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
 
       <!-- ICE CREAM -->
       <article class="pillar reveal">
-        <figure class="pillar-photo" aria-hidden="false"><img src="assets/99d362395522.webp" alt="Two scoops of small-batch ice cream in a coupe glass with a caramel tuile, on the terrazzo bar"></figure>
+        <figure class="pillar-photo" aria-hidden="false"><img src="assets/ig/carta-icecream.webp" alt="A chocolate ice cream sundae with chocolate drizzle and a cherry on top, on a sunlit wooden table" loading="lazy"></figure>
         <h3>Ice Cream</h3>
         <span class="sub">created exclusively for us in Mexico</span>
         <ul>
@@ -482,7 +545,7 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
 
       <!-- PASTRY -->
       <article class="pillar reveal">
-        <figure class="pillar-photo" aria-hidden="false"><img src="assets/0577678e2d12.webp" alt="A glazed sweet loaf and fried-to-order churros with dark chocolate dip, by candlelight"></figure>
+        <figure class="pillar-photo" aria-hidden="false"><img src="assets/ig/carta-dessert.webp" alt="Flan in caramel sauce and a mini tres leches cake, beside a gold candle holder" loading="lazy"></figure>
         <h3>Pastry</h3>
         <span class="sub">out of our ovens, every day</span>
         <ul>
@@ -496,7 +559,7 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
 
       <!-- THE BAR -->
       <article class="pillar reveal">
-        <figure class="pillar-photo" aria-hidden="false"><img src="assets/ba1e0612b1a9.webp" alt="A chilled martini and a smoked tamarind margarita on the terrazzo in late-day light"></figure>
+        <figure class="pillar-photo" aria-hidden="false"><img src="assets/ig/carta-bar.webp" alt="A matcha martini, an espresso martini topped with coffee beans and a chile-rimmed citrus cocktail in afternoon sun" loading="lazy"></figure>
         <h3>The Bar</h3>
         <span class="sub">dessert cocktails, built to order</span>
         <ul>
@@ -525,7 +588,7 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
     </div>
     <div class="reveal">
       <figure class="firma-photo">
-        <img src="assets/493406af0941.webp" alt="The Fried Banana Martini — cinnamon-dusted cold foam, caramelized banana coin, and a giant plantain chip across the rim">
+        <img src="assets/ig/firma-monkey-business.webp" alt="A cinnamon-rimmed martini topped with foam and a fried banana chip, a Casa Dulce cup and a chile-rimmed cocktail beside it" loading="lazy">
         <figcaption>Rum · banana syrup · cold foam · cinnamon · the chip</figcaption>
       </figure>
     </div>
@@ -538,21 +601,21 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
     <div class="salon-copy reveal">
       <p class="eyebrow">The Room</p>
       <h2>Designed to be photographed.<br>Built to be lived in.</h2>
-      <p>Every surface was commissioned like a piece of jewelry. A bar faced in river-stone terrazzo. Floors laid in a woven check of slate and bone. Sculptural ceiling lamps in olive, blush and butter, glowing low over the banquette. This is the backdrop your night deserves.</p>
+      <p>Every surface was commissioned like a piece of jewelry. A bar faced in river-stone terrazzo. Cane chairs and candlelit café tables. A hand-tufted mural on hand-troweled plaster, and a banquette wrapped in terracotta mosaic under blue zellige. This is the backdrop your night deserves.</p>
       <div class="pucks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     </div>
     <div class="salon-grid">
       <figure class="salon-card reveal">
-        <img src="assets/bff1d05cbbba.webp" alt="A bartender pours a dessert cocktail behind the river-stone terrazzo bar at Casa Dulce">
-        <figcaption><b>The terrazzo bar</b><span>River stone, oak plinth, one perfect pour at a time</span></figcaption>
+        <img src="assets/ig/salon-bar.webp" alt="A mint-and-lime cocktail in a Casa Dulce cup on the river-stone terrazzo bar, menus beside it" loading="lazy">
+        <figcaption><b>The terrazzo bar</b><span>River stone, menus out, one perfect pour at a time</span></figcaption>
       </figure>
       <figure class="salon-card reveal">
-        <img src="assets/5d8e701645a5.webp" alt="A couple shares an espresso martini and ice cream in a curved leather banquette under sculptural pendant lamps">
-        <figcaption><b>The banquette</b><span>Curved leather, marble tables, lamps in olive, blush and butter</span></figcaption>
+        <img src="assets/ig/salon-room.webp" alt="Cane chairs and candlelit café tables beneath a hand-tufted mural and the glowing Casa sign" loading="lazy">
+        <figcaption><b>The room</b><span>Hand-troweled plaster, a hand-tufted mural, candlelight</span></figcaption>
       </figure>
       <figure class="salon-card wide reveal">
-        <img src="assets/3f866fd41fc3.webp" alt="Friends raise espresso martinis under the pastel ceiling pucks, the Casa Dulce wordmark glowing behind them">
-        <figcaption><b>The lounge</b><span>Plaster, zellige, the pucks glowing low — the last, best hours</span></figcaption>
+        <img src="assets/ig/salon-lounge.webp" alt="A banquette wrapped in terracotta mosaic tile under blue zellige, with cane chairs and candlelit tables" loading="lazy">
+        <figcaption><b>The banquette</b><span>Terracotta mosaic, blue zellige — the last, best hours</span></figcaption>
       </figure>
     </div>
   </div>
@@ -574,32 +637,83 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
       <a class="btn btn-solid" href="#visita">Plan a private night</a>
     </div>
     <figure class="terraza-photo reveal">
-      <img src="assets/a3281810ea1f.webp" alt="Cocktails and dessert on the Casa Dulce terrace under string lights, the STRAT tower glowing behind">
+      <img src="assets/ig/terraza-night.webp" alt="The Casa Dulce sign lit up at night over the entrance, string lights and a patio umbrella out front" loading="lazy">
     </figure>
   </div>
+</section>
+
+<!-- ============ THE FEED ============ -->
+<section class="feed" id="feed">
+  <div class="wrap">
+    <div class="feed-head reveal">
+      <div>
+        <p class="eyebrow">On Instagram · @casadulce.lv</p>
+        <h2>Straight from <span class="es">the feed.</span></h2>
+      </div>
+      <p>New pours, new flavors and the nights you missed. Tap a reel to watch it here.</p>
+    </div>
+    <div class="reels">
+      <a class="reel reveal" href="https://www.instagram.com/reel/DfdN43zPe6P/" target="_blank" rel="noopener" data-code="DfdN43zPe6P" aria-label="Play reel: Green Monkey">
+        <img src="assets/ig/reel-green-monkey.webp" alt="Matcha poured over ice in a Casa Dulce cup on a sunlit wooden table" loading="lazy">
+        <span class="play" aria-hidden="true"></span>
+        <span class="cap"><span>Matcha · banana</span><b>Green Monkey</b></span>
+      </a>
+      <a class="reel reveal" href="https://www.instagram.com/reel/DeLIzbdiLYM/" target="_blank" rel="noopener" data-code="DeLIzbdiLYM" aria-label="Play reel: Eight espresso martinis">
+        <img src="assets/ig/reel-espresso-martinis.webp" alt="An espresso martini topped with three coffee beans" loading="lazy">
+        <span class="play" aria-hidden="true"></span>
+        <span class="cap"><span>The lineup</span><b>Eight espresso martinis</b></span>
+      </a>
+      <a class="reel reveal" href="https://www.instagram.com/reel/DeDh_3kiogz/" target="_blank" rel="noopener" data-code="DeDh_3kiogz" aria-label="Play reel: Four Latin-inspired flavors">
+        <img src="assets/ig/reel-ice-cream-flavors.webp" alt="Scoops of mango ice cream with chile-strawberry sauce and mint" loading="lazy">
+        <span class="play" aria-hidden="true"></span>
+        <span class="cap"><span>Ice cream</span><b>Four Latin-inspired flavors</b></span>
+      </a>
+      <a class="reel reveal" href="https://www.instagram.com/reel/DeQR3M8ChTN/" target="_blank" rel="noopener" data-code="DeQR3M8ChTN" aria-label="Play reel: Your sign to stay out">
+        <img src="assets/ig/reel-night-exterior.webp" alt="The Casa Dulce sign glowing at night under string lights" loading="lazy">
+        <span class="play" aria-hidden="true"></span>
+        <span class="cap"><span>Nights at Casa</span><b>Your sign to stay out</b></span>
+      </a>
+    </div>
+    <div class="ig-grid reveal">
+      <a href="https://www.instagram.com/p/Depn0FhAV8q/" target="_blank" rel="noopener" data-label="Olla Carajillo"><img src="assets/ig/ig-espresso.webp" alt="A coffee cocktail topped with coffee beans against the mosaic banquette" loading="lazy"></a>
+      <a href="https://www.instagram.com/p/DfYRCRsC8dm/" target="_blank" rel="noopener" data-label="Jamaica Me Crazy"><img src="assets/ig/ig-jamaica.webp" alt="Jamaica Me Crazy, a hibiscus tequila cocktail with mint and dried orange" loading="lazy"></a>
+      <a href="https://www.instagram.com/p/De0I7lXj6uE/" target="_blank" rel="noopener" data-label="Micheladas"><img src="assets/ig/ig-michelada.webp" alt="A michelada with a chile-salt rim and lime" loading="lazy"></a>
+      <a href="https://www.instagram.com/p/DeiNAiHCH6I/" target="_blank" rel="noopener" data-label="Matcha Daddy Martini"><img src="assets/ig/ig-matcha-martini.webp" alt="A matcha martini beside a candle on a white café table" loading="lazy"></a>
+      <a href="https://www.instagram.com/p/DeNjpTjD0FX/" target="_blank" rel="noopener" data-label="Cold foam"><img src="assets/ig/ig-cold-foam.webp" alt="Iced lattes with cinnamon cold foam, a fried banana chip and star anise" loading="lazy"></a>
+      <a href="https://www.instagram.com/p/De5ZlUtj6w0/" target="_blank" rel="noopener" data-label="Night in the mirror"><img src="assets/ig/ig-mirror.webp" alt="The glowing Casa Dulce sign reflected in a round mirror" loading="lazy"></a>
+      <a href="https://www.instagram.com/p/DeYCZqICjhn/" target="_blank" rel="noopener" data-label="Sweet Corn Latte"><img src="assets/ig/ig-sweet-corn.webp" alt="A latte with sweet corn cold foam in a Casa Dulce cup" loading="lazy"></a>
+      <a href="https://www.instagram.com/p/De5ZlUtj6w0/" target="_blank" rel="noopener" data-label="Mango, shaken"><img src="assets/ig/ig-mango.webp" alt="A mango cocktail with mint in a cut-glass highball" loading="lazy"></a>
+    </div>
+    <div class="feed-cta reveal"><a class="btn btn-line" href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">Follow @casadulce.lv</a></div>
+  </div>
+  <dialog class="reel-modal" aria-label="Instagram reel">
+    <button class="x" type="button" aria-label="Close">×</button>
+    <div class="frame"></div>
+    <a class="open-ig" href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">Open on Instagram</a>
+  </dialog>
 </section>
 
 <!-- ============ VISITA ============ -->
 <section class="visita" id="visita">
   <div class="wrap">
     <figure class="visita-photo reveal">
-      <img src="assets/77919cac128e.webp" alt="The Casa Dulce lounge — leather banquette, marble tables, blue zellige and the wordmark on plaster">
+      <img src="assets/ig/visita-bar.webp" alt="The team behind the Casa Dulce bar taking an order, martini glasses hanging overhead" loading="lazy">
     </figure>
-    <p class="eyebrow reveal">Reserve</p>
+    <p class="eyebrow reveal">Visit</p>
     <h2 class="reveal">Come for one drink.<br>Cancel your next stop.</h2>
     <div class="visita-grid" style="margin-top:2.5rem">
       <div class="reveal">
         <div class="vis-block">
           <h4>Hours</h4>
-          <p>Wednesday – Sunday · 5 pm to midnight<br><span class="es" style="color:var(--naranja)">The night runs late.</span></p>
+          <p>Wednesday – Sunday · 3:30 – 10:30 pm<br>Happy hour 3:30 – 6 pm · half-off drinks<br><span class="es" style="color:var(--naranja)">See you after work.</span></p>
         </div>
         <div class="vis-block">
           <h4>Find us</h4>
-          <p>Main Street at the north end of the Arts District — in the shadow of the STRAT, Las Vegas, NV.</p>
+          <p>The Distrikt · 1561 S Commerce St<br>Arts District, Downtown Las Vegas, NV<br><a href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Dulce+1561+S+Commerce+St+Las+Vegas+NV" target="_blank" rel="noopener">Get directions</a></p>
         </div>
         <div class="vis-block">
           <h4>Contact</h4>
-          <p><a href="mailto:hello@casadulcelv.com">hello@casadulcelv.com</a><br><a href="tel:+17025550022">(702) 555-0022</a> · <a href="#">@casadulcelv</a></p>
+          <p><a href="mailto:hello@casadulcelv.com">hello@casadulcelv.com</a><br><a href="tel:+17025550022">(702) 555-0022</a> · <a href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">@casadulce.lv</a></p>
         </div>
       </div>
       <aside class="res-card reveal">
@@ -624,11 +738,13 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
         <li><a href="#carta">The Menu</a></li>
         <li><a href="#salon">The Room</a></li>
         <li><a href="#terraza">The Terrace</a></li>
-        <li><a href="#visita">Reserve</a></li>
+        <li><a href="#feed">The Feed</a></li>
+        <li><a href="#visita">Visit</a></li>
+        <li><a href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">Instagram</a></li>
       </ul>
     </div>
     <div class="foot-base">
-      <span>© 2026 Casa Dulce · Las Vegas, Nevada</span>
+      <span>© 2026 Casa Dulce · The Distrikt, Las Vegas · <span class="photo-credit">Photography from <a href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">@casadulce.lv</a></span></span>
       <span class="es">Arrive sweet. Leave sweeter.</span>
     </div>
   </div>
@@ -645,6 +761,42 @@ const io = new IntersectionObserver(es => es.forEach(e => {
   if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
 }), {threshold:.18});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// hero slideshow (real photos)
+(() => {
+  const slides = [...document.querySelectorAll('.hero-slides .slide')];
+  const dots = [...document.querySelectorAll('.hero-dots button')];
+  if (slides.length < 2) return;
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let i = 0, t;
+  const show = n => {
+    slides[i].classList.remove('is-on'); dots[i]?.removeAttribute('aria-current');
+    i = (n + slides.length) % slides.length;
+    slides[i].classList.add('is-on'); dots[i]?.setAttribute('aria-current', 'true');
+  };
+  const play = () => { if (!still) { clearInterval(t); t = setInterval(() => show(i + 1), 6500); } };
+  dots.forEach((d, n) => d.addEventListener('click', () => { show(n); play(); }));
+  document.addEventListener('visibilitychange', () => document.hidden ? clearInterval(t) : play());
+  play();
+})();
+
+// Instagram reels open in an on-page player
+(() => {
+  const dlg = document.querySelector('.reel-modal');
+  if (!dlg || typeof dlg.showModal !== 'function') return;
+  const frame = dlg.querySelector('.frame'), link = dlg.querySelector('.open-ig');
+  document.querySelectorAll('.reel[data-code]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    const code = a.dataset.code;
+    frame.innerHTML = `<iframe src="https://www.instagram.com/p/${code}/embed/" title="Casa Dulce on Instagram" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+    link.href = a.href;
+    dlg.showModal();
+  }));
+  const close = () => { dlg.close(); };
+  dlg.querySelector('.x').addEventListener('click', close);
+  dlg.addEventListener('click', e => { if (e.target === dlg) close(); });
+  dlg.addEventListener('close', () => { frame.innerHTML = ''; });
+})();
 </script>
 </body>
 </html>
