@@ -19,7 +19,7 @@ try{var q=new URLSearchParams(location.search).get('mode');if(q==='day'||q==='ni
 d.setAttribute('data-mode',m);
 var tc=document.querySelector('meta[name=theme-color]');if(tc)tc.content=m==='day'?'#FBF6EC':'#17100A';
 var sm=window.matchMedia&&matchMedia('(max-width:760px)').matches,pl=document.createElement('link');pl.rel='preload';pl.as='image';
-pl.href=sm?'assets/ig/hero-arrival-poster-m.webp':'assets/ig/hero-arrival-poster.webp';
+pl.href='assets/ig/hero-arrival'+(m==='day'?'-day':'')+'-poster'+(sm?'-m':'')+'.webp';
 document.head.appendChild(pl);})();
 </script>
 <title>Casa Dulce — After-Dark Cocktails &amp; Desserts · Las Vegas</title>
@@ -776,7 +776,7 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
 @media(min-width:761px){
   .slide-video{background:#0E0A07}
   .slide-video video{left:22%;width:78%;object-position:50% 50%;
-    -webkit-mask-image:linear-gradient(90deg,transparent,#000 14%);mask-image:linear-gradient(90deg,transparent,#000 14%)}
+    -webkit-mask-image:linear-gradient(90deg,transparent,rgba(0,0,0,.3) 7%,rgba(0,0,0,.75) 14%,#000 21%);mask-image:linear-gradient(90deg,transparent,rgba(0,0,0,.3) 7%,rgba(0,0,0,.75) 14%,#000 21%)}
 }
 /* night terrace: wide arched window (16:9) so the whole photo shows */
 html:not([data-mode="day"]) .terraza-photo{max-width:none}
@@ -846,8 +846,11 @@ html:not([data-mode="day"]) .terraza-photo .win{aspect-ratio:16/9;border-radius:
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <div class="hero-media hero-slides">
-    <div class="slide slide-video" data-night="1" data-day="1" data-label="arriving at Casa Dulce">
-      <video class="v-arrival" muted playsinline preload="none" aria-hidden="true"></video>
+    <div class="slide slide-video" data-night="1" data-label="arriving at Casa Dulce at night">
+      <video class="v-night" muted playsinline preload="none" aria-hidden="true"></video>
+    </div>
+    <div class="slide slide-video" data-day="1" data-label="arriving at Casa Dulce by day">
+      <video class="v-day" muted playsinline preload="none" aria-hidden="true"></video>
     </div>
     <div class="slide slide-feature" data-night="2" data-label="Monkey Business">
       <span class="sf-pat" aria-hidden="true"></span>
@@ -874,9 +877,11 @@ html:not([data-mode="day"]) .terraza-photo .win{aspect-ratio:16/9;border-radius:
       <figure class="sf-photo win"><img src="assets/ig/a-company.webp" width="900" height="1200" alt="Hands reaching for a cinnamon-rimmed martini and a citrus cocktail on the wooden bar" loading="lazy"><figcaption>Monkey Business · good company</figcaption></figure>
     </div>
   </div>
-  <script>(function(){var m=matchMedia('(max-width:760px)').matches,v=document.querySelector('.v-arrival');
-  v.poster=m?'assets/ig/hero-arrival-poster-m.webp':'assets/ig/hero-arrival-poster.webp';v.src=m?'assets/ig/hero-arrival-m.mp4':'assets/ig/hero-arrival.mp4';
-  v.preload='auto';})();</script>
+  <script>(function(){var m=matchMedia('(max-width:760px)').matches?'-m':'',day=document.documentElement.getAttribute('data-mode')==='day',
+  n=document.querySelector('.v-night'),d=document.querySelector('.v-day');
+  n.poster='assets/ig/hero-arrival-poster'+m+'.webp';n.src='assets/ig/hero-arrival'+m+'.mp4';
+  d.poster='assets/ig/hero-arrival-day-poster'+m+'.webp';d.src='assets/ig/hero-arrival-day'+m+'.mp4';
+  (day?d:n).preload='auto';})();</script>
   <div class="hero-dots" role="group" aria-label="Hero slides"></div>
   <div class="hero-inner">
     <p class="eyebrow"><span class="only-night">The Distrikt · Downtown Las Vegas</span><span class="only-day">Afternoons at The Distrikt · DTLV</span></p>
