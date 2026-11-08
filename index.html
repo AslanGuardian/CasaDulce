@@ -19,7 +19,7 @@ try{var q=new URLSearchParams(location.search).get('mode');if(q==='day'||q==='ni
 d.setAttribute('data-mode',m);
 var tc=document.querySelector('meta[name=theme-color]');if(tc)tc.content=m==='day'?'#FBF6EC':'#17100A';
 var sm=window.matchMedia&&matchMedia('(max-width:760px)').matches,pl=document.createElement('link');pl.rel='preload';pl.as='image';
-pl.href=sm?'assets/ig/hero-video-poster-m.webp':'assets/ig/hero-video-poster.webp';
+pl.href=m==='day'?(sm?'assets/ig/day-video-poster-m.webp':'assets/ig/day-video-poster.webp'):(sm?'assets/ig/hero-video-poster-m.webp':'assets/ig/hero-video-poster.webp');
 document.head.appendChild(pl);})();
 </script>
 <title>Casa Dulce — After-Dark Cocktails &amp; Desserts · Las Vegas</title>
@@ -730,6 +730,65 @@ html.mode-anim body,html.mode-anim .carta,html.mode-anim .terraza,html.mode-anim
 .carta,.terraza,.feed,footer{--pat-op:.13}
 html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"] .feed{--pat-op:.16}
 @media(prefers-reduced-motion:reduce){.casa::before,.carta::before,.salon::before,.terraza::before,.feed::before,.visita::before,footer::before{animation:none}}
+
+/* ================= ARCHED WINDOWS: whole photo, terrazzo in the dome ================= */
+.win{position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;
+  border-radius:999px 999px 14px 14px;background:#EFE4CF;padding:0!important;margin:0;isolation:isolate}
+.win::after{content:"";order:-1;flex:none;display:block;width:100%;aspect-ratio:2/1}
+.win::before{content:"";position:absolute;inset:0;z-index:-1;background:url(assets/terrazzo.svg) 0 0/200px 200px;opacity:.85}
+.win>img,.win>img.only-day,.win>img.only-night{position:relative;display:block;width:100%!important;height:auto!important;
+  aspect-ratio:auto!important;object-fit:fill!important;flex:none;border-radius:0!important;outline:0!important;box-shadow:none!important;
+  transform:none!important;animation:none!important;border-top:2px solid var(--brass)}
+html:not([data-mode="day"]) .win>img.only-day,html[data-mode="day"] .win>img.only-night{display:none!important}
+.win:hover>img{transform:none!important}
+
+/* hero windows */
+.slide-feature{background:#1B120B}
+.slide-feature .sf-pat{position:absolute;inset:0;background:url(assets/terrazzo.svg) 0 0/360px 360px repeat;opacity:.12}
+.hero-media .sf-photo.win{position:absolute;top:50%;right:9vw;left:auto;transform:translateY(-46%);
+  width:min(28vw,420px,calc((100svh - 190px) / var(--k)));height:auto;aspect-ratio:auto;
+  outline:1px solid rgba(217,184,118,.6);outline-offset:10px;box-shadow:0 40px 90px rgba(0,0,0,.55);z-index:3}
+.hero-media .sf-photo.win figcaption{position:absolute;left:0;right:0;bottom:0;padding:2.6rem 1rem 1rem;text-align:center;
+  background:linear-gradient(transparent,rgba(14,9,5,.82));color:var(--cream);font-size:.64rem;letter-spacing:.26em;text-transform:uppercase;line-height:1.6}
+.hero.feature-on::after{opacity:.55}
+@media(max-width:1100px){.hero-media .sf-photo.win{right:5vw;width:min(34vw,calc((100svh - 190px) / var(--k)))}}
+
+/* section windows */
+.casa-photo{border-radius:0!important;overflow:visible!important;max-width:400px;margin-left:auto;margin-right:auto}
+.casa-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.25)}
+.pillar-photo.win{aspect-ratio:79/100;margin:-.2rem 0 1.7rem}
+.firma-photo{max-width:340px;padding:14px}
+.firma-photo .win{outline:1px solid var(--brass);outline-offset:12px;box-shadow:0 34px 64px rgba(23,16,10,.3)}
+.terraza-photo{max-width:420px;margin-left:auto;margin-right:auto}
+.terraza-photo .win{box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.salon-grid{grid-template-columns:repeat(3,1fr);align-items:end}
+.salon-card.win{border-radius:999px 999px 16px 16px;box-shadow:0 22px 48px rgba(23,16,10,.2)}
+.salon-card.win figcaption{z-index:1}
+.visita-photo img{aspect-ratio:auto!important;height:auto!important;object-fit:fill!important}
+html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.2)}
+
+/* reels: whole 9:16 cover under the terrazzo dome */
+.casa-photo::before{display:none!important}
+.reel.win{aspect-ratio:auto}
+.reel.win::after{position:static;inset:auto;background:none;z-index:auto}
+.reel.win .play{top:61%}
+.reel.win .cap{background:linear-gradient(180deg,transparent,rgba(14,9,5,.85));padding-top:2.4rem;z-index:2}
+.reel.win>img{border-top-width:2px}
+@media(max-width:920px){.salon-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){
+  /* phone hero: window above the headline; the long intro lives in "The House" below */
+  .hero-inner>p:not(.eyebrow){display:none}
+  .hero-media .sf-photo.win{top:calc(78px + env(safe-area-inset-top));right:auto;left:50%;transform:translateX(-50%);
+    width:min(66vw,calc((100svh - 470px) / var(--k)));outline-offset:6px}
+  .hero-media .sf-photo.win figcaption{display:none}
+  .hero.feature-on::after{opacity:.9}
+  .salon-grid{display:flex;align-items:flex-end}
+  .salon-card.win{flex:0 0 72%}
+  .casa-photo{max-width:300px}
+  .firma-photo{max-width:270px}
+  .terraza-photo{max-width:300px}
+  .pillar-photo.win{aspect-ratio:79/100}
+}
 </style>
 </head>
 <body>
@@ -774,39 +833,42 @@ html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <div class="hero-media hero-slides">
-    <div class="slide slide-video" data-night="1" data-day="1" data-label="the terrace at night">
-      <video muted playsinline preload="auto" poster="assets/ig/hero-video-poster.webp" aria-hidden="true"></video>
+    <div class="slide slide-video" data-night="1" data-label="the terrace at night">
+      <video class="v-night" muted playsinline preload="none" aria-hidden="true"></video>
     </div>
-    <picture class="slide" data-night="2" data-label="Monkey Business and a citrus cocktail"><source media="(max-width:760px)" srcset="assets/ig/hero-3-m.webp"><img src="assets/ig/hero-3.webp" alt="A cinnamon-rimmed martini with a fried banana chip beside a chile-rimmed citrus cocktail on a wooden bar" loading="lazy"></picture>
-    <picture class="slide" data-day="2" data-label="matcha and espresso martinis"><source media="(max-width:760px)" srcset="assets/ig/day-hero-2-m.webp"><img src="assets/ig/day-hero-2.webp" alt="A matcha martini, an espresso martini and a chile-rimmed citrus cocktail on a sunlit patio table" loading="lazy"></picture>
+    <div class="slide slide-video" data-day="1" data-label="the terrace by day">
+      <video class="v-day" muted playsinline preload="none" aria-hidden="true"></video>
+    </div>
+    <div class="slide slide-feature" data-night="2" data-label="Monkey Business">
+      <span class="sf-pat" aria-hidden="true"></span>
+      <figure class="sf-photo win" style="--k:1.834"><img src="assets/ig/w-monkey.webp" width="809" height="1079" alt="A cinnamon-rimmed martini with foam and a fried banana chip beside a chile-rimmed citrus cocktail on the wooden bar" loading="lazy"><figcaption>Monkey Business · fried banana martini</figcaption></figure>
+    </div>
+    <div class="slide slide-feature" data-day="2" data-label="matcha, espresso and citrus">
+      <span class="sf-pat" aria-hidden="true"></span>
+      <figure class="sf-photo win" style="--k:1.833"><img src="assets/ig/w-trio.webp" width="714" height="952" alt="A matcha martini, an espresso martini and a chile-rimmed citrus cocktail on a sunlit patio table" loading="lazy"><figcaption>Matcha · espresso · citrus — in the sun</figcaption></figure>
+    </div>
     <div class="slide slide-feature" data-night="3" data-day="3" data-label="the chocolate sundae">
-      <img class="sf-bg" src="assets/ig/feat-sundae-bg.webp" alt="" aria-hidden="true" loading="lazy">
       <span class="sf-pat" aria-hidden="true"></span>
-      <figure class="sf-photo"><img src="assets/ig/feat-sundae.webp" alt="Two scoops of chocolate ice cream with chocolate and white drizzle, crumble and a cherry" loading="lazy"><figcaption>Chocolate sundae · Latin-inspired ice cream</figcaption></figure>
+      <figure class="sf-photo win" style="--k:1.25"><img src="assets/ig/w-sundae.webp" width="952" height="714" alt="A chocolate ice cream sundae with chocolate and white drizzle, crumble and a cherry, on a sunlit wooden table" loading="lazy"><figcaption>Chocolate sundae · Latin-inspired ice cream</figcaption></figure>
     </div>
-    <div class="slide slide-feature" data-day="4" data-label="the espresso martini">
-      <img class="sf-bg" src="assets/ig/feat-espresso-bg.webp" alt="" aria-hidden="true" loading="lazy">
+    <div class="slide slide-feature" data-night="4" data-day="4" data-label="the sparkling mojito refresher">
       <span class="sf-pat" aria-hidden="true"></span>
-      <figure class="sf-photo"><img src="assets/ig/feat-espresso.webp" alt="An espresso martini topped with three coffee beans on a sunlit wooden table" loading="lazy"><figcaption>Espresso martini · eight ways</figcaption></figure>
-    </div>
-    <div class="slide slide-feature" data-night="4" data-day="6" data-label="the sparkling mojito refresher">
-      <img class="sf-bg" src="assets/ig/feat-mojito-bg.webp" alt="" aria-hidden="true" loading="lazy">
-      <span class="sf-pat" aria-hidden="true"></span>
-      <figure class="sf-photo"><img src="assets/ig/feat-mojito.webp" alt="A mint and lime sparkling mojito with a dried lime wheel on the terrazzo bar beside the menu" loading="lazy"><figcaption>Sparkling mojito refresher · zero proof</figcaption></figure>
+      <figure class="sf-photo win" style="--k:1.25"><img src="assets/ig/w-mojito.webp" width="1079" height="809" alt="A mint and lime sparkling mojito with a dried lime wheel on the terrazzo bar beside the menu" loading="lazy"><figcaption>Sparkling mojito refresher · zero proof</figcaption></figure>
     </div>
     <div class="slide slide-feature" data-night="5" data-day="5" data-label="flan and mini tres leches">
-      <img class="sf-bg" src="assets/ig/feat-flan-bg.webp" alt="" aria-hidden="true" loading="lazy">
       <span class="sf-pat" aria-hidden="true"></span>
-      <figure class="sf-photo"><img src="assets/ig/feat-flan.webp" alt="Flan in caramel sauce on a square plate behind a mini tres leches cake in a gold cup" loading="lazy"><figcaption>Flan · mini tres leches</figcaption></figure>
+      <figure class="sf-photo win" style="--k:1.126"><img src="assets/ig/w-flan.webp" width="952" height="596" alt="Flan in caramel sauce on a square plate and a mini tres leches cake in a gold cup, beside a gold candle holder" loading="lazy"><figcaption>Flan · mini tres leches</figcaption></figure>
     </div>
     <div class="slide slide-feature" data-night="6" data-label="cocktails in good company">
-      <img class="sf-bg" src="assets/ig/feat-company-bg.webp" alt="" aria-hidden="true" loading="lazy">
       <span class="sf-pat" aria-hidden="true"></span>
-      <figure class="sf-photo"><img src="assets/ig/feat-company.webp" alt="Hands reaching for a cinnamon-rimmed martini and a citrus cocktail on the wooden bar" loading="lazy"><figcaption>Monkey Business · good company</figcaption></figure>
+      <figure class="sf-photo win" style="--k:1.25"><img src="assets/ig/w-company.webp" width="952" height="714" alt="Hands reaching for a cinnamon-rimmed martini and a citrus cocktail on the wooden bar" loading="lazy"><figcaption>Monkey Business · good company</figcaption></figure>
     </div>
   </div>
-  <script>(function(){var v=document.querySelector('.slide-video video'),m=matchMedia('(max-width:760px)').matches;
-  v.poster=m?'assets/ig/hero-video-poster-m.webp':'assets/ig/hero-video-poster.webp';v.src=m?'assets/ig/hero-video-m.mp4':'assets/ig/hero-video.mp4';})();</script>
+  <script>(function(){var m=matchMedia('(max-width:760px)').matches,day=document.documentElement.getAttribute('data-mode')==='day',
+  n=document.querySelector('.v-night'),d=document.querySelector('.v-day');
+  n.poster=m?'assets/ig/hero-video-poster-m.webp':'assets/ig/hero-video-poster.webp';n.src=m?'assets/ig/hero-video-m.mp4':'assets/ig/hero-video.mp4';
+  d.poster=m?'assets/ig/day-video-poster-m.webp':'assets/ig/day-video-poster.webp';d.src=m?'assets/ig/day-video-m.mp4':'assets/ig/day-video.mp4';
+  (day?d:n).preload='auto';})();</script>
   <div class="hero-dots" role="group" aria-label="Hero slides"></div>
   <div class="hero-inner">
     <p class="eyebrow"><span class="only-night">The Distrikt · Downtown Las Vegas</span><span class="only-day">Afternoons at The Distrikt · DTLV</span></p>
@@ -851,8 +913,10 @@ html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"
       <span class="es-line">Arrive sweet. Leave sweeter.</span>
     </div>
     <figure class="casa-photo reveal">
-      <img class="only-night" src="assets/ig/casa-regulars.webp" alt="A guest holds up two Casa Dulce cocktails in the low light of the bar" loading="lazy">
-      <img class="only-day" src="assets/ig/day-casa-lounge.webp" alt="The Casa Dulce lounge by day: cane chairs, café tables, the mural and the glowing sign" loading="lazy">
+      <div class="win">
+        <img class="only-night" src="assets/ig/w-cheers.webp" width="809" height="1079" alt="A guest holds up two Casa Dulce cocktails in the low light of the bar" loading="lazy">
+        <img class="only-day" src="assets/ig/w-lounge.webp" width="714" height="952" alt="The Casa Dulce lounge by day: cane chairs, café tables, the mural and the glowing sign" loading="lazy">
+      </div>
       <figcaption><span class="only-night">Two in hand · the bar · the regulars</span><span class="only-day">The lounge · the mural · the afternoon</span></figcaption>
     </figure>
   </div>
@@ -875,7 +939,7 @@ html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"
 
       <!-- ICE CREAM -->
       <article class="pillar reveal">
-        <figure class="pillar-photo" aria-hidden="false"><img src="assets/ig/carta-icecream.webp" alt="A chocolate ice cream sundae with chocolate drizzle and a cherry on top, on a sunlit wooden table" loading="lazy"></figure>
+        <figure class="pillar-photo win"><img src="assets/ig/w-sundae.webp" width="952" height="714" alt="A chocolate ice cream sundae with chocolate drizzle and a cherry on top, on a sunlit wooden table" loading="lazy"></figure>
         <h3>Ice Cream</h3>
         <span class="sub">created exclusively for us in Mexico</span>
         <ul>
@@ -889,7 +953,7 @@ html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"
 
       <!-- PASTRY -->
       <article class="pillar reveal">
-        <figure class="pillar-photo" aria-hidden="false"><img src="assets/ig/carta-dessert.webp" alt="Flan in caramel sauce and a mini tres leches cake, beside a gold candle holder" loading="lazy"></figure>
+        <figure class="pillar-photo win"><img src="assets/ig/w-flan.webp" width="952" height="596" alt="Flan in caramel sauce and a mini tres leches cake in a gold cup, beside a gold candle holder" loading="lazy"></figure>
         <h3>Pastry</h3>
         <span class="sub">out of our ovens, every day</span>
         <ul>
@@ -903,7 +967,7 @@ html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"
 
       <!-- THE BAR -->
       <article class="pillar reveal">
-        <figure class="pillar-photo" aria-hidden="false"><img src="assets/ig/carta-bar.webp" alt="A matcha martini, an espresso martini topped with coffee beans and a chile-rimmed citrus cocktail in afternoon sun" loading="lazy"></figure>
+        <figure class="pillar-photo win"><img src="assets/ig/w-company.webp" width="952" height="714" alt="Hands reaching for a cinnamon-rimmed martini and a chile-rimmed citrus cocktail on the wooden bar" loading="lazy"></figure>
         <h3>The Bar</h3>
         <span class="sub">dessert cocktails, built to order</span>
         <ul>
@@ -941,9 +1005,11 @@ html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"
     </div>
     <div class="reveal">
       <figure class="firma-photo">
-        <img class="only-night" src="assets/ig/firma-monkey-business.webp" alt="A cinnamon-rimmed martini topped with foam and a fried banana chip, a Casa Dulce cup and a chile-rimmed cocktail beside it" loading="lazy">
-        <img class="only-day" src="assets/ig/day-matcha.webp" alt="A bright green matcha martini on a sunlit wooden patio table" loading="lazy">
-        <figcaption><span class="only-night">Rum · banana syrup · cold foam · cinnamon · the chip</span><span class="only-day">Matcha · shaken · poured up · in the sun</span></figcaption>
+        <div class="win">
+          <img class="only-night" src="assets/ig/w-monkey.webp" width="809" height="1079" alt="A cinnamon-rimmed martini topped with foam and a fried banana chip beside a chile-rimmed citrus cocktail" loading="lazy">
+          <img class="only-day" src="assets/ig/w-trio.webp" width="714" height="952" alt="A bright green matcha martini beside an espresso martini and a chile-rimmed citrus cocktail on a sunlit patio table" loading="lazy">
+        </div>
+        <figcaption><span class="only-night">Rum · banana syrup · cold foam · cinnamon · the chip</span><span class="only-day">The matcha martini · poured up · in the sun</span></figcaption>
       </figure>
     </div>
   </div>
@@ -960,17 +1026,17 @@ html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"
     </div>
     <p class="swipe-hint" aria-hidden="true">Swipe the room</p>
     <div class="salon-grid">
-      <figure class="salon-card reveal">
-        <img src="assets/ig/salon-bar.webp" alt="A mint-and-lime cocktail in a Casa Dulce cup on the river-stone terrazzo bar, menus beside it" loading="lazy">
-        <figcaption><b>The terrazzo bar</b><span>River stone, menus out, one perfect pour at a time</span></figcaption>
+      <figure class="salon-card win reveal">
+        <img src="assets/ig/w-backbar.webp" width="714" height="952" alt="The back bar at night: glassware hanging overhead, shelves of tequila and mezcal, the Casa Dulce sign reflected in the glass" loading="lazy">
+        <figcaption><b>The back bar</b><span>Glassware overhead, agave on the shelves</span></figcaption>
       </figure>
-      <figure class="salon-card reveal">
-        <img src="assets/ig/salon-room.webp" alt="Cane chairs and candlelit café tables beneath a hand-tufted mural and the glowing Casa sign" loading="lazy">
+      <figure class="salon-card win reveal">
+        <img src="assets/ig/w-room.webp" width="1079" height="809" alt="Cane chairs and candlelit café tables beneath a hand-tufted mural and the glowing Casa sign" loading="lazy">
         <figcaption><b>The room</b><span>Hand-troweled plaster, a hand-tufted mural, candlelight</span></figcaption>
       </figure>
-      <figure class="salon-card wide reveal">
-        <img src="assets/ig/salon-lounge.webp" alt="A banquette wrapped in terracotta mosaic tile under blue zellige, with cane chairs and candlelit tables" loading="lazy">
-        <figcaption><b>The banquette</b><span>Terracotta mosaic, blue zellige — the last, best hours</span></figcaption>
+      <figure class="salon-card win reveal">
+        <img src="assets/ig/w-mojito.webp" width="1079" height="809" alt="A mint-and-lime sparkling mojito in a Casa Dulce cup on the river-stone terrazzo bar, menus beside it" loading="lazy">
+        <figcaption><b>The terrazzo bar</b><span>River stone, menus out, one perfect pour at a time</span></figcaption>
       </figure>
     </div>
   </div>
@@ -994,8 +1060,10 @@ html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"
       <a class="btn btn-solid" href="#visita">Plan a private night</a>
     </div>
     <figure class="terraza-photo reveal">
-      <img class="only-night" src="assets/ig/terraza-night.webp" alt="The Casa Dulce sign lit up at night over the entrance, string lights and a patio umbrella out front" loading="lazy">
-      <img class="only-day" src="assets/ig/day-patio.webp" alt="Matcha and espresso martinis with a citrus cocktail in the sun on the patio" loading="lazy">
+      <div class="win">
+        <img class="only-night" src="assets/ig/w-sign-night.webp" width="714" height="952" alt="The Casa Dulce sign lit up at night over the entrance, string lights overhead" loading="lazy">
+        <img class="only-day" src="assets/ig/day-video-poster.webp" width="1280" height="720" alt="The Casa Dulce patio on a sunny afternoon, picnic tables under string lights and the Strat tower beyond" loading="lazy">
+      </div>
     </figure>
   </div>
 </section>
@@ -1012,22 +1080,22 @@ html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"
     </div>
     <p class="swipe-hint" aria-hidden="true">Swipe the reels</p>
     <div class="reels">
-      <a class="reel reveal" href="https://www.instagram.com/reel/DfdN43zPe6P/" target="_blank" rel="noopener" data-code="DfdN43zPe6P" aria-label="Play reel: Green Monkey">
+      <a class="reel win reveal" href="https://www.instagram.com/reel/DfdN43zPe6P/" target="_blank" rel="noopener" data-code="DfdN43zPe6P" aria-label="Play reel: Green Monkey">
         <img src="assets/ig/reel-green-monkey.webp" alt="Matcha poured over ice in a Casa Dulce cup on a sunlit wooden table" loading="lazy">
         <span class="play" aria-hidden="true"></span>
         <span class="cap"><span>Matcha · banana</span><b>Green Monkey</b></span>
       </a>
-      <a class="reel reveal" href="https://www.instagram.com/reel/DeLIzbdiLYM/" target="_blank" rel="noopener" data-code="DeLIzbdiLYM" aria-label="Play reel: Eight espresso martinis">
+      <a class="reel win reveal" href="https://www.instagram.com/reel/DeLIzbdiLYM/" target="_blank" rel="noopener" data-code="DeLIzbdiLYM" aria-label="Play reel: Eight espresso martinis">
         <img src="assets/ig/reel-espresso-martinis.webp" alt="An espresso martini topped with three coffee beans" loading="lazy">
         <span class="play" aria-hidden="true"></span>
         <span class="cap"><span>The lineup</span><b>Eight espresso martinis</b></span>
       </a>
-      <a class="reel reveal" href="https://www.instagram.com/reel/DeDh_3kiogz/" target="_blank" rel="noopener" data-code="DeDh_3kiogz" aria-label="Play reel: Four Latin-inspired flavors">
+      <a class="reel win reveal" href="https://www.instagram.com/reel/DeDh_3kiogz/" target="_blank" rel="noopener" data-code="DeDh_3kiogz" aria-label="Play reel: Four Latin-inspired flavors">
         <img src="assets/ig/reel-ice-cream-flavors.webp" alt="Scoops of mango ice cream with chile-strawberry sauce and mint" loading="lazy">
         <span class="play" aria-hidden="true"></span>
         <span class="cap"><span>Ice cream</span><b>Four Latin-inspired flavors</b></span>
       </a>
-      <a class="reel reveal" href="https://www.instagram.com/reel/DeQR3M8ChTN/" target="_blank" rel="noopener" data-code="DeQR3M8ChTN" aria-label="Play reel: Your sign to stay out">
+      <a class="reel win reveal" href="https://www.instagram.com/reel/DeQR3M8ChTN/" target="_blank" rel="noopener" data-code="DeQR3M8ChTN" aria-label="Play reel: Your sign to stay out">
         <img src="assets/ig/reel-night-exterior.webp" alt="The Casa Dulce sign glowing at night under string lights" loading="lazy">
         <span class="play" aria-hidden="true"></span>
         <span class="cap"><span>Nights at Casa</span><b>Your sign to stay out</b></span>
@@ -1061,7 +1129,7 @@ html[data-mode="day"] .carta,html[data-mode="day"] .terraza,html[data-mode="day"
   <div class="wrap">
     <figure class="visita-photo reveal">
       <img class="only-night" src="assets/ig/visita-bar.webp" alt="The team behind the Casa Dulce bar taking an order, martini glasses hanging overhead" loading="lazy">
-      <img class="only-day" src="assets/ig/day-hero-1.webp" alt="The Casa Dulce lounge by day under the glowing sign" loading="lazy">
+      <img class="only-day" src="assets/ig/day-hero-1.webp" width="1920" height="1080" alt="The Casa Dulce lounge by day under the glowing sign" loading="lazy">
     </figure>
     <p class="eyebrow reveal">Visit</p>
     <h2 class="reveal"><span class="only-night">Come for one drink.<br>Cancel your next stop.</span><span class="only-day">Come for a coffee.<br>Stay for happy hour.</span></h2>
@@ -1137,7 +1205,8 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 // hero slideshow: the original video + real photos, ordered for the day or night look
 const Hero = (() => {
   const wrap = document.querySelector('.hero-slides'), dotsWrap = document.querySelector('.hero-dots');
-  const vid = wrap.querySelector('video'), heroEl = document.querySelector('.hero');
+  const heroEl = document.querySelector('.hero');
+  let vid = null;
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const PHOTO_MS = 6500, VIDEO_PLAYS = 2;
   let slides = [], dots = [], i = 0, t = null, plays = 0;
@@ -1146,7 +1215,8 @@ const Hero = (() => {
   const schedule = () => {
     stop();
     const cur = slides[i];
-    if (!isVideo(cur) && vid) vid.pause();
+    wrap.querySelectorAll('video').forEach(v => { if (!cur.contains(v)) v.pause(); });
+    vid = isVideo(cur) ? cur.querySelector('video') : null;
     if (still) return;
     if (isVideo(cur) && vid) {
       plays = 0;
@@ -1156,8 +1226,8 @@ const Hero = (() => {
       t = setTimeout(next, 16000); // safety net if the video stalls
     } else {
       t = setTimeout(next, PHOTO_MS);
-      const after = slides[(i + 1) % slides.length];
-      if (isVideo(after) && vid && vid.preload === 'none') { vid.preload = 'auto'; vid.load(); }
+      const after = slides[(i + 1) % slides.length], av = isVideo(after) && after.querySelector('video');
+      if (av && av.preload === 'none') { av.preload = 'auto'; av.load(); }
     }
   };
   const go = n => {
@@ -1169,10 +1239,10 @@ const Hero = (() => {
     schedule();
   };
   const next = () => go(i + 1);
-  if (vid) vid.addEventListener('ended', () => {
-    if (!isVideo(slides[i])) return;
-    if (++plays < VIDEO_PLAYS) { vid.currentTime = 0; vid.play().catch(() => next()); } else next();
-  });
+  wrap.querySelectorAll('video').forEach(v => v.addEventListener('ended', () => {
+    if (v !== vid) return;
+    if (++plays < VIDEO_PLAYS) { v.currentTime = 0; v.play().catch(() => next()); } else next();
+  }));
   const build = () => {
     const mode = document.documentElement.getAttribute('data-mode') === 'day' ? 'day' : 'night';
     wrap.querySelectorAll('.slide').forEach(el => el.classList.remove('is-on'));
@@ -1191,7 +1261,7 @@ const Hero = (() => {
     if (hx === null) return; const dx = e.changedTouches[0].clientX - hx, dy = e.changedTouches[0].clientY - hy; hx = null;
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) go(i + (dx < 0 ? 1 : -1));
   }, {passive:true});
-  document.addEventListener('visibilitychange', () => { if (document.hidden) { stop(); vid && vid.pause(); } else schedule(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { stop(); wrap.querySelectorAll('video').forEach(v => v.pause()); } else schedule(); });
   build();
   return { build };
 })();
