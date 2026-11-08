@@ -19,7 +19,7 @@ try{var q=new URLSearchParams(location.search).get('mode');if(q==='day'||q==='ni
 d.setAttribute('data-mode',m);
 var tc=document.querySelector('meta[name=theme-color]');if(tc)tc.content=m==='day'?'#FBF6EC':'#17100A';
 var sm=window.matchMedia&&matchMedia('(max-width:760px)').matches,pl=document.createElement('link');pl.rel='preload';pl.as='image';
-pl.href=m==='day'?(sm?'assets/ig/day-video-poster-m.webp':'assets/ig/day-video-poster.webp'):(sm?'assets/ig/hero-video-poster-m.webp':'assets/ig/hero-video-poster.webp');
+pl.href=sm?'assets/ig/hero-arrival-poster-m.webp':'assets/ig/hero-arrival-poster.webp';
 document.head.appendChild(pl);})();
 </script>
 <title>Casa Dulce — After-Dark Cocktails &amp; Desserts · Las Vegas</title>
@@ -772,16 +772,15 @@ html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.
 @media(prefers-reduced-motion:reduce){.hero-slides .slide{transition:opacity .8s ease!important}}
 .casa-photo::before{display:none!important}
 @media(max-width:920px){.salon-grid{grid-template-columns:1fr 1fr}}
-/* night terrace: the arrival clip in a wide arched window (16:9, nothing important clipped) */
-.win>video{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%;background:#0E0A07}
-html[data-mode="day"] .win>video.only-night{display:none!important}
+/* desktop hero video: fills the right of the hero and fades out behind the headline, so the clip lands on the Casa Dulce sign beside it */
+@media(min-width:761px){
+  .slide-video{background:#0E0A07}
+  .slide-video video{left:22%;width:78%;object-position:50% 50%;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 14%);mask-image:linear-gradient(90deg,transparent,#000 14%)}
+}
+/* night terrace: wide arched window (16:9) so the whole photo shows */
 html:not([data-mode="day"]) .terraza-photo{max-width:none}
 html:not([data-mode="day"]) .terraza-photo .win{aspect-ratio:16/9;border-radius:50% 50% 14px 14px / 36% 36% 14px 14px}
-.tz-replay{position:absolute;right:14px;bottom:14px;z-index:2;width:36px;height:36px;display:grid;place-items:center;padding:0;cursor:pointer;
-  border:1px solid rgba(239,230,210,.55);border-radius:50%;background:rgba(14,9,5,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background .2s ease}
-.tz-replay:hover,.tz-replay:focus-visible{background:rgba(14,9,5,.7)}
-.tz-replay svg{width:16px;height:16px;fill:var(--cream)}
-.tz-replay[hidden]{display:none!important}
 @media(max-width:1100px){html:not([data-mode="day"]) .terraza-photo{max-width:720px}}
 @media(max-width:760px){
   /* phone hero: window above the headline; the long intro lives in "The House" below */
@@ -798,7 +797,10 @@ html:not([data-mode="day"]) .terraza-photo .win{aspect-ratio:16/9;border-radius:
   .firma-photo{max-width:270px}
   .terraza-photo{max-width:300px}
   html:not([data-mode="day"]) .terraza-photo{max-width:none}
-  .tz-replay{right:10px;bottom:10px;width:34px;height:34px}
+  /* phone hero video: a box a little shorter than the screen so the whole Casa Dulce sign fits, fading into the headline */
+  .slide-video{background:#0E0A07}
+  .slide-video video{bottom:auto;height:min(100%,168vw);object-position:50% 50%;
+    -webkit-mask-image:linear-gradient(180deg,#000 74%,transparent);mask-image:linear-gradient(180deg,#000 74%,transparent)}
 }
 </style>
 </head>
@@ -844,11 +846,8 @@ html:not([data-mode="day"]) .terraza-photo .win{aspect-ratio:16/9;border-radius:
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <div class="hero-media hero-slides">
-    <div class="slide slide-video" data-night="1" data-label="the terrace at night">
-      <video class="v-night" muted playsinline preload="none" aria-hidden="true"></video>
-    </div>
-    <div class="slide slide-video" data-day="1" data-label="the terrace by day">
-      <video class="v-day" muted playsinline preload="none" aria-hidden="true"></video>
+    <div class="slide slide-video" data-night="1" data-day="1" data-label="arriving at Casa Dulce">
+      <video class="v-arrival" muted playsinline preload="none" aria-hidden="true"></video>
     </div>
     <div class="slide slide-feature" data-night="2" data-label="Monkey Business">
       <span class="sf-pat" aria-hidden="true"></span>
@@ -875,11 +874,9 @@ html:not([data-mode="day"]) .terraza-photo .win{aspect-ratio:16/9;border-radius:
       <figure class="sf-photo win"><img src="assets/ig/a-company.webp" width="900" height="1200" alt="Hands reaching for a cinnamon-rimmed martini and a citrus cocktail on the wooden bar" loading="lazy"><figcaption>Monkey Business · good company</figcaption></figure>
     </div>
   </div>
-  <script>(function(){var m=matchMedia('(max-width:760px)').matches,day=document.documentElement.getAttribute('data-mode')==='day',
-  n=document.querySelector('.v-night'),d=document.querySelector('.v-day');
-  n.poster=m?'assets/ig/hero-video-poster-m.webp':'assets/ig/hero-video-poster.webp';n.src=m?'assets/ig/hero-video-m.mp4':'assets/ig/hero-video.mp4';
-  d.poster=m?'assets/ig/day-video-poster-m.webp':'assets/ig/day-video-poster.webp';d.src=m?'assets/ig/day-video-m.mp4':'assets/ig/day-video.mp4';
-  (day?d:n).preload='auto';})();</script>
+  <script>(function(){var m=matchMedia('(max-width:760px)').matches,v=document.querySelector('.v-arrival');
+  v.poster=m?'assets/ig/hero-arrival-poster-m.webp':'assets/ig/hero-arrival-poster.webp';v.src=m?'assets/ig/hero-arrival-m.mp4':'assets/ig/hero-arrival.mp4';
+  v.preload='auto';})();</script>
   <div class="hero-dots" role="group" aria-label="Hero slides"></div>
   <div class="hero-inner">
     <p class="eyebrow"><span class="only-night">The Distrikt · Downtown Las Vegas</span><span class="only-day">Afternoons at The Distrikt · DTLV</span></p>
@@ -1072,8 +1069,7 @@ html:not([data-mode="day"]) .terraza-photo .win{aspect-ratio:16/9;border-radius:
     </div>
     <figure class="terraza-photo reveal">
       <div class="win">
-        <video class="only-night tz-reveal" muted playsinline preload="none" width="1280" height="720" poster="assets/ig/terraza-reveal-end.webp" aria-label="Arriving at Casa Dulce at night: the Las Vegas skyline and the STRAT tower, then the glowing Casa Dulce sign under string lights on the terrace"></video>
-        <button class="tz-replay only-night" type="button" aria-label="Play the arrival again" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg></button>
+        <img class="only-night" src="assets/ig/terraza-night.webp" width="1280" height="720" alt="The Casa Dulce sign glowing over the terrace at night, string lights overhead and the STRAT tower beyond" loading="lazy">
         <img class="only-day" src="assets/ig/a-patio.webp" width="900" height="1200" alt="The Casa Dulce patio on a sunny afternoon, picnic tables under string lights and the Strat tower beyond" loading="lazy">
       </div>
     </figure>
@@ -1220,7 +1216,7 @@ const Hero = (() => {
   const heroEl = document.querySelector('.hero');
   let vid = null;
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const PHOTO_MS = 5200, VIDEO_PLAYS = 1;
+  const PHOTO_MS = 5200, VIDEO_PLAYS = 1, VIDEO_HOLD_MS = 2400;
   let slides = [], dots = [], i = 0, t = null, plays = 0, paused = false;
   const pauseBtn = document.createElement('button');
   pauseBtn.type = 'button'; pauseBtn.className = 'hero-pause'; pauseBtn.setAttribute('aria-label', 'Pause slideshow'); pauseBtn.setAttribute('aria-pressed', 'false');
@@ -1261,7 +1257,7 @@ const Hero = (() => {
   });
   wrap.querySelectorAll('video').forEach(v => v.addEventListener('ended', () => {
     if (v !== vid) return;
-    if (++plays < VIDEO_PLAYS) { v.currentTime = 0; v.play().catch(() => next()); } else next();
+    if (++plays < VIDEO_PLAYS) { v.currentTime = 0; v.play().catch(() => next()); } else { stop(); if (!paused) t = setTimeout(next, VIDEO_HOLD_MS); }
   }));
   const build = () => {
     const mode = document.documentElement.getAttribute('data-mode') === 'day' ? 'day' : 'night';
@@ -1414,41 +1410,6 @@ const Hero = (() => {
     if (bar) bar.dataset.state = state;
   };
   update(); setInterval(update, 60000);
-})();
-
-// night terrace: skyline -> Casa Dulce, played once when it scrolls into view, then rests on the sign
-(() => {
-  const v = document.querySelector('.tz-reveal'); if (!v) return;
-  const fig = v.closest('.terraza-photo'), btn = fig.querySelector('.tz-replay');
-  const root = document.documentElement;
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
-  const src = matchMedia('(max-width: 760px)').matches ? 'assets/ig/terraza-reveal-m.mp4' : 'assets/ig/terraza-reveal.mp4';
-  const START = 'assets/ig/terraza-reveal-start.webp', END = 'assets/ig/terraza-reveal-end.webp';
-  const night = () => root.getAttribute('data-mode') !== 'day';
-  let loaded = false, visible = false, state = 'idle'; // idle | playing | done
-  v.muted = true;
-  const load = () => { if (loaded) return; loaded = true; v.preload = 'auto'; v.src = src; v.load(); };
-  const done = () => { state = 'done'; v.poster = END; btn.hidden = false; };
-  const play = () => {
-    load(); state = 'playing'; btn.hidden = true;
-    const p = v.play();
-    if (p && p.catch) p.catch(() => { if (state === 'playing') done(); });
-  };
-  const sync = () => {
-    if (!night()) { if (state === 'playing') { v.pause(); state = 'idle'; } return; }
-    if (reduce.matches) { if (state !== 'playing') done(); return; }
-    if (state === 'idle') { v.poster = START; if (visible) play(); }
-    else if (state === 'playing') { visible ? v.play().catch(done) : v.pause(); }
-  };
-  v.addEventListener('ended', done);
-  btn.addEventListener('click', () => { if (loaded) v.currentTime = 0; play(); });
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(es => { if (es[0].isIntersecting && night() && !reduce.matches) load(); }, {rootMargin: '700px 0px'}).observe(fig);
-    new IntersectionObserver(es => { visible = es[0].isIntersecting; sync(); }, {threshold: 0.55}).observe(fig);
-  } else { visible = true; }
-  document.addEventListener('modechange', sync);
-  document.addEventListener('visibilitychange', () => { if (document.hidden && state === 'playing') v.pause(); else sync(); });
-  sync();
 })();
 
 // action bar appears once the hero is behind you
