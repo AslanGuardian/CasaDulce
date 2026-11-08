@@ -4,7 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#17100A">
-<script>document.documentElement.classList.add('js')</script>
+<script>
+/* Day look from Las Vegas sunrise to sunset, night look after dark. ?mode=day|night or the toggle overrides. */
+(function(){var d=document.documentElement;d.classList.add('js');
+function sun(date,lat,lng){var r=Math.PI/180,day=864e5,J1970=2440588,J2000=2451545,e=r*23.4397,J0=0.0009,lw=r*-lng,phi=r*lat,
+ dd=date/day-0.5+J1970-J2000,n=Math.round(dd-J0-lw/(2*Math.PI)),ds=J0+lw/(2*Math.PI)+n,M=r*(357.5291+0.98560028*ds),
+ C=r*(1.9148*Math.sin(M)+0.02*Math.sin(2*M)+0.0003*Math.sin(3*M)),L=M+C+r*102.9372+Math.PI,dec=Math.asin(Math.sin(e)*Math.sin(L)),
+ Jn=J2000+ds+0.0053*Math.sin(M)-0.0069*Math.sin(2*L),w=Math.acos((Math.sin(-0.833*r)-Math.sin(phi)*Math.sin(dec))/(Math.cos(phi)*Math.cos(dec))),
+ a=J0+(w+lw)/(2*Math.PI)+n,Js=J2000+a+0.0053*Math.sin(M)-0.0069*Math.sin(2*L),Jr=Jn-(Js-Jn),f=function(j){return (j+0.5-J1970)*day};
+ return {rise:f(Jr),set:f(Js)}}
+window.__sun=sun;
+var now=Date.now(),s=sun(now,36.1716,-115.1391),auto=(now>=s.rise&&now<s.set)?'day':'night',m=auto;
+try{var q=new URLSearchParams(location.search).get('mode');if(q==='day'||q==='night'){m=q}else{var v=sessionStorage.getItem('cd-mode');if(v==='day'||v==='night')m=v}}catch(x){}
+d.setAttribute('data-mode',m);
+var tc=document.querySelector('meta[name=theme-color]');if(tc)tc.content=m==='day'?'#FBF6EC':'#17100A';
+var sm=window.matchMedia&&matchMedia('(max-width:760px)').matches,pl=document.createElement('link');pl.rel='preload';pl.as='image';
+pl.href=m==='day'?(sm?'assets/ig/day-hero-1-m.webp':'assets/ig/day-hero-1.webp'):(sm?'assets/ig/hero-video-poster-m.webp':'assets/ig/hero-video-poster.webp');
+document.head.appendChild(pl);})();
+</script>
 <title>Casa Dulce — After-Dark Cocktails &amp; Desserts · Las Vegas</title>
 <meta name="description" content="Las Vegas's new after-dark address. Craft cocktails, chef-driven desserts and small-batch ice cream imported from Mexico. Casa Dulce.">
 <meta property="og:type" content="website">
@@ -12,8 +29,6 @@
 <meta property="og:description" content="Espresso martinis, craft cocktails, Latin-inspired ice cream, coffee and matcha at The Distrikt, Downtown Las Vegas.">
 <meta property="og:image" content="https://casa-dulce-lv.vercel.app/assets/ig/hero-1.webp">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" as="image" href="assets/ig/hero-1.webp" media="(min-width:761px)">
-<link rel="preload" as="image" href="assets/ig/hero-1-m.webp" media="(max-width:760px)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Mrs+Saint+Delafield&family=Jost:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -56,7 +71,7 @@ h2{font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,5.2vw,4.2re
 .hero-media{position:absolute;inset:0;z-index:-2;overflow:hidden}
 .hero-media img,.hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%}
 .hero-media video{z-index:1}
-@media(prefers-reduced-motion:reduce){.hero-media video{display:none}}
+/* reduced motion: the video slide shows its still poster and nothing auto-advances */
 /* ---------- pillar photos ---------- */
 .pillar-photo{margin:0 0 1.6rem;border-radius:14px;overflow:hidden}
 .pillar-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .8s cubic-bezier(.2,.6,.2,1)}
@@ -601,13 +616,91 @@ html.menu-open,html.modal-open{overflow:hidden}
   .hero-cta .btn{letter-spacing:.14em;font-size:.66rem}
   .mbar-btn{padding:0 .75rem}
 }
+
+/* ================= DAY / NIGHT ================= */
+html:not([data-mode="day"]) .only-day{display:none!important}
+html[data-mode="day"] .only-night{display:none!important}
+html:not([data-mode="day"]) .slide:not([data-night]),html[data-mode="day"] .slide:not([data-day]){display:none}
+html:not([data-mode="day"]) .hero-slides:not(.ready) .slide[data-night="1"],html[data-mode="day"] .hero-slides:not(.ready) .slide[data-day="1"]{opacity:1}
+.slide-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+
+/* logo: transparent marks, cocoa version on the light bar */
+nav .logo,footer .logo{display:block}
+.logo .logo-d{display:none}
+html[data-mode="day"] nav.solid .logo .logo-l{display:none}
+html[data-mode="day"] nav.solid .logo .logo-d{display:block}
+
+/* toggle */
+.mode-toggle{display:grid;place-items:center;width:46px;height:46px;margin-left:.6rem;border:1px solid rgba(239,230,210,.55);background:rgba(14,9,5,.25);color:var(--cream);cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.mode-toggle svg{width:20px;height:20px}
+.mode-toggle .i-sun{display:none}
+html[data-mode="day"] .mode-toggle .i-sun{display:block}
+html[data-mode="day"] .mode-toggle .i-moon{display:none}
+.mode-toggle:hover{background:rgba(239,230,210,.14)}
+
+/* ---- the day look: light, sunny, coffee-and-ice-cream ---- */
+html[data-mode="day"] body{background:#FBF6EC}
+html[data-mode="day"] .hero::after{background:linear-gradient(180deg,rgba(14,9,5,.42) 0%,rgba(14,9,5,.1) 34%,rgba(14,9,5,.32) 64%,rgba(14,9,5,.86) 100%)}
+html[data-mode="day"] nav.solid{background:rgba(251,246,236,.96);box-shadow:0 8px 30px rgba(61,37,25,.12)}
+html[data-mode="day"] nav.solid ul a{color:var(--ink)}
+html[data-mode="day"] nav.solid .btn-line{color:var(--ink);border-color:rgba(36,24,17,.45);background:transparent}
+html[data-mode="day"] nav.solid .btn-line:hover{background:var(--ink);color:var(--cream)}
+html[data-mode="day"] nav.solid .nav-burger,html[data-mode="day"] nav.solid .mode-toggle{border-color:rgba(36,24,17,.38);background:transparent;color:var(--ink)}
+html[data-mode="day"] nav.solid .nav-burger span{background:var(--ink)}
+
+html[data-mode="day"] .marquee{background:#F1E6CF;border-color:rgba(140,106,46,.35)}
+html[data-mode="day"] .marquee-track{color:var(--ink)}
+html[data-mode="day"] .marquee-track i{color:#B5862F}
+
+html[data-mode="day"] .carta{background:#F4ECDD;color:var(--ink)}
+html[data-mode="day"] .carta .eyebrow,html[data-mode="day"] .carta-note{color:#8C6A2E}
+html[data-mode="day"] .pillar{background:#FFFDF8;border-color:rgba(140,106,46,.2);box-shadow:0 18px 40px rgba(61,37,25,.07)}
+html[data-mode="day"] .pillar:hover{border-color:rgba(140,106,46,.55)}
+html[data-mode="day"] .pillar .sub{color:#B0604B}
+html[data-mode="day"] .pillar li{border-top-color:rgba(140,106,46,.18)}
+html[data-mode="day"] .pillar .dish::before{border-bottom-color:rgba(140,106,46,.45)}
+html[data-mode="day"] .pillar .dish .price{color:#8C6A2E}
+html[data-mode="day"] .carta-tabs{border-color:rgba(140,106,46,.35)!important}
+html[data-mode="day"] .carta-tabs button{color:var(--ink)}
+html[data-mode="day"] .carta-tabs button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+
+html[data-mode="day"] .terraza{background:#EFE3CB;color:var(--ink)}
+html[data-mode="day"] .terraza .eyebrow,html[data-mode="day"] .tstat .num{color:#8C6A2E}
+html[data-mode="day"] .terraza-photo img{box-shadow:0 30px 60px rgba(61,37,25,.2)}
+
+html[data-mode="day"] .feed{background:#FBF6EC;color:var(--ink)}
+html[data-mode="day"] .feed .eyebrow{color:#8C6A2E}
+html[data-mode="day"] .feed .btn-line{color:var(--ink);border-color:rgba(36,24,17,.45)}
+html[data-mode="day"] .feed .btn-line:hover{background:var(--ink);color:var(--cream)}
+html[data-mode="day"] .reel{box-shadow:0 22px 44px rgba(61,37,25,.22)}
+
+html[data-mode="day"] .mnav{background:rgba(251,246,236,.99)}
+html[data-mode="day"] .mnav li a{color:var(--ink);border-bottom-color:rgba(140,106,46,.25)}
+html[data-mode="day"] .mnav li a::after{color:#8C6A2E}
+html[data-mode="day"] .mnav-foot .btn-line{color:var(--ink);border-color:rgba(36,24,17,.45)}
+html[data-mode="day"] .mnav-foot p{color:var(--ink)}
+
+html[data-mode="day"] .mbar{background:rgba(251,246,236,.97);border-top-color:rgba(140,106,46,.35);box-shadow:0 -8px 24px rgba(61,37,25,.08)}
+html[data-mode="day"] .mbar-status{color:var(--ink)}
+html[data-mode="day"] .mbar-btn:not(.solid){color:var(--ink);border-color:rgba(36,24,17,.4)}
+
+/* day hero: lighter washes, keep the sign in frame */
+html[data-mode="day"] .hero-media::before{background:linear-gradient(90deg,rgba(14,9,5,.58) 0%,rgba(14,9,5,.22) 40%,transparent 66%)}
+.slide[data-label="the lounge"] img{object-position:85% 42%}
+@media(max-width:760px){
+  html[data-mode="day"] .hero-media::before{background:linear-gradient(180deg,rgba(14,9,5,.32) 0%,rgba(14,9,5,.12) 40%,transparent 70%)}
+  .slide[data-label="the lounge"] img{object-position:90% 50%}
+}
+/* gentle cross-fade when the look changes */
+html.mode-anim body,html.mode-anim .carta,html.mode-anim .terraza,html.mode-anim .feed,html.mode-anim .marquee,html.mode-anim .mbar-status{transition:background-color .7s ease,color .7s ease}
+@media(max-width:760px){.mode-toggle{width:46px;height:46px}}
 </style>
 </head>
 <body>
 
 <!-- ============ NAV ============ -->
 <nav id="nav">
-  <a class="logo" href="#top" aria-label="Casa Dulce home"><img src="assets/446903149e24.png" alt="Casa Dulce"></a>
+  <a class="logo" href="#top" aria-label="Casa Dulce home"><img class="logo-l" src="assets/logo-light.png" alt="Casa Dulce" width="130" height="33"><img class="logo-d" src="assets/logo-dark.png" alt="" aria-hidden="true" width="130" height="33"></a>
   <ul>
     <li><a href="#casa">The House</a></li>
     <li><a href="#carta">The Menu</a></li>
@@ -617,6 +710,10 @@ html.menu-open,html.modal-open{overflow:hidden}
     <li><a href="#visita">Visit</a></li>
   </ul>
   <div class="nav-right">
+    <button class="mode-toggle" type="button" aria-label="Switch to the day look" title="Day / night look">
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+    </button>
     <a class="btn btn-line nav-cta" href="#visita">Reserve</a>
     <button class="nav-burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span></span><span></span></button>
   </div>
@@ -641,35 +738,42 @@ html.menu-open,html.modal-open{overflow:hidden}
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <div class="hero-media hero-slides">
-    <picture class="slide is-on"><source media="(max-width:760px)" srcset="assets/ig/hero-1-m.webp"><img src="assets/ig/hero-1.webp" alt="The Casa Dulce sign glowing over the entrance at The Distrikt, string lights overhead" fetchpriority="high"></picture>
-    <picture class="slide"><source media="(max-width:760px)" srcset="assets/ig/hero-2-m.webp"><img src="assets/ig/hero-2.webp" alt="The back bar at night — glassware overhead, shelves of tequila and mezcal, the Casa Dulce sign reflected in the glass" decoding="async"></picture>
-    <picture class="slide"><source media="(max-width:760px)" srcset="assets/ig/hero-3-m.webp"><img src="assets/ig/hero-3.webp" alt="A cinnamon-rimmed martini with a fried banana chip beside a chile-rimmed citrus cocktail on a wooden bar" decoding="async"></picture>
+    <div class="slide slide-video" data-night="1" data-day="3" data-label="the terrace at night">
+      <video muted playsinline preload="none" poster="assets/ig/hero-video-poster.webp" aria-hidden="true"></video>
+    </div>
+    <picture class="slide" data-day="1" data-label="the lounge"><source media="(max-width:760px)" srcset="assets/ig/day-hero-1-m.webp"><img src="assets/ig/day-hero-1.webp" alt="The Casa Dulce lounge by day — cane chairs, a hand-tufted mural and the sign on hand-troweled plaster" loading="lazy"></picture>
+    <picture class="slide" data-day="2" data-label="matcha and espresso martinis"><source media="(max-width:760px)" srcset="assets/ig/day-hero-2-m.webp"><img src="assets/ig/day-hero-2.webp" alt="A matcha martini, an espresso martini and a chile-rimmed citrus cocktail on a sunlit patio table" loading="lazy"></picture>
+    <picture class="slide" data-night="2" data-label="the entrance"><source media="(max-width:760px)" srcset="assets/ig/hero-1-m.webp"><img src="assets/ig/hero-1.webp" alt="The Casa Dulce sign glowing over the entrance at The Distrikt, string lights overhead" loading="lazy"></picture>
+    <picture class="slide" data-night="3" data-label="the bar"><source media="(max-width:760px)" srcset="assets/ig/hero-2-m.webp"><img src="assets/ig/hero-2.webp" alt="The back bar at night — glassware overhead, shelves of tequila and mezcal, the Casa Dulce sign reflected in the glass" loading="lazy"></picture>
+    <picture class="slide" data-night="4" data-label="the cocktails"><source media="(max-width:760px)" srcset="assets/ig/hero-3-m.webp"><img src="assets/ig/hero-3.webp" alt="A cinnamon-rimmed martini with a fried banana chip beside a chile-rimmed citrus cocktail on a wooden bar" loading="lazy"></picture>
   </div>
-  <div class="hero-dots" role="group" aria-label="Hero photos">
-    <button type="button" aria-label="Photo 1: the entrance" aria-current="true"></button>
-    <button type="button" aria-label="Photo 2: the bar"></button>
-    <button type="button" aria-label="Photo 3: the cocktails"></button>
-  </div>
+  <script>(function(){var v=document.querySelector('.slide-video video'),m=matchMedia('(max-width:760px)').matches,n=document.documentElement.getAttribute('data-mode')!=='day';
+  v.poster=m?'assets/ig/hero-video-poster-m.webp':'assets/ig/hero-video-poster.webp';v.preload=n?'auto':'none';v.src=m?'assets/ig/hero-video-m.mp4':'assets/ig/hero-video.mp4';})();</script>
+  <div class="hero-dots" role="group" aria-label="Hero slides"></div>
   <div class="hero-inner">
-    <p class="eyebrow">The Distrikt · Downtown Las Vegas</p>
-    <h1>You found it <span class="es">first.</span></h1>
-    <p>Casa Dulce is the city's new after-dark obsession — dessert cocktails engineered by top bartenders, chef-driven sweets, and small-batch ice cream flavors created exclusively for us in Mexico.<span class="lg-only"> The kind of room you bring people to before everyone else knows about it.</span></p>
+    <p class="eyebrow"><span class="only-night">The Distrikt · Downtown Las Vegas</span><span class="only-day">Afternoons at The Distrikt · DTLV</span></p>
+    <h1><span class="only-night">You found it <span class="es">first.</span></span><span class="only-day">Your afternoon, <span class="es">sweeter.</span></span></h1>
+    <p class="only-day">Craft coffee, matcha and Latin-inspired ice cream in the sunniest corner of Downtown — with half-off drinks every happy hour, 3:30 to 6.<span class="lg-only"> Espresso martinis are always on, too.</span></p>
+    <p class="only-night">Casa Dulce is the city's new after-dark obsession — dessert cocktails engineered by top bartenders, chef-driven sweets, and small-batch ice cream flavors created exclusively for us in Mexico.<span class="lg-only"> The kind of room you bring people to before everyone else knows about it.</span></p>
     <div class="hero-cta">
-      <a class="btn btn-solid" href="#carta"><span class="lg-only">See la carta</span><span class="sm-only">The Menu</span></a>
-      <a class="btn btn-line" href="#firma"><span class="lg-only">The Fried Banana Martini</span><span class="sm-only">The Signature</span></a>
+      <a class="btn btn-solid" href="#carta"><span class="lg-only"><span class="only-night">See la carta</span><span class="only-day">See the menu</span></span><span class="sm-only">The Menu</span></a>
+      <a class="btn btn-line only-night" href="#firma"><span class="lg-only">The Fried Banana Martini</span><span class="sm-only">The Signature</span></a>
+      <a class="btn btn-line only-day" href="#visita"><span class="lg-only">Happy hour · 3:30–6</span><span class="sm-only">Happy hour</span></a>
     </div>
   </div>
   <div class="hero-fact">
-    <div class="num">½<span style="font-size:.4em">OFF</span></div>
-    <div class="lbl">Happy hour · 3:30–6 pm</div>
+    <div class="num" data-hero-num>½<span style="font-size:.4em">OFF</span></div>
+    <div class="lbl" data-hero-lbl>Happy hour · 3:30–6 pm</div>
   </div>
 </header>
 
 <!-- ============ MARQUEE ============ -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>Dessert Cocktails <i>◆</i> Chef-Driven Sweets <i>◆</i> Small-Batch Ice Cream <i>◆</i> Specialty Coffee <i>◆</i> Happy Hour 3:30–6 <i>◆</i> </span>
-    <span>Dessert Cocktails <i>◆</i> Chef-Driven Sweets <i>◆</i> Small-Batch Ice Cream <i>◆</i> Specialty Coffee <i>◆</i> Happy Hour 3:30–6 <i>◆</i> </span>
+    <span class="only-night">Dessert Cocktails <i>◆</i> Chef-Driven Sweets <i>◆</i> Small-Batch Ice Cream <i>◆</i> Specialty Coffee <i>◆</i> Happy Hour 3:30–6 <i>◆</i> </span>
+    <span class="only-night">Dessert Cocktails <i>◆</i> Chef-Driven Sweets <i>◆</i> Small-Batch Ice Cream <i>◆</i> Specialty Coffee <i>◆</i> Happy Hour 3:30–6 <i>◆</i> </span>
+    <span class="only-day">Craft Coffee <i>◆</i> Matcha <i>◆</i> Latin-Inspired Ice Cream <i>◆</i> Mexican Mocha <i>◆</i> Café de Olla <i>◆</i> Happy Hour 3:30–6 <i>◆</i> </span>
+    <span class="only-day">Craft Coffee <i>◆</i> Matcha <i>◆</i> Latin-Inspired Ice Cream <i>◆</i> Mexican Mocha <i>◆</i> Café de Olla <i>◆</i> Happy Hour 3:30–6 <i>◆</i> </span>
   </div>
 </div>
 <div class="stone-band" aria-hidden="true"></div>
@@ -679,15 +783,19 @@ html.menu-open,html.modal-open{overflow:hidden}
   <div class="wrap casa-grid">
     <div class="reveal">
       <p class="eyebrow">The House</p>
-      <h2>Intimacy is<br>the new luxury.</h2>
-      <p class="lead">Dinner is a reservation. What comes after is a scene. Casa Dulce is where the night migrates once the plates are cleared — a candlelit room built for the last, best hours of the evening.</p>
+      <h2 class="only-night">Intimacy is<br>the new luxury.</h2>
+      <h2 class="only-day">Sunlight on plaster.<br>Something sweet in hand.</h2>
+      <p class="lead only-day">By day, Casa Dulce is the bright corner of The Distrikt for craft coffee, matcha and Latin-inspired ice cream — the kind of place you stop for one latte and stay for the afternoon.</p>
+      <p class="lead only-night">Dinner is a reservation. What comes after is a scene. Casa Dulce is where the night migrates once the plates are cleared — a candlelit room built for the last, best hours of the evening.</p>
       <p>Everything here is sourced like it matters, because it does. Our ice cream flavors were developed with top chefs in Mexico and are produced exclusively for this house — all natural, imported directly, available nowhere else. The pastry program runs out of our own ovens. The bar builds every cocktail to order, one perfect pour at a time.</p>
-      <p>Terrazzo, oak and cane, hand-troweled plaster, low amber light. Dress well. Stay late.</p>
+      <p class="only-night">Terrazzo, oak and cane, hand-troweled plaster, low amber light. Dress well. Stay late.</p>
+      <p class="only-day">Cane chairs, hand-troweled plaster, blue zellige and a mural made by hand. Bring a friend. Stay for happy hour.</p>
       <span class="es-line">Arrive sweet. Leave sweeter.</span>
     </div>
     <figure class="casa-photo reveal">
-      <img src="assets/ig/casa-regulars.webp" alt="A guest holds up two Casa Dulce cocktails in the low light of the bar" loading="lazy">
-      <figcaption>Two in hand · the bar · the regulars</figcaption>
+      <img class="only-night" src="assets/ig/casa-regulars.webp" alt="A guest holds up two Casa Dulce cocktails in the low light of the bar" loading="lazy">
+      <img class="only-day" src="assets/ig/day-casa-lounge.webp" alt="The Casa Dulce lounge by day: cane chairs, café tables, the mural and the glowing sign" loading="lazy">
+      <figcaption><span class="only-night">Two in hand · the bar · the regulars</span><span class="only-day">The lounge · the mural · the afternoon</span></figcaption>
     </figure>
   </div>
 </section>
@@ -758,16 +866,26 @@ html.menu-open,html.modal-open{overflow:hidden}
 <section class="firma" id="firma">
   <div class="wrap firma-grid">
     <div class="reveal">
+      <div class="only-day">
+        <p class="eyebrow">The Signature · by day</p>
+        <h2>The Matcha Daddy <span class="es">Martini.</span></h2>
+        <p>For the matcha lovers. Our matcha, shaken into a martini and poured up — the greenest way to start happy hour, and the one everyone photographs first.</p>
+        <p>Not drinking? Try the Green Monkey: matcha over our homemade cinnamon-banana syrup, finished with fried banana cream. Add a scoop of churro or fried banana ice cream and the afternoon is handled.</p>
+        <p class="chip-line">Green, cold, poured up.</p>
+      </div>
+      <div class="only-night">
       <p class="eyebrow">The Signature</p>
       <h2>The Fried Banana <span class="es">Martini.</span></h2>
       <p>The drink people will fly in for. Bananas fried in-house and reduced with cinnamon into a syrup, layered over aged Nicaraguan dark rum and a touch of milk. Crowned with fried banana and a cinnamon cold foam, dusted table-side.</p>
       <p>Then the move: a giant sweet plantain chip laid across the rim — your spoon and your first bite in one. Scoop the foam. Eat the chip. Drink the martini. Order another.</p>
       <p class="chip-line">One drink, three textures, zero shortcuts.</p>
+      </div>
     </div>
     <div class="reveal">
       <figure class="firma-photo">
-        <img src="assets/ig/firma-monkey-business.webp" alt="A cinnamon-rimmed martini topped with foam and a fried banana chip, a Casa Dulce cup and a chile-rimmed cocktail beside it" loading="lazy">
-        <figcaption>Rum · banana syrup · cold foam · cinnamon · the chip</figcaption>
+        <img class="only-night" src="assets/ig/firma-monkey-business.webp" alt="A cinnamon-rimmed martini topped with foam and a fried banana chip, a Casa Dulce cup and a chile-rimmed cocktail beside it" loading="lazy">
+        <img class="only-day" src="assets/ig/day-matcha.webp" alt="A bright green matcha martini on a sunlit wooden patio table" loading="lazy">
+        <figcaption><span class="only-night">Rum · banana syrup · cold foam · cinnamon · the chip</span><span class="only-day">Matcha · shaken · poured up · in the sun</span></figcaption>
       </figure>
     </div>
   </div>
@@ -804,9 +922,11 @@ html.menu-open,html.modal-open{overflow:hidden}
 <section class="terraza" id="terraza">
   <div class="wrap terraza-grid">
     <div class="reveal">
-      <p class="eyebrow">The Terrace · Private Events</p>
-      <h2>String lights, night air, the tower glowing.</h2>
-      <p>The terrace is where the night opens up — cocktails under café lights, desert air, the STRAT lit up over your shoulder. A skyline view that feels like a secret, because for now it still is.</p>
+      <p class="eyebrow"><span class="only-night">The Terrace · Private Events</span><span class="only-day">The Patio · Private Events</span></p>
+      <h2 class="only-night">String lights, night air, the tower glowing.</h2>
+      <h2 class="only-day">Sun on the patio, an iced latte in hand.</h2>
+      <p class="only-day">Afternoons at The Distrikt run on cold foam and sunshine — Green Monkeys, Mexican mochas and café de olla made with our housemade syrups, out on the patio.</p>
+      <p class="only-night">The terrace is where the night opens up — cocktails under café lights, desert air, the STRAT lit up over your shoulder. A skyline view that feels like a secret, because for now it still is.</p>
       <p>For the nights that matter, take the whole house. Product launches, birthdays that deserve better than bottle service, the dinner-after-the-dinner. The room, the terrace, the full bar and pastry program — yours.</p>
       <div class="terraza-stats">
         <div class="tstat"><div class="num">Full</div><div class="lbl">House buyouts</div></div>
@@ -816,7 +936,8 @@ html.menu-open,html.modal-open{overflow:hidden}
       <a class="btn btn-solid" href="#visita">Plan a private night</a>
     </div>
     <figure class="terraza-photo reveal">
-      <img src="assets/ig/terraza-night.webp" alt="The Casa Dulce sign lit up at night over the entrance, string lights and a patio umbrella out front" loading="lazy">
+      <img class="only-night" src="assets/ig/terraza-night.webp" alt="The Casa Dulce sign lit up at night over the entrance, string lights and a patio umbrella out front" loading="lazy">
+      <img class="only-day" src="assets/ig/day-patio.webp" alt="Matcha and espresso martinis with a citrus cocktail in the sun on the patio" loading="lazy">
     </figure>
   </div>
 </section>
@@ -881,10 +1002,11 @@ html.menu-open,html.modal-open{overflow:hidden}
 <section class="visita" id="visita">
   <div class="wrap">
     <figure class="visita-photo reveal">
-      <img src="assets/ig/visita-bar.webp" alt="The team behind the Casa Dulce bar taking an order, martini glasses hanging overhead" loading="lazy">
+      <img class="only-night" src="assets/ig/visita-bar.webp" alt="The team behind the Casa Dulce bar taking an order, martini glasses hanging overhead" loading="lazy">
+      <img class="only-day" src="assets/ig/day-hero-1.webp" alt="The Casa Dulce lounge by day under the glowing sign" loading="lazy">
     </figure>
     <p class="eyebrow reveal">Visit</p>
-    <h2 class="reveal">Come for one drink.<br>Cancel your next stop.</h2>
+    <h2 class="reveal"><span class="only-night">Come for one drink.<br>Cancel your next stop.</span><span class="only-day">Come for a coffee.<br>Stay for happy hour.</span></h2>
     <div class="visita-grid" style="margin-top:2.5rem">
       <div class="reveal">
         <div class="vis-block">
@@ -902,8 +1024,10 @@ html.menu-open,html.modal-open{overflow:hidden}
       </div>
       <aside class="res-card reveal">
         <div class="shape" aria-hidden="true"></div>
-        <h3>The room fills by eight.</h3>
-        <p>Walk-ins take their chances at the bar and terrace. For a table in the lounge — especially Friday and Saturday — reserve ahead. You'll want the banquette.</p>
+        <h3 class="only-day">Afternoons are easy.</h3>
+        <p class="only-day">Walk right in for coffee, matcha and ice cream — no reservation needed. Tables fill fast once happy hour starts at 3:30, and the lounge books up on Friday and Saturday nights.</p>
+        <h3 class="only-night">The room fills by eight.</h3>
+        <p class="only-night">Walk-ins take their chances at the bar and terrace. For a table in the lounge — especially Friday and Saturday — reserve ahead. You'll want the banquette.</p>
         <a class="btn btn-solid" href="#">Reserve on Resy</a>
       </aside>
     </div>
@@ -922,7 +1046,7 @@ html.menu-open,html.modal-open{overflow:hidden}
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <a class="logo" href="#top" aria-label="Casa Dulce home"><img src="assets/446903149e24.png" alt="Casa Dulce"></a>
+      <a class="logo" href="#top" aria-label="Casa Dulce home"><img src="assets/logo-light.png" alt="Casa Dulce" width="144" height="36"></a>
       <ul class="foot-links">
         <li><a href="#casa">The House</a></li>
         <li><a href="#carta">The Menu</a></li>
@@ -952,28 +1076,91 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 }), {threshold:.18});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// hero slideshow (real photos)
-(() => {
-  const slides = [...document.querySelectorAll('.hero-slides .slide')];
-  const dots = [...document.querySelectorAll('.hero-dots button')];
-  if (slides.length < 2) return;
+// hero slideshow: the original video + real photos, ordered for the day or night look
+const Hero = (() => {
+  const wrap = document.querySelector('.hero-slides'), dotsWrap = document.querySelector('.hero-dots');
+  const vid = wrap.querySelector('video');
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let i = 0, t;
-  const show = n => {
-    slides[i].classList.remove('is-on'); dots[i]?.removeAttribute('aria-current');
-    i = (n + slides.length) % slides.length;
-    slides[i].classList.add('is-on'); dots[i]?.setAttribute('aria-current', 'true');
+  const PHOTO_MS = 6500, VIDEO_PLAYS = 2;
+  let slides = [], dots = [], i = 0, t = null, plays = 0;
+  const isVideo = el => el && el.classList.contains('slide-video');
+  const stop = () => { clearTimeout(t); t = null; };
+  const schedule = () => {
+    stop();
+    const cur = slides[i];
+    if (!isVideo(cur) && vid) vid.pause();
+    if (still) return;
+    if (isVideo(cur) && vid) {
+      plays = 0;
+      try { vid.currentTime = 0; } catch (e) {}
+      const p = vid.play();
+      if (p && p.catch) p.catch(() => { stop(); t = setTimeout(next, PHOTO_MS); });
+      t = setTimeout(next, 16000); // safety net if the video stalls
+    } else {
+      t = setTimeout(next, PHOTO_MS);
+      const after = slides[(i + 1) % slides.length];
+      if (isVideo(after) && vid && vid.preload === 'none') { vid.preload = 'auto'; vid.load(); }
+    }
   };
-  const play = () => { if (!still) { clearInterval(t); t = setInterval(() => show(i + 1), 6500); } };
-  dots.forEach((d, n) => d.addEventListener('click', () => { show(n); play(); }));
+  const go = n => {
+    if (!slides.length) return;
+    slides[i] && slides[i].classList.remove('is-on'); dots[i] && dots[i].removeAttribute('aria-current');
+    i = (n + slides.length) % slides.length;
+    slides[i].classList.add('is-on'); dots[i] && dots[i].setAttribute('aria-current', 'true');
+    schedule();
+  };
+  const next = () => go(i + 1);
+  if (vid) vid.addEventListener('ended', () => {
+    if (!isVideo(slides[i])) return;
+    if (++plays < VIDEO_PLAYS) { vid.currentTime = 0; vid.play().catch(() => next()); } else next();
+  });
+  const build = () => {
+    const mode = document.documentElement.getAttribute('data-mode') === 'day' ? 'day' : 'night';
+    wrap.querySelectorAll('.slide').forEach(el => el.classList.remove('is-on'));
+    slides = [...wrap.querySelectorAll('.slide')].filter(el => el.dataset[mode]).sort((a, b) => a.dataset[mode] - b.dataset[mode]);
+    dotsWrap.innerHTML = slides.map((el, k) => `<button type="button" aria-label="Slide ${k + 1}: ${el.dataset.label}"></button>`).join('');
+    dots = [...dotsWrap.children];
+    dots.forEach((d, k) => d.addEventListener('click', () => go(k)));
+    i = 0; slides[0].classList.add('is-on'); dots[0].setAttribute('aria-current', 'true');
+    wrap.classList.add('ready');
+    schedule();
+  };
   const hero = document.querySelector('.hero'); let hx = null, hy = null;
   hero.addEventListener('touchstart', e => { hx = e.touches[0].clientX; hy = e.touches[0].clientY; }, {passive:true});
   hero.addEventListener('touchend', e => {
     if (hx === null) return; const dx = e.changedTouches[0].clientX - hx, dy = e.changedTouches[0].clientY - hy; hx = null;
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) { show(i + (dx < 0 ? 1 : -1)); play(); }
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) go(i + (dx < 0 ? 1 : -1));
   }, {passive:true});
-  document.addEventListener('visibilitychange', () => document.hidden ? clearInterval(t) : play());
-  play();
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { stop(); vid && vid.pause(); } else schedule(); });
+  build();
+  return { build };
+})();
+
+// day / night look: follows the Las Vegas sun; the toggle overrides it for this visit
+(() => {
+  const root = document.documentElement, btn = document.querySelector('.mode-toggle'), meta = document.querySelector('meta[name=theme-color]');
+  const label = () => { if (btn) btn.setAttribute('aria-label', root.getAttribute('data-mode') === 'day' ? 'Switch to the night look' : 'Switch to the day look'); };
+  const apply = m => {
+    if (root.getAttribute('data-mode') === m) return;
+    root.classList.add('mode-anim'); root.setAttribute('data-mode', m);
+    if (meta) meta.content = m === 'day' ? '#FBF6EC' : '#17100A';
+    label(); Hero.build();
+    document.dispatchEvent(new CustomEvent('modechange', {detail: m}));
+    setTimeout(() => root.classList.remove('mode-anim'), 800);
+  };
+  if (btn) btn.addEventListener('click', () => {
+    const m = root.getAttribute('data-mode') === 'day' ? 'night' : 'day';
+    try { sessionStorage.setItem('cd-mode', m); } catch (e) {}
+    apply(m);
+  });
+  label();
+  setInterval(() => {
+    let manual = /[?&]mode=(day|night)/.test(location.search);
+    try { manual = manual || !!sessionStorage.getItem('cd-mode'); } catch (e) {}
+    if (manual || !window.__sun) return;
+    const now = Date.now(), sn = window.__sun(now, 36.1716, -115.1391);
+    apply(now >= sn.rise && now < sn.set ? 'day' : 'night');
+  }, 60000);
 })();
 
 // Instagram reels open in an on-page player
@@ -1019,14 +1206,17 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     tabs.forEach((t, k) => t.setAttribute('aria-pressed', k === cur));
     cards.forEach((c, k) => { c.classList.toggle('is-active', k === cur); if (k === cur) c.classList.add('in'); });
   };
-  tabs.forEach((t, k) => t.addEventListener('click', () => sel(k)));
+  let touched = false;
+  tabs.forEach((t, k) => t.addEventListener('click', () => { touched = true; sel(k); }));
+  const byMode = () => document.documentElement.getAttribute('data-mode') === 'day' ? 0 : tabs.length - 1;
+  document.addEventListener('modechange', () => { if (!touched) sel(byMode()); });
   const g = document.querySelector('.carta-grid'); let x0 = null, y0 = null;
   g.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, {passive:true});
   g.addEventListener('touchend', e => {
     if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) sel(cur + (dx < 0 ? 1 : -1));
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) { touched = true; sel(cur + (dx < 0 ? 1 : -1)); }
   }, {passive:true});
-  sel(0);
+  sel(byMode());
 })();
 
 // live open / closed status, in Las Vegas time
@@ -1054,6 +1244,14 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
       text = 'Closed · opens ' + day + ' at 3:30 pm'; short = 'Opens ' + day + ' 3:30';
     }
     els.forEach(el => { el.textContent = el.dataset.openStatus === 'short' ? short : text; el.dataset.state = state; });
+    const hn = document.querySelector('[data-hero-num]'), hl = document.querySelector('[data-hero-lbl]');
+    if (hn && hl) {
+      const small = w => `<span style="font-size:.4em">${w}</span>`;
+      if (state === 'hh') { hn.innerHTML = '½' + small('OFF'); hl.textContent = 'Happy hour · until 6 pm'; }
+      else if (state === 'open') { hn.textContent = 'Open'; hl.textContent = 'Until 10:30 pm tonight'; }
+      else if (openDay(wd) && now < OPEN) { hn.innerHTML = '3:30' + small('PM'); hl.textContent = 'Doors open today'; }
+      else { hn.innerHTML = '½' + small('OFF'); hl.textContent = 'Happy hour · Wed–Sun 3:30–6'; }
+    }
     if (bar) bar.dataset.state = state;
   };
   update(); setInterval(update, 60000);
