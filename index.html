@@ -71,7 +71,7 @@ h2{font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,5.2vw,4.2re
 .hero-media{position:absolute;inset:0;z-index:-2;overflow:hidden}
 .hero-media img,.hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%}
 .hero-media video{z-index:1}
-/* reduced motion: the video slide shows its still poster and nothing auto-advances */
+/* reduced motion: slides still advance (gentle fades, no zoom); the pause button stops everything */
 /* ---------- pillar photos ---------- */
 .pillar-photo{margin:0 0 1.6rem;border-radius:14px;overflow:hidden}
 .pillar-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .8s cubic-bezier(.2,.6,.2,1)}
@@ -767,6 +767,13 @@ html:not([data-mode="day"]) .win>img.only-day,html[data-mode="day"] .win>img.onl
 .visita-photo img{aspect-ratio:auto!important;height:auto!important;object-fit:fill!important}
 html[data-mode="day"] .terraza-photo .win{box-shadow:0 30px 60px rgba(61,37,25,.2)}
 
+/* slideshow pause control */
+.hero-dots{align-items:center}
+.hero-pause{width:30px;height:30px;margin-left:.5rem;display:grid;place-items:center;border:1px solid rgba(239,230,210,.45);border-radius:50%;background:rgba(14,9,5,.3);cursor:pointer;padding:0}
+.hero-pause svg{width:12px;height:12px;fill:var(--cream)}
+.hero-pause .ic-play,.hero-pause[aria-pressed="true"] .ic-pause{display:none}
+.hero-pause[aria-pressed="true"] .ic-play{display:block}
+@media(prefers-reduced-motion:reduce){.hero-slides .slide{transition:opacity .8s ease!important}}
 /* reels: whole 9:16 cover under the terrazzo dome */
 .casa-photo::before{display:none!important}
 .reel.win{aspect-ratio:auto}
@@ -1208,8 +1215,11 @@ const Hero = (() => {
   const heroEl = document.querySelector('.hero');
   let vid = null;
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const PHOTO_MS = 6500, VIDEO_PLAYS = 2;
-  let slides = [], dots = [], i = 0, t = null, plays = 0;
+  const PHOTO_MS = 5200, VIDEO_PLAYS = 1;
+  let slides = [], dots = [], i = 0, t = null, plays = 0, paused = false;
+  const pauseBtn = document.createElement('button');
+  pauseBtn.type = 'button'; pauseBtn.className = 'hero-pause'; pauseBtn.setAttribute('aria-label', 'Pause slideshow'); pauseBtn.setAttribute('aria-pressed', 'false');
+  pauseBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path class="ic-pause" d="M8 5h3v14H8zM13 5h3v14h-3z"/><path class="ic-play" d="M8 5l11 7-11 7z"/></svg>';
   const isVideo = el => el && el.classList.contains('slide-video');
   const stop = () => { clearTimeout(t); t = null; };
   const schedule = () => {
@@ -1217,7 +1227,7 @@ const Hero = (() => {
     const cur = slides[i];
     wrap.querySelectorAll('video').forEach(v => { if (!cur.contains(v)) v.pause(); });
     vid = isVideo(cur) ? cur.querySelector('video') : null;
-    if (still) return;
+    if (paused) return;
     if (isVideo(cur) && vid) {
       plays = 0;
       try { vid.currentTime = 0; } catch (e) {}
@@ -1239,6 +1249,11 @@ const Hero = (() => {
     schedule();
   };
   const next = () => go(i + 1);
+  pauseBtn.addEventListener('click', () => {
+    paused = !paused;
+    pauseBtn.setAttribute('aria-pressed', paused); pauseBtn.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+    if (paused) { stop(); wrap.querySelectorAll('video').forEach(v => v.pause()); } else schedule();
+  });
   wrap.querySelectorAll('video').forEach(v => v.addEventListener('ended', () => {
     if (v !== vid) return;
     if (++plays < VIDEO_PLAYS) { v.currentTime = 0; v.play().catch(() => next()); } else next();
@@ -1249,6 +1264,7 @@ const Hero = (() => {
     slides = [...wrap.querySelectorAll('.slide')].filter(el => el.dataset[mode]).sort((a, b) => a.dataset[mode] - b.dataset[mode]);
     dotsWrap.innerHTML = slides.map((el, k) => `<button type="button" aria-label="Slide ${k + 1}: ${el.dataset.label}"></button>`).join('');
     dots = [...dotsWrap.children];
+    dotsWrap.appendChild(pauseBtn);
     dots.forEach((d, k) => d.addEventListener('click', () => go(k)));
     i = 0; slides[0].classList.add('is-on'); dots[0].setAttribute('aria-current', 'true');
     heroEl.classList.toggle('feature-on', slides[0].classList.contains('slide-feature'));
@@ -1261,7 +1277,7 @@ const Hero = (() => {
     if (hx === null) return; const dx = e.changedTouches[0].clientX - hx, dy = e.changedTouches[0].clientY - hy; hx = null;
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) go(i + (dx < 0 ? 1 : -1));
   }, {passive:true});
-  document.addEventListener('visibilitychange', () => { if (document.hidden) { stop(); wrap.querySelectorAll('video').forEach(v => v.pause()); } else schedule(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { stop(); wrap.querySelectorAll('video').forEach(v => v.pause()); } else if (!paused) schedule(); });
   build();
   return { build };
 })();
