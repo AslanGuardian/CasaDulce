@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#17100A">
+<script>document.documentElement.classList.add('js')</script>
 <title>Casa Dulce — After-Dark Cocktails &amp; Desserts · Las Vegas</title>
 <meta name="description" content="Las Vegas's new after-dark address. Craft cocktails, chef-driven desserts and small-batch ice cream imported from Mexico. Casa Dulce.">
 <meta property="og:type" content="website">
@@ -447,6 +449,158 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
 @media(max-width:760px){.hero-media::before{background:linear-gradient(180deg,rgba(14,9,5,.55) 0%,rgba(14,9,5,.45) 40%,rgba(14,9,5,.2) 70%,transparent 100%)}}
 @media(max-width:520px){.reels{gap:.8rem}.reel .play{width:52px;height:52px;margin:-26px 0 0 -26px}.reel .play::before{left:21px;top:16px}.reel .cap{padding:1rem .9rem}.reel .cap span{display:none}.reel .cap b{font-size:1rem}}
 
+
+/* ================= MOBILE-FIRST PASS ================= */
+html{-webkit-tap-highlight-color:transparent}
+section[id],header[id]{scroll-margin-top:68px}
+.sm-only{display:none}
+.carta-tabs,.mbar,.swipe-hint{display:none}
+
+/* hero dots: bigger hit area, same thin line */
+.hero-dots{gap:.2rem}
+.hero-dots button{position:relative;width:36px;height:28px;background:transparent}
+.hero-dots button::before{content:"";position:absolute;left:4px;right:4px;top:13px;height:2px;background:rgba(239,230,210,.4);transition:background .4s}
+.hero-dots button[aria-current="true"]{background:transparent}
+.hero-dots button[aria-current="true"]::before{background:var(--brass-bright)}
+
+/* burger + full-screen menu */
+.nav-burger{display:none;position:relative;width:46px;height:46px;border:1px solid rgba(239,230,210,.55);background:rgba(14,9,5,.25);cursor:pointer;margin-left:.6rem}
+.nav-burger span{position:absolute;left:12px;right:12px;height:1.5px;background:var(--cream);transition:transform .35s,top .35s}
+.nav-burger span:nth-child(1){top:18px}.nav-burger span:nth-child(2){top:26px}
+.nav-burger[aria-expanded="true"] span:nth-child(1){top:22px;transform:rotate(45deg)}
+.nav-burger[aria-expanded="true"] span:nth-child(2){top:22px;transform:rotate(-45deg)}
+nav{padding-top:max(1.1rem,env(safe-area-inset-top))}
+nav .nav-right{display:flex;align-items:center}
+.mnav{position:fixed;inset:0;z-index:99;background:rgba(23,16,10,.985);display:flex;flex-direction:column;justify-content:space-between;padding:calc(96px + env(safe-area-inset-top)) 8vw calc(2rem + env(safe-area-inset-bottom));overflow-y:auto}
+.mnav[hidden]{display:none}
+.mnav ul{list-style:none}
+.mnav li a{display:flex;justify-content:space-between;align-items:baseline;padding:.95rem 0;border-bottom:1px solid rgba(198,163,95,.22);color:var(--cream);text-decoration:none;font-family:var(--display);font-size:1.75rem;line-height:1.2}
+.mnav li a::after{content:"→";font-family:var(--body);font-size:1rem;color:var(--brass)}
+.mnav-foot{display:grid;gap:.7rem;margin-top:2rem}
+.mnav-foot .btn{text-align:center}
+.mnav-foot p{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream);opacity:.7;text-align:center;margin-top:.4rem}
+html.menu-open,html.modal-open{overflow:hidden}
+
+/* live open/closed status */
+.open-now{display:inline-flex;align-items:center;gap:.5rem;font-weight:500}
+.open-now::before,.mbar-status .dot{content:"";width:8px;height:8px;border-radius:50%;background:#8a8a7a;flex:0 0 8px}
+.open-now[data-state="open"]::before,.mbar[data-state="open"] .dot{background:#7FB069;box-shadow:0 0 0 3px rgba(127,176,105,.22)}
+.open-now[data-state="hh"]::before,.mbar[data-state="hh"] .dot{background:var(--brass-bright);box-shadow:0 0 0 3px rgba(217,184,118,.25)}
+.vis-block .open-now{margin-top:.55rem;color:var(--ink)}
+
+/* reel player: header bar instead of floating close button */
+.reel-modal{width:min(420px,92vw)}
+.reel-modal .rm-bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:0 0 .7rem}
+.reel-modal .x{position:static;flex:0 0 44px;width:44px;height:44px;font-size:1.5rem}
+.reel-modal .open-ig{margin:0;padding:.7rem 0}
+.reel-modal .frame{width:100%;height:min(740px,calc(100dvh - 140px))}
+
+@media(max-width:920px){
+  .nav-burger{display:block}
+  .ig-grid{grid-template-columns:repeat(3,1fr)}
+  .ig-grid a:nth-child(n+10){display:none}
+}
+@media(min-width:921px){.ig-grid{grid-template-columns:repeat(5,1fr)}}
+
+@media(max-width:760px){
+  body{font-size:15.5px}
+  .nav-cta{display:none}
+  nav{padding-left:5vw;padding-right:5vw}
+  nav .logo img{height:26px}
+  .wrap{padding:0 5.5vw}
+  .lg-only{display:none}.sm-only{display:inline}
+
+  /* tighter vertical rhythm: ~half the scroll */
+  .casa,.carta,.firma,.salon,.terraza,.visita,.feed{padding:4.6rem 0}
+  .casa-grid,.terraza-grid,.visita-grid,.firma-grid{gap:2.4rem}
+  h2{margin:.8rem 0 1.1rem;font-size:clamp(2rem,8.4vw,2.6rem)}
+  .eyebrow{font-size:.68rem;letter-spacing:.3em;gap:.7rem}
+  .eyebrow::before{width:28px}
+  .casa p.lead{font-size:1.08rem}
+  .casa .es-line{font-size:2.2rem}
+
+  /* hero */
+  .hero-inner{padding:0 5.5vw calc(10vh + env(safe-area-inset-bottom))}
+  .hero h1{margin:.9rem 0 1.1rem}
+  .hero p{font-size:1rem;line-height:1.6;margin-bottom:1.6rem}
+  .hero .eyebrow{letter-spacing:.24em}
+  .hero-cta{flex-wrap:nowrap;gap:.6rem}
+  .hero-cta .btn{flex:1 1 0;text-align:center;padding:1rem .6rem;letter-spacing:.2em;min-height:48px;display:flex;align-items:center;justify-content:center}
+  .hero-dots{left:5.5vw;bottom:calc(2.6vh + env(safe-area-inset-bottom))}
+
+  /* menu: one program at a time, tabs + swipe */
+  .carta-head{margin-bottom:1.8rem}
+  .js .carta-tabs{display:flex;gap:.4rem;margin:0 0 1.4rem;padding:.3rem;border:1px solid rgba(198,163,95,.3);border-radius:999px}
+  .carta-tabs button{flex:1;min-height:44px;border:0;border-radius:999px;background:transparent;color:var(--cream);font-family:var(--body);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .3s,color .3s}
+  .carta-tabs button[aria-pressed="true"]{background:var(--brass);color:var(--noir)}
+  .js .carta-grid .pillar{display:none}
+  .js .carta-grid .pillar.is-active{display:block;animation:fadeUp .45s ease both}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .pillar{padding:1.4rem 1.3rem 1.6rem}
+  .pillar-photo img{aspect-ratio:16/11}
+  .pillar li{padding:.8rem 0}
+  .carta-note{font-size:1.7rem;margin-top:2.2rem}
+
+  /* signature */
+  .firma-photo{max-width:330px}
+  .firma .chip-line{font-size:1.9rem}
+
+  /* swipe rows: the room + reels */
+  .swipe-hint{display:block;margin:1.4rem 0 0;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;opacity:.55}
+  .swipe-hint::after{content:"  →"}
+  .salon-grid,.reels{display:flex;gap:.9rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -5.5vw;padding:0 5.5vw 8px;scroll-padding:0 5.5vw}
+  .salon-grid::-webkit-scrollbar,.reels::-webkit-scrollbar{display:none}
+  .salon-grid{margin-top:1.6rem}
+  .salon-card{flex:0 0 80%;scroll-snap-align:start}
+  .salon-card img,.salon-card.wide img{aspect-ratio:4/5}
+  .salon-card.wide{border-radius:999px 999px 12px 12px}
+  .reel{flex:0 0 56%;scroll-snap-align:start}
+  .salon-grid .reveal,.reels .reveal{opacity:1;transform:none}
+
+  /* terrace stats on one line */
+  .terraza-stats{flex-wrap:nowrap;justify-content:space-between;gap:1rem;margin-top:1.8rem}
+  .tstat .num{font-size:2.5rem}
+  .tstat .lbl{font-size:.58rem;letter-spacing:.16em}
+  .terraza .btn{display:block;text-align:center;margin-top:1.8rem}
+
+  /* feed */
+  .feed-head{margin-bottom:1.6rem}
+  .feed .swipe-hint{margin:0 0 1rem}
+  .ig-grid{gap:.35rem;margin-top:1.8rem}
+  .ig-grid a::after{display:none}
+  .feed-cta .btn{display:block}
+
+  /* visit: thumb-sized links */
+  .visita-photo img{aspect-ratio:4/3}
+  .vis-block{padding:1.1rem 0 1.4rem}
+  .vis-block a{display:inline-block;padding:.55rem 0}
+  .vis-block .dir-link{display:block;margin-top:.6rem;padding:.95rem 1rem;text-align:center;border:1px solid var(--naranja);border-radius:999px;text-decoration:none;letter-spacing:.2em;font-size:.72rem;text-transform:uppercase}
+  .res-card{padding:2.2rem 1.6rem}
+  .res-card .btn{display:block;text-align:center}
+
+  /* footer clears the action bar */
+  footer{padding:3rem 0 calc(6.2rem + env(safe-area-inset-bottom))}
+  .foot-links{gap:.2rem 1.4rem}
+  .foot-links a{display:inline-block;padding:.65rem 0}
+
+  /* sticky action bar */
+  .mbar{display:flex;align-items:center;gap:.5rem;position:fixed;left:0;right:0;bottom:0;z-index:90;padding:.6rem 4vw calc(.6rem + env(safe-area-inset-bottom));background:rgba(23,16,10,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(198,163,95,.35);transform:translateY(110%);transition:transform .4s cubic-bezier(.2,.6,.2,1)}
+  .mbar.show{transform:none}
+  html.menu-open .mbar{transform:translateY(110%)}
+  .mbar-status{flex:1;min-width:0;display:flex;align-items:center;gap:.5rem;color:var(--cream);font-size:.78rem;line-height:1.25}
+  .mbar-status span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mbar-btn{flex:0 0 auto;min-height:44px;display:flex;align-items:center;padding:0 1rem;border:1px solid rgba(239,230,210,.55);color:var(--cream);text-decoration:none;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase}
+  .mbar-btn.solid{background:var(--brass);border-color:var(--brass);color:var(--noir);font-weight:500}
+
+  /* reel player goes full screen on phones */
+  .reel-modal{width:100vw;height:100dvh;max-width:100vw;max-height:100dvh;margin:0;background:#000}
+  .reel-modal .rm-bar{padding:calc(.4rem + env(safe-area-inset-top)) 4vw .4rem;background:#000}
+  .reel-modal .frame{width:100%;height:calc(100dvh - 60px - env(safe-area-inset-top));border-radius:0}
+}
+@media(max-width:380px){
+  .hero-cta .btn{letter-spacing:.14em;font-size:.66rem}
+  .mbar-btn{padding:0 .75rem}
+}
 </style>
 </head>
 <body>
@@ -462,8 +616,27 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
     <li><a href="#feed">The Feed</a></li>
     <li><a href="#visita">Visit</a></li>
   </ul>
-  <a class="btn btn-line" href="#visita">Reserve</a>
+  <div class="nav-right">
+    <a class="btn btn-line nav-cta" href="#visita">Reserve</a>
+    <button class="nav-burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span></span><span></span></button>
+  </div>
 </nav>
+<div class="mnav" id="mnav" hidden>
+  <ul>
+    <li><a href="#casa">The House</a></li>
+    <li><a href="#carta">The Menu</a></li>
+    <li><a href="#firma">The Signature</a></li>
+    <li><a href="#salon">The Room</a></li>
+    <li><a href="#terraza">The Terrace</a></li>
+    <li><a href="#feed">The Feed</a></li>
+    <li><a href="#visita">Visit</a></li>
+  </ul>
+  <div class="mnav-foot">
+    <a class="btn btn-solid" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Dulce+1561+S+Commerce+St+Las+Vegas+NV" target="_blank" rel="noopener">Get directions</a>
+    <a class="btn btn-line" href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">@casadulce.lv</a>
+    <p><span data-open-status class="open-now">Wed–Sun · 3:30–10:30 pm</span></p>
+  </div>
+</div>
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
@@ -480,10 +653,10 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
   <div class="hero-inner">
     <p class="eyebrow">The Distrikt · Downtown Las Vegas</p>
     <h1>You found it <span class="es">first.</span></h1>
-    <p>Casa Dulce is the city's new after-dark obsession — dessert cocktails engineered by top bartenders, chef-driven sweets, and small-batch ice cream flavors created exclusively for us in Mexico. The kind of room you bring people to before everyone else knows about it.</p>
+    <p>Casa Dulce is the city's new after-dark obsession — dessert cocktails engineered by top bartenders, chef-driven sweets, and small-batch ice cream flavors created exclusively for us in Mexico.<span class="lg-only"> The kind of room you bring people to before everyone else knows about it.</span></p>
     <div class="hero-cta">
-      <a class="btn btn-solid" href="#carta">See la carta</a>
-      <a class="btn btn-line" href="#firma">The Fried Banana Martini</a>
+      <a class="btn btn-solid" href="#carta"><span class="lg-only">See la carta</span><span class="sm-only">The Menu</span></a>
+      <a class="btn btn-line" href="#firma"><span class="lg-only">The Fried Banana Martini</span><span class="sm-only">The Signature</span></a>
     </div>
   </div>
   <div class="hero-fact">
@@ -526,6 +699,11 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
       <p class="eyebrow">The Menu</p>
       <h2>Handpicked by chefs.<br>Sourced like it matters.</h2>
       <p>Three programs, each curated obsessively: ice cream created exclusively for us in Mexico, pastry from our own ovens, and a bar led by dessert cocktails you won't find anywhere else in the city.</p>
+    </div>
+    <div class="carta-tabs" aria-label="Menu sections">
+      <button type="button" aria-pressed="true">Ice Cream</button>
+      <button type="button" aria-pressed="false">Pastry</button>
+      <button type="button" aria-pressed="false">The Bar</button>
     </div>
     <div class="carta-grid">
 
@@ -604,6 +782,7 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
       <p>Every surface was commissioned like a piece of jewelry. A bar faced in river-stone terrazzo. Cane chairs and candlelit café tables. A hand-tufted mural on hand-troweled plaster, and a banquette wrapped in terracotta mosaic under blue zellige. This is the backdrop your night deserves.</p>
       <div class="pucks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     </div>
+    <p class="swipe-hint" aria-hidden="true">Swipe the room</p>
     <div class="salon-grid">
       <figure class="salon-card reveal">
         <img src="assets/ig/salon-bar.webp" alt="A mint-and-lime cocktail in a Casa Dulce cup on the river-stone terrazzo bar, menus beside it" loading="lazy">
@@ -652,6 +831,7 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
       </div>
       <p>New pours, new flavors and the nights you missed. Tap a reel to watch it here.</p>
     </div>
+    <p class="swipe-hint" aria-hidden="true">Swipe the reels</p>
     <div class="reels">
       <a class="reel reveal" href="https://www.instagram.com/reel/DfdN43zPe6P/" target="_blank" rel="noopener" data-code="DfdN43zPe6P" aria-label="Play reel: Green Monkey">
         <img src="assets/ig/reel-green-monkey.webp" alt="Matcha poured over ice in a Casa Dulce cup on a sunlit wooden table" loading="lazy">
@@ -683,13 +863,17 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
       <a href="https://www.instagram.com/p/De5ZlUtj6w0/" target="_blank" rel="noopener" data-label="Night in the mirror"><img src="assets/ig/ig-mirror.webp" alt="The glowing Casa Dulce sign reflected in a round mirror" loading="lazy"></a>
       <a href="https://www.instagram.com/p/DeYCZqICjhn/" target="_blank" rel="noopener" data-label="Sweet Corn Latte"><img src="assets/ig/ig-sweet-corn.webp" alt="A latte with sweet corn cold foam in a Casa Dulce cup" loading="lazy"></a>
       <a href="https://www.instagram.com/p/De5ZlUtj6w0/" target="_blank" rel="noopener" data-label="Mango, shaken"><img src="assets/ig/ig-mango.webp" alt="A mango cocktail with mint in a cut-glass highball" loading="lazy"></a>
+      <a href="https://www.instagram.com/p/DfDtXUnmVzt/" target="_blank" rel="noopener" data-label="Behind the bar"><img src="assets/ig/ig-bar-crew.webp" alt="The team working behind the Casa Dulce bar" loading="lazy"></a>
+      <a href="https://www.instagram.com/p/De5ZlUtj6w0/" target="_blank" rel="noopener" data-label="The menu"><img src="assets/ig/ig-menu.webp" alt="A guest reading the Casa Dulce menu on the terrazzo bar" loading="lazy"></a>
     </div>
     <div class="feed-cta reveal"><a class="btn btn-line" href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">Follow @casadulce.lv</a></div>
   </div>
   <dialog class="reel-modal" aria-label="Instagram reel">
-    <button class="x" type="button" aria-label="Close">×</button>
+    <div class="rm-bar">
+      <a class="open-ig" href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">Open on Instagram ↗</a>
+      <button class="x" type="button" aria-label="Close">×</button>
+    </div>
     <div class="frame"></div>
-    <a class="open-ig" href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">Open on Instagram</a>
   </dialog>
 </section>
 
@@ -705,11 +889,11 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
       <div class="reveal">
         <div class="vis-block">
           <h4>Hours</h4>
-          <p>Wednesday – Sunday · 3:30 – 10:30 pm<br>Happy hour 3:30 – 6 pm · half-off drinks<br><span class="es" style="color:var(--naranja)">See you after work.</span></p>
+          <p>Wednesday – Sunday · 3:30 – 10:30 pm<br>Happy hour 3:30 – 6 pm · half-off drinks<br><span data-open-status class="open-now"></span></p>
         </div>
         <div class="vis-block">
           <h4>Find us</h4>
-          <p>The Distrikt · 1561 S Commerce St<br>Arts District, Downtown Las Vegas, NV<br><a href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Dulce+1561+S+Commerce+St+Las+Vegas+NV" target="_blank" rel="noopener">Get directions</a></p>
+          <p>The Distrikt · 1561 S Commerce St<br>Arts District, Downtown Las Vegas, NV<br><a href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Dulce+1561+S+Commerce+St+Las+Vegas+NV" target="_blank" rel="noopener" class="dir-link">Get directions</a></p>
         </div>
         <div class="vis-block">
           <h4>Contact</h4>
@@ -727,6 +911,12 @@ h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,3.7rem);line-height:1.14;letter-
 </section>
 
 <div class="stone-band" aria-hidden="true"></div>
+
+<div class="mbar" id="mbar">
+  <p class="mbar-status"><i class="dot" aria-hidden="true"></i><span data-open-status="short">Wed–Sun · 3:30–10:30</span></p>
+  <a class="mbar-btn" href="#carta">Menu</a>
+  <a class="mbar-btn solid" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Dulce+1561+S+Commerce+St+Las+Vegas+NV" target="_blank" rel="noopener">Directions</a>
+</div>
 
 <!-- ============ FOOTER ============ -->
 <footer>
@@ -776,6 +966,12 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   };
   const play = () => { if (!still) { clearInterval(t); t = setInterval(() => show(i + 1), 6500); } };
   dots.forEach((d, n) => d.addEventListener('click', () => { show(n); play(); }));
+  const hero = document.querySelector('.hero'); let hx = null, hy = null;
+  hero.addEventListener('touchstart', e => { hx = e.touches[0].clientX; hy = e.touches[0].clientY; }, {passive:true});
+  hero.addEventListener('touchend', e => {
+    if (hx === null) return; const dx = e.changedTouches[0].clientX - hx, dy = e.changedTouches[0].clientY - hy; hx = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) { show(i + (dx < 0 ? 1 : -1)); play(); }
+  }, {passive:true});
   document.addEventListener('visibilitychange', () => document.hidden ? clearInterval(t) : play());
   play();
 })();
@@ -790,12 +986,84 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     const code = a.dataset.code;
     frame.innerHTML = `<iframe src="https://www.instagram.com/p/${code}/embed/" title="Casa Dulce on Instagram" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
     link.href = a.href;
-    dlg.showModal();
+    dlg.showModal(); document.documentElement.classList.add('modal-open');
   }));
   const close = () => { dlg.close(); };
   dlg.querySelector('.x').addEventListener('click', close);
   dlg.addEventListener('click', e => { if (e.target === dlg) close(); });
-  dlg.addEventListener('close', () => { frame.innerHTML = ''; });
+  dlg.addEventListener('close', () => { frame.innerHTML = ''; document.documentElement.classList.remove('modal-open'); });
+})();
+
+// mobile menu
+(() => {
+  const b = document.querySelector('.nav-burger'), m = document.getElementById('mnav');
+  if (!b || !m) return;
+  const set = open => {
+    b.setAttribute('aria-expanded', open); b.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    m.hidden = !open; document.documentElement.classList.toggle('menu-open', open);
+    nav.classList.toggle('solid', open || scrollY > 40);
+  };
+  b.addEventListener('click', () => set(m.hidden));
+  m.querySelectorAll('a').forEach(a => a.addEventListener('click', () => set(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !m.hidden) { set(false); b.focus(); } });
+  matchMedia('(min-width:921px)').addEventListener('change', e => { if (e.matches) set(false); });
+})();
+
+// menu tabs on phones (all three programs stay visible on larger screens)
+(() => {
+  const tabs = [...document.querySelectorAll('.carta-tabs button')], cards = [...document.querySelectorAll('.carta-grid .pillar')];
+  if (!tabs.length) return;
+  let cur = 0;
+  const sel = n => {
+    cur = Math.max(0, Math.min(tabs.length - 1, n));
+    tabs.forEach((t, k) => t.setAttribute('aria-pressed', k === cur));
+    cards.forEach((c, k) => { c.classList.toggle('is-active', k === cur); if (k === cur) c.classList.add('in'); });
+  };
+  tabs.forEach((t, k) => t.addEventListener('click', () => sel(k)));
+  const g = document.querySelector('.carta-grid'); let x0 = null, y0 = null;
+  g.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, {passive:true});
+  g.addEventListener('touchend', e => {
+    if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) sel(cur + (dx < 0 ? 1 : -1));
+  }, {passive:true});
+  sel(0);
+})();
+
+// live open / closed status, in Las Vegas time
+(() => {
+  const els = document.querySelectorAll('[data-open-status]'), bar = document.getElementById('mbar');
+  const OPEN = 15 * 60 + 30, CLOSE = 22 * 60 + 30, HH_END = 18 * 60, DAYS = [0, 3, 4, 5, 6];
+  const names = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const update = () => {
+    let wd, h, m;
+    try {
+      const parts = new Intl.DateTimeFormat('en-US', {timeZone:'America/Los_Angeles', weekday:'short', hour:'numeric', minute:'numeric', hourCycle:'h23'}).formatToParts(new Date());
+      const get = t => parts.find(p => p.type === t).value;
+      wd = names.indexOf(get('weekday')); h = +get('hour') % 24; m = +get('minute');
+    } catch (e) { return; }
+    const now = h * 60 + m, openDay = d => DAYS.includes(d);
+    let text, short, state = 'closed';
+    if (openDay(wd) && now >= OPEN && now < CLOSE) {
+      if (now < HH_END) { state = 'hh'; text = 'Happy hour now · ½ off until 6 pm'; short = 'Happy hour · ½ off till 6'; }
+      else { state = 'open'; text = 'Open now · until 10:30 pm'; short = 'Open · until 10:30'; }
+    } else if (openDay(wd) && now < OPEN) {
+      text = 'Opens today at 3:30 pm'; short = 'Opens 3:30 today';
+    } else {
+      let k = 1; while (!openDay((wd + k) % 7)) k++;
+      const day = k === 1 ? 'tomorrow' : names[(wd + k) % 7];
+      text = 'Closed · opens ' + day + ' at 3:30 pm'; short = 'Opens ' + day + ' 3:30';
+    }
+    els.forEach(el => { el.textContent = el.dataset.openStatus === 'short' ? short : text; el.dataset.state = state; });
+    if (bar) bar.dataset.state = state;
+  };
+  update(); setInterval(update, 60000);
+})();
+
+// action bar appears once the hero is behind you
+(() => {
+  const bar = document.getElementById('mbar'); if (!bar) return;
+  const upd = () => bar.classList.toggle('show', scrollY > innerHeight * 0.55);
+  addEventListener('scroll', upd, {passive:true}); upd();
 })();
 </script>
 </body>
