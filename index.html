@@ -31,7 +31,7 @@ document.head.appendChild(pl);})();
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Mrs+Saint+Delafield&family=Jost:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Jost:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
   --cocoa:#3D2519;
@@ -852,6 +852,210 @@ html[data-mode="day"] .pillar h4,html[data-mode="day"] .pillar .sig-tag{color:va
 html[data-mode="day"] .pillar h4{border-bottom-color:rgba(140,106,46,.4)}
 html[data-mode="day"] .pillar .sig{border-color:rgba(140,106,46,.45)}
 @media(max-width:760px){.pillar .grp li{padding:.55rem 0}}
+
+/* ================= LAUNCH LAYOUT + LEGIBILITY ================= */
+:root{
+  --l-bg:#EFE6D2;--l-fg:#241811;--l-muted:#3B2A1D;--l-label:#5C4115;--l-line:rgba(36,24,17,.2);
+  --d-bg:#17100A;--d-fg:#EFE6D2;--d-muted:#DCCFB6;--d-label:#D9B876;--d-line:rgba(239,230,210,.2);
+}
+/* no thin script anywhere: accents use the display face, colour does the work */
+.es{font-family:var(--display);font-size:1em;line-height:inherit;letter-spacing:0;font-style:normal}
+.hero h1 .es{font-size:1em;color:var(--brass-bright)}
+.hero-fact .num{font-family:var(--display);font-size:4.2rem;line-height:.95}
+.pillar .sub{font-family:var(--body);font-size:1.02rem;line-height:1.4;font-weight:500;letter-spacing:.01em;margin-bottom:1.4rem;color:#E8A99A}
+html[data-mode="day"] .pillar .sub{color:#8A3F2B}
+.carta-note{font-family:var(--display);font-size:clamp(1.3rem,2.4vw,1.75rem);line-height:1.3}
+.carta-note a{color:inherit;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.carta-pdf{margin-top:1rem}
+.carta-pdf a{font-weight:600;color:var(--d-label);text-decoration:underline;text-underline-offset:4px}
+html[data-mode="day"] .carta-pdf a{color:var(--l-label)}
+.foot-base .es{font-family:var(--display);font-size:1.3em}
+
+/* hero copy over video: bigger and better separated from the footage */
+.hero p{font-size:1.15rem;line-height:1.6;text-shadow:0 1px 3px rgba(0,0,0,.75),0 2px 18px rgba(0,0,0,.7)}
+.hero h1{text-shadow:0 2px 24px rgba(0,0,0,.55)}
+.hero .eyebrow{font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.8),0 1px 12px rgba(0,0,0,.8)}
+
+/* a soft dark glow behind the hero words only, so they read over any frame of the footage */
+.hero-inner{position:relative;isolation:isolate}
+.hero-inner::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:-14vw;right:-10vw;top:-18%;bottom:-14%;
+  background:radial-gradient(ellipse at 40% 55%,rgba(14,9,5,.74) 0%,rgba(14,9,5,.6) 42%,rgba(14,9,5,.28) 66%,transparent 80%)}
+.hero .eyebrow{color:#EFE6D2}
+.hero .eyebrow::before{background:var(--brass-bright);opacity:1}
+@media(max-width:760px){.hero-inner::before{left:-8vw;right:-8vw;top:-10%;bottom:-6%;background:linear-gradient(180deg,transparent 0%,rgba(14,9,5,.5) 8%,rgba(14,9,5,.68) 18%,rgba(14,9,5,.74) 60%,rgba(14,9,5,.8) 100%)}}
+
+/* menu text: full strength */
+.pillar .desc{opacity:1;font-size:.95rem;color:var(--d-muted)}
+html[data-mode="day"] .pillar .desc{color:var(--l-muted)}
+.pillar .dish{font-size:1.02rem}
+.carta-head p{opacity:1;font-size:1.125rem}
+
+/* labels everywhere: a touch larger and bolder */
+.eyebrow{font-size:.8125rem;font-weight:600;letter-spacing:.2em}
+.btn{font-size:.8125rem;font-weight:600;letter-spacing:.18em}
+
+/* ---------- shared section frame ---------- */
+.mf,.lc,.sigs,.hh,.rsv{position:relative;isolation:isolate;overflow:hidden;padding:7.5rem 0}
+.sec-light{background:var(--l-bg);color:var(--l-fg)}
+.sec-dark{background:var(--d-bg);color:var(--d-fg)}
+.sec-head{max-width:760px;margin:0 0 3.4rem}
+.sec-head p,.hh p,.lc-private p,.rsv-info p{font-size:1.125rem;line-height:1.7;font-weight:400}
+.sec-light .eyebrow{color:var(--l-label)}
+.sec-dark .eyebrow{color:var(--d-label)}
+.sec-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.6rem}
+.sec-light .btn-solid{background:var(--l-fg);color:#EFE6D2;border:1.5px solid var(--l-fg)}
+.sec-light .btn-solid:hover{background:#5C4115;border-color:#5C4115}
+.sec-light .btn-line{color:var(--l-fg);border:1.5px solid rgba(36,24,17,.6);background:transparent}
+.sec-light .btn-line:hover{background:var(--l-fg);color:#EFE6D2}
+.sec-dark .btn-line{border-width:1.5px;border-color:rgba(239,230,210,.75)}
+.mf::before,.lc::before,.sigs::before,.hh::before,.rsv::before{
+  content:"";position:absolute;top:-360px;left:-360px;right:0;bottom:0;z-index:-1;pointer-events:none;
+  background:url(assets/terrazzo.svg) 0 0/360px 360px repeat;opacity:var(--pat-op,.07);
+  animation:terrazzo-drift var(--pat-speed,120s) linear infinite;animation-play-state:paused;will-change:transform}
+.sigs::before,.rsv::before{animation-direction:reverse}
+.mf{--pat-op:.06}.hh{--pat-op:.09}
+@media(prefers-reduced-motion:reduce){.mf::before,.lc::before,.sigs::before,.hh::before,.rsv::before{animation:none}}
+
+/* ---------- manifesto ---------- */
+.mf{background:#241811;color:var(--d-fg);text-align:center;padding:6.5rem 0 7rem}
+.mf .wrap{max-width:920px}
+.mf .eyebrow{justify-content:center;color:var(--d-label)}
+.mf .eyebrow::before{display:none}
+.mf-lead{font-family:var(--display);font-size:clamp(2rem,4.2vw,3.3rem);line-height:1.18;margin:1.1rem auto 1.6rem;max-width:20ch}
+.mf-body{font-size:clamp(1.15rem,1.6vw,1.35rem);line-height:1.65;max-width:42ch;margin:0 auto 1rem}
+.mf-sign{font-family:var(--display);color:#E3C68E;font-size:clamp(1.5rem,2.6vw,2rem);margin-top:1.8rem}
+html[data-mode="day"] .mf{background:#EFE6D2;color:var(--l-fg)}
+html[data-mode="day"] .mf .eyebrow,html[data-mode="day"] .mf-sign{color:var(--l-label)}
+
+/* ---------- La Casa + Signatures cards ---------- */
+.lc-grid,.sig-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.6rem 2.2rem}
+.lc-card .win,.sig-card .win{aspect-ratio:3/4;margin:0 0 1.4rem;box-shadow:0 18px 40px rgba(36,24,17,.16)}
+.lc-card h3,.sig-card h3{font-family:var(--display);font-weight:400;font-size:1.7rem;line-height:1.15;margin:0 0 .6rem}
+.lc-card p,.sig-card p{font-size:1.0625rem;line-height:1.65}
+.best{margin-top:1rem;padding-top:.9rem;border-top:1px solid var(--l-line)}
+.best b{display:block;font-size:.8125rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--l-label);margin-bottom:.25rem}
+.lc-private{margin-top:3.6rem;display:flex;align-items:center;justify-content:space-between;gap:2.4rem;padding:2.4rem 2.6rem;border:1.5px solid rgba(36,24,17,.28);background:rgba(255,253,248,.55)}
+.lc-private h3{font-family:var(--display);font-weight:400;font-size:2rem;margin:0 0 .4rem}
+.lc-private .btn{flex:0 0 auto}
+.sig-kind{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:.8125rem!important;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--l-label);margin:0 0 .6rem;padding-bottom:.55rem;border-bottom:1px solid var(--l-line)}
+.sig-kind span{font-family:var(--display);font-weight:400;font-size:1.3rem;letter-spacing:0;text-transform:none;color:var(--l-fg)}
+html[data-mode="day"] .lc,html[data-mode="day"] .rsv{background:#FBF6EC}
+html[data-mode="day"] .sig-card{order:var(--d)}
+
+/* ---------- happy hour ---------- */
+.hh-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:5rem;align-items:center}
+.hh h2{margin-bottom:1.2rem}
+.hh p+p,.sec-head p+p{margin-top:1rem}
+.hh-photo{margin:0}
+.hh-photo .win{aspect-ratio:3/4;max-width:420px;margin-left:auto;outline:1px solid rgba(217,184,118,.6);outline-offset:12px}
+.hh-live{display:inline-flex;align-items:center;gap:.65rem;font-size:1.02rem!important;font-weight:600;letter-spacing:.02em;padding:.6rem 1.1rem;border:1.5px solid currentColor;border-radius:999px;margin:0 0 1.6rem}
+.hh-live::before{content:"";width:10px;height:10px;border-radius:50%;background:currentColor;opacity:.7}
+.hh-live[data-state="on"]::before{background:#6FD08C;opacity:1;box-shadow:0 0 0 4px rgba(111,208,140,.25)}
+.hh-live[data-state="soon"]::before{background:#E3C68E;opacity:1}
+html[data-mode="day"] .hh{background:#F4ECDD;color:var(--l-fg)}
+html[data-mode="day"] .hh .eyebrow{color:var(--l-label)}
+html[data-mode="day"] .hh .btn-solid{background:var(--l-fg);color:#EFE6D2;border:1.5px solid var(--l-fg)}
+html[data-mode="day"] .hh .btn-line{color:var(--l-fg);border-color:rgba(36,24,17,.6)}
+html[data-mode="day"] .hh .btn-line:hover{background:var(--l-fg);color:#EFE6D2}
+html[data-mode="day"] .hh-live[data-state="on"]::before{background:#1E8C45;box-shadow:0 0 0 4px rgba(30,140,69,.18)}
+html[data-mode="day"] .hh-live[data-state="soon"]::before{background:#8A6528}
+html[data-mode="day"] .hh-photo .win{outline-color:rgba(92,65,21,.45)}
+
+/* ---------- reserve ---------- */
+.rsv{--sec-bg:var(--l-bg)}
+html[data-mode="day"] .rsv{--sec-bg:#FBF6EC}
+.rsv-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.4rem;align-items:start}
+.rsv-builder fieldset{border:0;padding:0;margin:0 0 2rem;min-width:0}
+.rsv-builder legend{font-family:var(--display);font-size:1.5rem;margin-bottom:.85rem;color:var(--l-fg);padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.chips button{min-height:48px;padding:.6rem 1.2rem;border:1.5px solid rgba(36,24,17,.45);border-radius:999px;background:transparent;color:var(--l-fg);font:500 1.02rem/1.2 var(--body);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.chips button:hover{border-color:var(--l-fg)}
+.chips button[aria-pressed="true"]{background:var(--l-fg);border-color:var(--l-fg);color:#EFE6D2}
+.chips button:focus-visible,.ticket .btn:focus-visible,.sec-cta .btn:focus-visible{outline:3px solid #5C4115;outline-offset:3px}
+.ticket{position:relative;background:#17100A;color:#EFE6D2;padding:2.4rem 2.3rem 2.1rem;border-radius:18px;box-shadow:0 30px 60px rgba(23,16,10,.28)}
+.ticket::before,.ticket::after{content:"";position:absolute;top:calc(50% - 14px);width:28px;height:28px;border-radius:50%;background:var(--sec-bg)}
+.ticket::before{left:-14px}.ticket::after{right:-14px}
+.t-top{font-size:.8125rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#D9B876}
+.t-title{font-family:var(--display);font-size:2.7rem;line-height:1;margin:.35rem 0 1.1rem}
+.t-when{font-family:var(--display);font-size:1.55rem;line-height:1.2;color:#E3C68E}
+.t-party{font-size:1.08rem;margin:.3rem 0 1.4rem}
+.ticket dl{border-top:1.5px dashed rgba(239,230,210,.4);padding-top:1.2rem;display:grid;gap:.95rem;margin:0}
+.ticket dt{font-size:.75rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#D9B876}
+.ticket dd{margin:.15rem 0 0;font-size:1.08rem;line-height:1.5}
+.t-addr{margin-top:1.3rem;font-size:1rem;color:#DCCFB6}
+.t-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.5rem}
+.ticket .btn-solid{background:#D9B876;color:#17100A;border:1.5px solid #D9B876}
+.ticket .btn-solid:hover{background:#E3C68E}
+.ticket .btn-line{color:#EFE6D2;border:1.5px solid rgba(239,230,210,.75);background:transparent}
+.ticket .btn-line:hover{background:#EFE6D2;color:#17100A}
+.ticket .btn:focus-visible{outline-color:#E3C68E}
+.t-note{margin-top:1.1rem;font-size:1rem;line-height:1.55;color:#DCCFB6}
+.rsv-info{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.2rem;margin-top:3.8rem;padding-top:2.4rem;border-top:1.5px solid var(--l-line)}
+.rsv-info h4{font-size:.8125rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--l-label);margin:0 0 .6rem}
+.rsv-info p{font-size:1.0625rem}
+.rsv-info a{color:var(--l-fg);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.rsv-info .open-now{font-weight:600}
+
+/* ---------- feed header + footer: full strength ---------- */
+.feed-head p{opacity:1;font-size:1.125rem}
+html[data-mode="day"] .feed-cta .btn-solid{background:var(--l-fg);color:#EFE6D2;border:1.5px solid var(--l-fg)}
+
+/* ---------- tablets ---------- */
+@media(max-width:1000px){
+  .sig-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hh-grid{gap:3rem}
+  .rsv-grid{grid-template-columns:1fr}
+  .ticket{max-width:560px}
+}
+/* ---------- phones ---------- */
+@media(max-width:760px){
+  .mf,.lc,.sigs,.hh,.rsv{padding:4.8rem 0}
+  .mf{padding:4.4rem 0 4.8rem}
+  .sec-head{margin-bottom:2.2rem}
+  .sec-head p,.hh p,.lc-private p,.rsv-info p{font-size:1.0625rem}
+  .hero p{font-size:1.08rem}
+  .lc-grid,.sig-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:6vw;gap:1.1rem;margin:0 -6vw;padding:0 6vw 1.2rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .lc-grid::-webkit-scrollbar,.sig-grid::-webkit-scrollbar{display:none}
+  .lc-card,.sig-card{flex:0 0 80vw;max-width:340px;scroll-snap-align:start}
+  .swipe-hint{opacity:1;font-size:.8125rem;font-weight:600;letter-spacing:.16em}
+  .lc .swipe-hint,.sigs .swipe-hint{display:block;color:var(--l-label);opacity:1;font-size:.8125rem;font-weight:600;letter-spacing:.16em;margin:0 0 1rem}
+  .lc .swipe-hint::after,.sigs .swipe-hint::after{content:'  →'}
+  .lc-private{flex-direction:column;align-items:flex-start;padding:1.7rem 1.5rem;margin-top:2.6rem}
+  .lc-private h3{font-size:1.7rem}
+  .lc-private .btn,.sec-cta .btn,.t-actions .btn{width:100%;text-align:center;justify-content:center}
+  .hh-grid{grid-template-columns:1fr;gap:2.6rem}
+  .hh-photo{order:-1}
+  .hh-photo .win{max-width:280px;margin:0 auto}
+  .ticket{padding:2rem 1.5rem 1.7rem}
+  .t-title{font-size:2.3rem}
+  .rsv-info{grid-template-columns:1fr;gap:1.6rem;margin-top:2.8rem}
+  .chips button{flex:1 1 auto}
+}
+
+/* ================= legibility floor: nothing under 13px, AAA colour on light grounds ================= */
+nav ul a{font-size:.8125rem;letter-spacing:.2em}
+.hero-media .sf-photo.win figcaption,.slide-feature .sf-photo figcaption,.hero-media .sf-photo figcaption{font-size:.8125rem;letter-spacing:.16em;font-weight:600}
+.hero-fact .lbl{font-size:.8125rem;letter-spacing:.18em;font-weight:600}
+.hero-fact .num span{font-size:.21em!important;font-weight:600}
+.pillar h4{font-size:.8125rem;letter-spacing:.2em}
+.pillar .sig-tag{font-size:.8125rem;letter-spacing:.2em}
+.pillar .dish .price{font-size:1.02rem}
+.ticket dt{font-size:.8125rem;letter-spacing:.18em}
+.reel .cap span{font-size:.8125rem;letter-spacing:.18em}
+.foot-links a{font-size:.875rem;letter-spacing:.16em}
+.foot-base{font-size:.875rem}
+.photo-credit{font-size:.875rem}
+.carta-tabs button{font-size:.8125rem!important;letter-spacing:.14em!important;font-weight:600}
+html[data-mode="day"] .carta .eyebrow,html[data-mode="day"] .feed .eyebrow,html[data-mode="day"] .carta-note,
+html[data-mode="day"] .pillar h4,html[data-mode="day"] .pillar .sig-tag,html[data-mode="day"] .pillar .dish .price,
+html[data-mode="day"] .carta-pdf a{color:var(--l-label)}
+html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
+@media(max-width:760px){
+  .hero-cta .btn{font-size:.8125rem!important;letter-spacing:.14em!important}
+  .mbar-btn{font-size:.8125rem!important;letter-spacing:.12em!important}
+  .mbar-status{font-size:.875rem}
+  .eyebrow{font-size:.8125rem;letter-spacing:.18em}
+}
 </style>
 </head>
 <body>
@@ -860,31 +1064,29 @@ html[data-mode="day"] .pillar .sig{border-color:rgba(140,106,46,.45)}
 <nav id="nav">
   <a class="logo" href="#top" aria-label="Casa Dulce home"><img class="logo-l" src="assets/logo-light.png" alt="Casa Dulce" width="130" height="33"><img class="logo-d" src="assets/logo-dark.png" alt="" aria-hidden="true" width="130" height="33"></a>
   <ul>
-    <li><a href="#casa">The House</a></li>
-    <li><a href="#carta">The Menu</a></li>
-    <li><a href="#firma">The Signature</a></li>
-    <li><a href="#terraza">The Terrace</a></li>
-    <li><a href="#feed">The Feed</a></li>
-    <li><a href="#visita">Visit</a></li>
+    <li><a href="#la-casa">La Casa</a></li>
+    <li><a href="#carta">Menu</a></li>
+    <li><a href="#signatures">Signatures</a></li>
+    <li><a href="#happy-hour">Happy Hour</a></li>
+    <li><a href="#feed">Follow</a></li>
   </ul>
   <div class="nav-right">
     <button class="mode-toggle" type="button" aria-label="Switch to the day look" title="Day / night look">
       <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
       <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
     </button>
-    <a class="btn btn-line nav-cta" href="#visita">Reserve</a>
+    <a class="btn btn-line nav-cta" href="#reserve">Reserve</a>
     <button class="nav-burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span></span><span></span></button>
   </div>
 </nav>
 <div class="mnav" id="mnav" hidden>
   <ul>
-    <li><a href="#casa">The House</a></li>
-    <li><a href="#carta">The Menu</a></li>
-    <li><a href="#firma">The Signature</a></li>
-    <li><a href="#salon">The Room</a></li>
-    <li><a href="#terraza">The Terrace</a></li>
-    <li><a href="#feed">The Feed</a></li>
-    <li><a href="#visita">Visit</a></li>
+    <li><a href="#la-casa">La Casa</a></li>
+    <li><a href="#carta">Menu</a></li>
+    <li><a href="#signatures">Signatures</a></li>
+    <li><a href="#happy-hour">Happy Hour</a></li>
+    <li><a href="#reserve">Reserve</a></li>
+    <li><a href="#feed">Follow along</a></li>
   </ul>
   <div class="mnav-foot">
     <a class="btn btn-solid" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Dulce+1561+S+Commerce+St+Las+Vegas+NV" target="_blank" rel="noopener">Get directions</a>
@@ -934,14 +1136,15 @@ html[data-mode="day"] .pillar .sig{border-color:rgba(140,106,46,.45)}
   (day?d:n).preload='auto';})();</script>
   <div class="hero-dots" role="group" aria-label="Hero slides"></div>
   <div class="hero-inner">
-    <p class="eyebrow"><span class="only-night">The Distrikt · Downtown Las Vegas</span><span class="only-day">Afternoons at The Distrikt · DTLV</span></p>
+    <p class="eyebrow"><span class="only-night">Now open · The Distrikt, Downtown Las Vegas</span><span class="only-day">Now open · Afternoons at The Distrikt</span></p>
     <h1><span class="only-night">You found it <span class="es">first.</span></span><span class="only-day">Your afternoon, <span class="es">sweeter.</span></span></h1>
     <p class="only-day">Craft coffee, matcha and Latin-inspired ice cream in the sunniest corner of Downtown. Happy hour runs 3:30 to 6, with half-off drinks.<span class="lg-only"> Espresso martinis are always on.</span></p>
     <p class="only-night">Dessert cocktails from top bartenders, chef-driven sweets and small-batch ice cream made for us in Mexico.<span class="lg-only"> The room you bring people to before everyone else finds out.</span></p>
     <div class="hero-cta">
-      <a class="btn btn-solid" href="#carta"><span class="lg-only">See the menu</span><span class="sm-only">The menu</span></a>
-      <a class="btn btn-line only-night" href="#firma"><span class="lg-only">Monkey Business</span><span class="sm-only">The signature</span></a>
-      <a class="btn btn-line only-day" href="#visita"><span class="lg-only">Happy hour · 3:30–6</span><span class="sm-only">Happy hour</span></a>
+      <a class="btn btn-solid only-night" href="#reserve"><span class="lg-only">Reserve a seat</span><span class="sm-only">Reserve</span></a>
+      <a class="btn btn-solid only-day" href="#carta"><span class="lg-only">See the menu</span><span class="sm-only">The menu</span></a>
+      <a class="btn btn-line only-night" href="#carta"><span class="lg-only">See the menu</span><span class="sm-only">The menu</span></a>
+      <a class="btn btn-line only-day" href="#happy-hour"><span class="lg-only">Happy hour · 3:30–6</span><span class="sm-only">Happy hour</span></a>
     </div>
   </div>
   <div class="hero-fact">
@@ -950,48 +1153,65 @@ html[data-mode="day"] .pillar .sig{border-color:rgba(140,106,46,.45)}
   </div>
 </header>
 
-<!-- ============ MARQUEE ============ -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span class="only-night">Dessert Cocktails <i>◆</i> Chef-Driven Sweets <i>◆</i> Small-Batch Ice Cream <i>◆</i> Specialty Coffee <i>◆</i> Happy Hour 3:30–6 <i>◆</i> </span>
-    <span class="only-night">Dessert Cocktails <i>◆</i> Chef-Driven Sweets <i>◆</i> Small-Batch Ice Cream <i>◆</i> Specialty Coffee <i>◆</i> Happy Hour 3:30–6 <i>◆</i> </span>
-    <span class="only-day">Craft Coffee <i>◆</i> Matcha <i>◆</i> Latin-Inspired Ice Cream <i>◆</i> Mexican Mocha <i>◆</i> Café de Olla <i>◆</i> Happy Hour 3:30–6 <i>◆</i> </span>
-    <span class="only-day">Craft Coffee <i>◆</i> Matcha <i>◆</i> Latin-Inspired Ice Cream <i>◆</i> Mexican Mocha <i>◆</i> Café de Olla <i>◆</i> Happy Hour 3:30–6 <i>◆</i> </span>
-  </div>
-</div>
-<div class="stone-band" aria-hidden="true"></div>
-
-<!-- ============ LA CASA ============ -->
-<section class="casa" id="casa">
-  <div class="wrap casa-grid">
-    <div class="reveal">
-      <p class="eyebrow">The House</p>
-      <h2 class="only-night">Intimacy is<br>the new luxury.</h2>
-      <h2 class="only-day">Sunlight on plaster.<br>Something sweet in hand.</h2>
-      <p class="lead only-day">By day, Casa Dulce is the bright corner of The Distrikt for craft coffee, matcha and Latin-inspired ice cream. You stop in for one latte and stay all afternoon.</p>
-      <p class="lead only-night">Dinner is a reservation. What comes after is a scene. Casa Dulce is where the night goes once the plates are cleared: a candlelit room built for the last, best hours of the evening.</p>
-      <p>Every detail here is chosen on purpose. Our ice cream was developed with top chefs in Mexico and is made only for this house: all natural, imported directly, available nowhere else. Our syrups are made in house, and the bar builds every cocktail to order.</p>
-      <p class="only-night">Terrazzo, oak and cane, hand-troweled plaster, low amber light. Dress well. Stay late.</p>
-      <p class="only-day">Cane chairs, hand-troweled plaster, blue zellige and a mural made by hand. Bring a friend. Stay for happy hour.</p>
-      <span class="es-line">Arrive sweet. Leave sweeter.</span>
-    </div>
-    <figure class="casa-photo reveal">
-      <div class="win">
-        <img class="only-night" src="assets/ig/w-cheers.webp" width="809" height="1079" alt="A guest holds up two Casa Dulce cocktails in the low light of the bar" loading="lazy">
-        <img class="only-day" src="assets/ig/w-lounge.webp" width="714" height="952" alt="The Casa Dulce lounge by day: cane chairs, café tables, the mural and the glowing sign" loading="lazy">
-      </div>
-      <figcaption><span class="only-night">Two in hand · the bar · the regulars</span><span class="only-day">The lounge · the mural · the afternoon</span></figcaption>
-    </figure>
+<!-- ============ MANIFESTO ============ -->
+<section class="mf" id="manifesto" aria-labelledby="mf-title">
+  <div class="wrap">
+    <p class="eyebrow reveal">Bienvenidos</p>
+    <p class="mf-lead reveal" id="mf-title">We opened a sweet house in Downtown Las Vegas.</p>
+    <p class="mf-body reveal">Coffee and matcha while the sun is up. Espresso martinis when it goes down. Ice cream made for us in Mexico, all day long.</p>
+    <p class="mf-body reveal">Come as you are. Bring whoever you love. Nobody leaves without dessert.</p>
+    <p class="mf-sign reveal">Mi casa es tu casa.</p>
   </div>
 </section>
+
+<!-- ============ LA CASA ============ -->
+<section class="lc sec-light" id="la-casa">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">La Casa</p>
+      <h2>Pick a seat. Come back for the others.</h2>
+      <p>One house, three moods. By day the light pours in over cane chairs and blue zellige. By night the candles come out and the bar takes over. Every corner is built for staying a little longer than you planned.</p>
+    </div>
+    <p class="swipe-hint" aria-hidden="true">Swipe the house</p>
+    <div class="lc-grid">
+      <article class="lc-card reveal">
+        <figure class="win"><img src="assets/ig/w-backbar.webp" width="714" height="952" alt="The back bar: glassware hanging overhead, shelves of tequila and mezcal, the Casa Dulce sign reflected in the glass" loading="lazy"></figure>
+        <h3>The Bar</h3>
+        <p>A river-stone terrazzo bar, glassware overhead and agave on the shelves. Pull up a stool and watch your espresso martini come together.</p>
+        <p class="best"><b>Best for</b>a first date, flying solo, watching the pour</p>
+      </article>
+      <article class="lc-card reveal">
+        <figure class="win"><img class="only-night" src="assets/ig/a-room.webp" width="900" height="1200" alt="Cane chairs and candlelit café tables beneath a hand-tufted mural and the glowing Casa sign" loading="lazy"><img class="only-day" src="assets/ig/w-lounge.webp" width="714" height="952" alt="The lounge by day: cane chairs, café tables, the mural and the glowing sign" loading="lazy"></figure>
+        <h3>The Lounge</h3>
+        <p>Cane chairs, café tables, a hand-tufted mural and a terracotta mosaic banquette under blue zellige. Ask for the banquette.</p>
+        <p class="best"><b>Best for</b>date night, catching up, dessert for two</p>
+      </article>
+      <article class="lc-card reveal">
+        <figure class="win"><img class="only-night" src="assets/ig/a-terrace-night.webp" width="900" height="1200" alt="The Casa Dulce sign glowing over the terrace at night, string lights overhead and the STRAT beyond" loading="lazy"><img class="only-day" src="assets/ig/a-patio.webp" width="900" height="1200" alt="The terrace on a sunny afternoon, picnic tables under string lights and the STRAT beyond" loading="lazy"></figure>
+        <h3>The Terrace</h3>
+        <p>Picnic tables under string lights, with the STRAT glowing over your shoulder. The best seat in the house when the sun goes down.</p>
+        <p class="best"><b>Best for</b>groups, happy hour, sunsets</p>
+      </article>
+    </div>
+    <div class="lc-private reveal">
+      <div>
+        <h3>Take the whole house.</h3>
+        <p>Birthdays, launches, the dinner after the dinner. Book the bar, the lounge and the terrace for your people, with our bar team pouring for you.</p>
+      </div>
+      <a class="btn btn-solid" href="https://ig.me/m/casadulce.lv" target="_blank" rel="noopener">Plan a private night</a>
+    </div>
+  </div>
+</section>
+
 
 <!-- ============ LA CARTA ============ -->
 <section class="carta" id="carta">
   <div class="wrap">
     <div class="carta-head reveal">
       <p class="eyebrow">The Menu</p>
-      <h2>Handpicked by chefs.<br>Sourced like it matters.</h2>
-      <p>Lattes built on housemade syrups, sundaes and scoops, and a bar of espresso martinis and Latin cocktails you won't find anywhere else in the city.</p>
+      <h2>Something new every visit.</h2>
+      <p>Lattes on housemade syrups, sundaes and scoops, and a bar of espresso martinis and Latin cocktails you won't find anywhere else in the city. Start with a favorite, then work your way through the rest.</p>
+      <p class="carta-pdf"><a href="assets/casa-dulce-menu.pdf" target="_blank" rel="noopener">Download the menu (PDF)</a></p>
     </div>
     <div class="carta-tabs" aria-label="Menu sections">
       <button type="button" aria-pressed="true">Coffee</button>
@@ -1134,91 +1354,155 @@ html[data-mode="day"] .pillar .sig{border-color:rgba(140,106,46,.45)}
       </article>
 
     </div>
-    <p class="carta-note reveal">Every item on this list was fought over. Nothing made the cut by accident.</p>
+    <p class="carta-note reveal">Found your favorite? Show us <a href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">@casadulce.lv</a></p>
   </div>
 </section>
 
-<!-- ============ LA FIRMA ============ -->
-<section class="firma" id="firma">
-  <div class="wrap firma-grid">
-    <div class="reveal">
-      <div class="only-day">
-        <p class="eyebrow">The Signature Martini · by day</p>
-        <h2>The Matcha Daddy <span class="es">Martini.</span></h2>
-        <p>For the matcha lovers. Ceremonial-grade matcha and Japanese shochu, shaken and poured up. The greenest way to start happy hour, and the drink everyone photographs first.</p>
-        <p>Not drinking? Try the Green Monkey: matcha over our housemade cinnamon banana syrup, finished with fried banana cream. Add a Churro or Fried Banana sundae and the afternoon is handled.</p>
-        <p class="chip-line">Green, cold, poured up.</p>
-      </div>
-      <div class="only-night">
-      <p class="eyebrow">The Signature Martini</p>
-      <h2>Monkey <span class="es">Business.</span></h2>
-      <p>The drink people will fly in for. Bananas fried in-house and reduced with cinnamon into a syrup, layered over aged Nicaraguan dark rum and a touch of milk. Crowned with fried banana and a cinnamon cold foam, dusted table-side.</p>
-      <p>Then the move: a giant sweet plantain chip laid across the rim. Your spoon and your first bite in one. Scoop the foam. Eat the chip. Drink the martini. Order another.</p>
-      <p class="chip-line">One drink, three textures, zero shortcuts.</p>
-      </div>
-    </div>
-    <div class="reveal">
-      <figure class="firma-photo">
-        <div class="win">
-          <img class="only-night" src="assets/ig/w-monkey.webp" width="809" height="1079" alt="A cinnamon-rimmed martini topped with foam and a fried banana chip beside a chile-rimmed citrus cocktail" loading="lazy">
-          <img class="only-day" src="assets/ig/w-trio.webp" width="714" height="952" alt="A bright green matcha martini beside an espresso martini and a chile-rimmed citrus cocktail on a sunlit patio table" loading="lazy">
-        </div>
-        <figcaption><span class="only-night">Rum · banana syrup · cold foam · cinnamon · the chip</span><span class="only-day">The matcha martini · poured up · in the sun</span></figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- ============ EL SALÓN ============ -->
-<section class="salon" id="salon">
+<!-- ============ SIGNATURES ============ -->
+<section class="sigs sec-light" id="signatures">
   <div class="wrap">
-    <div class="salon-copy reveal">
-      <p class="eyebrow">The Room</p>
-      <h2>Designed to be photographed.<br>Built to be lived in.</h2>
-      <p>Every surface was commissioned like a piece of jewelry. A bar faced in river-stone terrazzo. Cane chairs and candlelit café tables. A hand-tufted mural on plaster walls, and a banquette wrapped in terracotta mosaic under blue zellige. This is the backdrop your night deserves.</p>
-      <div class="pucks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="sec-head reveal">
+      <p class="eyebrow">Signature drinks &amp; desserts</p>
+      <h2>Order these first. Thank us later.</h2>
+      <p>The drinks people cross town for and the desserts every table ends up sharing. Start here on your first visit. You'll be back for the rest.</p>
     </div>
-    <p class="swipe-hint" aria-hidden="true">Swipe the room</p>
-    <div class="salon-grid">
-      <figure class="salon-card win reveal">
-        <img src="assets/ig/w-backbar.webp" width="714" height="952" alt="The back bar at night: glassware hanging overhead, shelves of tequila and mezcal, the Casa Dulce sign reflected in the glass" loading="lazy">
-        <figcaption><b>The back bar</b><span>Glassware overhead, agave on the shelves</span></figcaption>
-      </figure>
-      <figure class="salon-card win reveal">
-        <img src="assets/ig/a-room.webp" width="900" height="1200" alt="Cane chairs and candlelit café tables beneath a hand-tufted mural and the glowing Casa sign" loading="lazy">
-        <figcaption><b>The room</b><span>The mural, the banquette, the candlelight</span></figcaption>
-      </figure>
-      <figure class="salon-card win reveal">
-        <img src="assets/ig/a-mojito.webp" width="900" height="1200" alt="A mint-and-lime sparkling mojito in a Casa Dulce cup on the river-stone terrazzo bar, menus beside it" loading="lazy">
-        <figcaption><b>The terrazzo bar</b><span>River stone, menus out, one perfect pour at a time</span></figcaption>
-      </figure>
+    <p class="swipe-hint" aria-hidden="true">Swipe the signatures</p>
+    <div class="sig-grid">
+      <article class="sig-card reveal" style="--d:4">
+        <figure class="win"><img src="assets/ig/a-jamaica.webp" width="900" height="1200" alt="Jamaica Me Crazy: a ruby-red hibiscus cocktail in a cut-crystal glass with a sugared rim, mint and a dried citrus wheel" loading="lazy"></figure>
+        <p class="sig-kind">Signature cocktail<span>18</span></p>
+        <h3>Jamaica Me Crazy</h3>
+        <p>Hibiscus, watermelon and lime with Abuelitos tequila. Ruby red, bright and gone too fast.</p>
+      </article>
+      <article class="sig-card reveal" style="--d:5">
+        <figure class="win"><img src="assets/ig/w-monkey.webp" width="809" height="1079" alt="Monkey Business: a cinnamon-rimmed martini with cold foam and a sweet plantain chip on the wooden bar" loading="lazy"></figure>
+        <p class="sig-kind">Espresso martini<span>16</span></p>
+        <h3>Monkey Business</h3>
+        <p>Housemade cinnamon banana syrup and dark rum under a cinnamon cold foam, with a sweet plantain chip across the rim. Scoop the foam. Eat the chip. Order another.</p>
+      </article>
+      <article class="sig-card reveal" style="--d:1">
+        <figure class="win"><img src="assets/ig/a-matcha-daddy.webp" width="900" height="1200" alt="Matcha Daddy: a bright green matcha martini on a white café table beside a gold candle holder" loading="lazy"></figure>
+        <p class="sig-kind">Espresso martini<span>16</span></p>
+        <h3>Matcha Daddy</h3>
+        <p>Ceremonial grade matcha and Japanese shochu, shaken and poured up. The green one everyone photographs first.</p>
+      </article>
+      <article class="sig-card reveal" style="--d:3">
+        <figure class="win"><img src="assets/ig/a-sundae.webp" width="900" height="1200" alt="Abuela's Chocolate sundae with chocolate and condensed milk drizzle, cookie crumble and a cherry" loading="lazy"></figure>
+        <p class="sig-kind">Ice cream sundae<span>9</span></p>
+        <h3>Abuela's Chocolate</h3>
+        <p>A double scoop with wedding cookie crumble, chocolate and condensed milk, finished with a cherry on top.</p>
+      </article>
+      <article class="sig-card reveal" style="--d:6">
+        <figure class="win"><img src="assets/ig/a-flan.webp" width="900" height="1200" alt="Flan in caramel sauce and a mini tres leches cake in a gold cup" loading="lazy"></figure>
+        <p class="sig-kind">Desserts<span>7 each</span></p>
+        <h3>Flan &amp; Tres Leches</h3>
+        <p>Silky flan in caramel and a soaked tres leches cake. Order both and pass them around the table.</p>
+      </article>
+      <article class="sig-card reveal" style="--d:2">
+        <figure class="win"><img src="assets/ig/a-mojito.webp" width="900" height="1200" alt="A sparkling mojito refresher with mint and a dried lime wheel on the terrazzo bar" loading="lazy"></figure>
+        <p class="sig-kind">Zero proof<span>8</span></p>
+        <h3>Sparkling Mojito Refresher</h3>
+        <p>Lime, agave, lemon, fresh mint and Mineragua. Everything you love about a mojito, no rum required.</p>
+      </article>
+    </div>
+    <div class="sec-cta reveal">
+      <a class="btn btn-solid" href="#reserve">Reserve a seat</a>
+      <a class="btn btn-line" href="#carta">See the full menu</a>
     </div>
   </div>
 </section>
 
-<!-- ============ LA TERRAZA ============ -->
-<section class="terraza" id="terraza">
-  <div class="wrap terraza-grid">
+<!-- ============ HAPPY HOUR ============ -->
+<section class="hh sec-dark" id="happy-hour">
+  <div class="wrap hh-grid">
     <div class="reveal">
-      <p class="eyebrow"><span class="only-night">The Terrace · Private Events</span><span class="only-day">The Patio · Private Events</span></p>
-      <h2 class="only-night">String lights, night air, the tower glowing.</h2>
-      <h2 class="only-day">Sun on the patio, an iced latte in hand.</h2>
-      <p class="only-day">Afternoons at The Distrikt run on cold foam and sunshine: Green Monkeys, Mexican mochas and café de olla made with our housemade syrups, out on the patio.</p>
-      <p class="only-night">The terrace is where the night opens up: cocktails under café lights, desert air, the STRAT lit up over your shoulder. A skyline view that feels like a secret, because for now it still is.</p>
-      <p>For the nights that matter, take the whole house. Product launches, birthdays that deserve better than bottle service, the dinner-after-the-dinner. The room, the terrace, the full bar and the pastry program, all yours.</p>
-      <div class="terraza-stats">
-        <div class="tstat"><div class="num">Full</div><div class="lbl">House buyouts</div></div>
-        <div class="tstat"><div class="num">Late</div><div class="lbl">We keep your hours</div></div>
-        <div class="tstat"><div class="num">Yours</div><div class="lbl">Bar &amp; pastry team</div></div>
+      <p class="eyebrow">Happy Hour · Wednesday to Sunday</p>
+      <h2>Half-off drinks, 3:30 to 6.</h2>
+      <p class="hh-live" data-hh-live>Every day we're open</p>
+      <p>Bring the crew after work and try one more than you planned. Matcha on the terrace, espresso martinis at the bar, and the sun going down over the STRAT.</p>
+      <p>Make it your standing plan. Add happy hour to your calendar and we'll see you this week.</p>
+      <div class="sec-cta">
+        <button class="btn btn-solid" type="button" data-hh-cal>Add it to my calendar</button>
+        <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Dulce+1561+S+Commerce+St+Las+Vegas+NV" target="_blank" rel="noopener">Get directions</a>
       </div>
-      <a class="btn btn-solid" href="#visita">Plan a private night</a>
     </div>
-    <figure class="terraza-photo reveal">
-      <div class="win">
-        <img class="only-night" src="assets/ig/a-terrace-night.webp" width="900" height="1200" alt="The Casa Dulce sign glowing over the terrace at night, string lights and the lamp post overhead, the STRAT tower beyond" loading="lazy">
-        <img class="only-day" src="assets/ig/a-patio.webp" width="900" height="1200" alt="The Casa Dulce patio on a sunny afternoon, picnic tables under string lights and the Strat tower beyond" loading="lazy">
-      </div>
+    <figure class="hh-photo reveal">
+      <div class="win"><img src="assets/ig/w-trio.webp" width="714" height="952" alt="A matcha martini, an espresso martini and a chile-rimmed citrus cocktail on a sunlit patio table" loading="lazy"></div>
     </figure>
+  </div>
+</section>
+
+<!-- ============ RESERVE ============ -->
+<section class="rsv sec-light" id="reserve">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Reserve</p>
+      <h2>Save a seat. Bring someone.</h2>
+      <p>Plan your night in three taps, then book it or send the invite to whoever's coming.</p>
+    </div>
+    <div class="rsv-grid">
+      <div class="rsv-builder reveal" role="group" aria-label="Plan your visit">
+        <fieldset>
+          <legend>Who's coming?</legend>
+          <div class="chips" data-key="party">
+            <button type="button" data-v="1" aria-pressed="false">Just me</button>
+            <button type="button" data-v="2" aria-pressed="true">Two of us</button>
+            <button type="button" data-v="4" aria-pressed="false">3 to 4</button>
+            <button type="button" data-v="5" aria-pressed="false">5 or more</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Which day?</legend>
+          <div class="chips" data-key="day">
+            <button type="button" data-v="3" aria-pressed="false">Wed</button>
+            <button type="button" data-v="4" aria-pressed="false">Thu</button>
+            <button type="button" data-v="5" aria-pressed="true">Fri</button>
+            <button type="button" data-v="6" aria-pressed="false">Sat</button>
+            <button type="button" data-v="0" aria-pressed="false">Sun</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>What's the plan?</legend>
+          <div class="chips" data-key="plan">
+            <button type="button" data-v="hh" aria-pressed="false">Happy hour</button>
+            <button type="button" data-v="date" aria-pressed="true">Date night</button>
+            <button type="button" data-v="celebrate" aria-pressed="false">Celebrating</button>
+            <button type="button" data-v="because" aria-pressed="false">Just because</button>
+          </div>
+        </fieldset>
+      </div>
+      <div class="ticket reveal" aria-live="polite">
+        <p class="t-top">You're invited to</p>
+        <p class="t-title">Casa Dulce</p>
+        <p class="t-when" data-t-when>Friday · Date night</p>
+        <p class="t-party" data-t-party>Table for two</p>
+        <dl>
+          <div><dt>Order first</dt><dd data-t-order>Monkey Business, then Abuela's Chocolate to share</dd></div>
+          <div><dt>Where to sit</dt><dd data-t-seat>The banquette in the lounge</dd></div>
+          <div><dt>When</dt><dd data-t-time>Evening, open until 10:30 pm</dd></div>
+        </dl>
+        <p class="t-addr">1561 S Commerce St · The Distrikt, Las Vegas</p>
+        <div class="t-actions">
+          <a class="btn btn-solid" data-book href="https://ig.me/m/casadulce.lv" target="_blank" rel="noopener">Message us to book</a>
+          <button class="btn btn-line" type="button" data-share>Send the invite</button>
+        </div>
+        <p class="t-note" data-t-note>Friday and Saturday nights fill by eight. Book the lounge ahead.</p>
+      </div>
+    </div>
+    <div class="rsv-info reveal">
+      <div>
+        <h4>Hours</h4>
+        <p>Wednesday to Sunday, 3:30 to 10:30 pm<br>Happy hour 3:30 to 6, half-off drinks<br><span data-open-status class="open-now"></span></p>
+      </div>
+      <div>
+        <h4>Find us</h4>
+        <p>1561 S Commerce St, The Distrikt<br>Arts District, Downtown Las Vegas<br><a href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Dulce+1561+S+Commerce+St+Las+Vegas+NV" target="_blank" rel="noopener">Get directions</a></p>
+      </div>
+      <div>
+        <h4>Big group or private night</h4>
+        <p>Message us and we'll set it up.<br><a href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">@casadulce.lv</a> · <a href="mailto:hello@casadulcelv.com">hello@casadulcelv.com</a></p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1228,9 +1512,9 @@ html[data-mode="day"] .pillar .sig{border-color:rgba(140,106,46,.45)}
     <div class="feed-head reveal">
       <div>
         <p class="eyebrow">On Instagram · @casadulce.lv</p>
-        <h2>Straight from <span class="es">the feed.</span></h2>
+        <h2>New flavors drop here first.</h2>
       </div>
-      <p>New pours, new flavors and the nights you missed. Tap a reel to watch it here.</p>
+      <p>Follow along for new pours, seasonal sundaes and the nights you missed. Tap a reel to watch it here.</p>
     </div>
     <p class="swipe-hint" aria-hidden="true">Swipe the reels</p>
     <div class="reels">
@@ -1267,7 +1551,7 @@ html[data-mode="day"] .pillar .sig{border-color:rgba(140,106,46,.45)}
       <a href="https://www.instagram.com/p/DfDtXUnmVzt/" target="_blank" rel="noopener" data-label="Behind the bar"><img src="assets/ig/ig-bar-crew.webp" alt="The team working behind the Casa Dulce bar" loading="lazy"></a>
       <a href="https://www.instagram.com/p/De5ZlUtj6w0/" target="_blank" rel="noopener" data-label="The menu"><img src="assets/ig/ig-menu.webp" alt="A guest reading the Casa Dulce menu on the terrazzo bar" loading="lazy"></a>
     </div>
-    <div class="feed-cta reveal"><a class="btn btn-line" href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">Follow @casadulce.lv</a></div>
+    <div class="feed-cta reveal"><a class="btn btn-solid" href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">Follow @casadulce.lv</a></div>
   </div>
   <dialog class="reel-modal" aria-label="Instagram reel">
     <div class="rm-bar">
@@ -1278,48 +1562,14 @@ html[data-mode="day"] .pillar .sig{border-color:rgba(140,106,46,.45)}
   </dialog>
 </section>
 
-<!-- ============ VISITA ============ -->
-<section class="visita" id="visita">
-  <div class="wrap">
-    <figure class="visita-photo reveal">
-      <img class="only-night" src="assets/ig/visita-bar.webp" alt="The team behind the Casa Dulce bar taking an order, martini glasses hanging overhead" loading="lazy">
-      <img class="only-day" src="assets/ig/day-hero-1.webp" width="1920" height="1080" alt="The Casa Dulce lounge by day under the glowing sign" loading="lazy">
-    </figure>
-    <p class="eyebrow reveal">Visit</p>
-    <h2 class="reveal"><span class="only-night">Come for one drink.<br>Cancel your next stop.</span><span class="only-day">Come for a coffee.<br>Stay for happy hour.</span></h2>
-    <div class="visita-grid" style="margin-top:2.5rem">
-      <div class="reveal">
-        <div class="vis-block">
-          <h4>Hours</h4>
-          <p>Wednesday – Sunday · 3:30 – 10:30 pm<br>Happy hour 3:30 – 6 pm · half-off drinks<br><span data-open-status class="open-now"></span></p>
-        </div>
-        <div class="vis-block">
-          <h4>Find us</h4>
-          <p>The Distrikt · 1561 S Commerce St<br>Arts District, Downtown Las Vegas, NV<br><a href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Dulce+1561+S+Commerce+St+Las+Vegas+NV" target="_blank" rel="noopener" class="dir-link">Get directions</a></p>
-        </div>
-        <div class="vis-block">
-          <h4>Contact</h4>
-          <p><a href="mailto:hello@casadulcelv.com">hello@casadulcelv.com</a><br><a href="tel:+17025550022">(702) 555-0022</a> · <a href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">@casadulce.lv</a></p>
-        </div>
-      </div>
-      <aside class="res-card reveal">
-        <div class="shape" aria-hidden="true"></div>
-        <h3 class="only-day">Afternoons are easy.</h3>
-        <p class="only-day">Walk right in for coffee, matcha and ice cream. No reservation needed. Tables fill fast once happy hour starts at 3:30, and the lounge books up on Friday and Saturday nights.</p>
-        <h3 class="only-night">The room fills by eight.</h3>
-        <p class="only-night">Walk-ins take their chances at the bar and terrace. For a table in the lounge, especially on Friday and Saturday, reserve ahead. You'll want the banquette.</p>
-        <a class="btn btn-solid" href="#">Reserve on Resy</a>
-      </aside>
-    </div>
-  </div>
-</section>
+
 
 <div class="stone-band" aria-hidden="true"></div>
 
 <div class="mbar" id="mbar">
   <p class="mbar-status"><i class="dot" aria-hidden="true"></i><span data-open-status="short">Wed–Sun · 3:30–10:30</span></p>
   <a class="mbar-btn" href="#carta">Menu</a>
-  <a class="mbar-btn solid" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Dulce+1561+S+Commerce+St+Las+Vegas+NV" target="_blank" rel="noopener">Directions</a>
+  <a class="mbar-btn solid" href="#reserve">Reserve</a>
 </div>
 
 <!-- ============ FOOTER ============ -->
@@ -1328,17 +1578,16 @@ html[data-mode="day"] .pillar .sig{border-color:rgba(140,106,46,.45)}
     <div class="foot-grid">
       <a class="logo" href="#top" aria-label="Casa Dulce home"><img src="assets/logo-light.png" alt="Casa Dulce" width="144" height="36"></a>
       <ul class="foot-links">
-        <li><a href="#casa">The House</a></li>
-        <li><a href="#carta">The Menu</a></li>
-        <li><a href="#salon">The Room</a></li>
-        <li><a href="#terraza">The Terrace</a></li>
-        <li><a href="#feed">The Feed</a></li>
-        <li><a href="#visita">Visit</a></li>
+        <li><a href="#la-casa">La Casa</a></li>
+        <li><a href="#carta">Menu</a></li>
+        <li><a href="#signatures">Signatures</a></li>
+        <li><a href="#happy-hour">Happy Hour</a></li>
+        <li><a href="#reserve">Reserve</a></li>
         <li><a href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">Instagram</a></li>
       </ul>
     </div>
     <div class="foot-base">
-      <span>© 2026 Casa Dulce · The Distrikt, Las Vegas · <span class="photo-credit">Photography from <a href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">@casadulce.lv</a></span></span>
+      <span>© 2026 Casa Dulce · 1561 S Commerce St, The Distrikt, Las Vegas · <span class="photo-credit">Photography from <a href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">@casadulce.lv</a></span></span>
       <span class="es">Arrive sweet. Leave sweeter.</span>
     </div>
   </div>
@@ -1431,7 +1680,7 @@ const Hero = (() => {
 
 // terrazzo pattern drifts only while its section is on screen
 (() => {
-  const els = document.querySelectorAll('.casa,.carta,.salon,.terraza,.feed,.visita,footer');
+  const els = document.querySelectorAll('.mf,.lc,.carta,.sigs,.hh,.rsv,.feed,footer');
   if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('pat-live')); return; }
   const o = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('pat-live', e.isIntersecting)), {rootMargin:'100px'});
   els.forEach(e => o.observe(e));
@@ -1563,6 +1812,130 @@ const Hero = (() => {
   const bar = document.getElementById('mbar'); if (!bar) return;
   const upd = () => bar.classList.toggle('show', scrollY > innerHeight * 0.55);
   addEventListener('scroll', upd, {passive:true}); upd();
+})();
+
+// Las Vegas clock shared by happy hour and the reserve builder
+const lvNow = () => {
+  const parts = new Intl.DateTimeFormat('en-US', {timeZone:'America/Los_Angeles', weekday:'short', year:'numeric', month:'2-digit', day:'2-digit', hour:'numeric', minute:'numeric', hourCycle:'h23'}).formatToParts(new Date());
+  const g = t => parts.find(p => p.type === t).value;
+  return {wd: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(g('weekday')), y: +g('year'), mo: +g('month'), d: +g('day'), min: (+g('hour') % 24) * 60 + +g('minute')};
+};
+const CD_DAYS = [0, 3, 4, 5, 6], CD_OPEN = 15 * 60 + 30, CD_CLOSE = 22 * 60 + 30, CD_HH_END = 18 * 60;
+const CD_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+// happy hour: live countdown + add to calendar
+(() => {
+  const live = document.querySelector('[data-hh-live]'), cal = document.querySelector('[data-hh-cal]');
+  const dur = m => { const h = Math.floor(m / 60), r = m % 60; return [h ? h + ' hr' : '', r || !h ? r + ' min' : ''].filter(Boolean).join(' '); };
+  const update = () => {
+    if (!live) return;
+    let t; try { t = lvNow(); } catch (e) { return; }
+    const open = CD_DAYS.includes(t.wd);
+    let text, state = 'off';
+    if (open && t.min >= CD_OPEN && t.min < CD_HH_END) { state = 'on'; text = 'On now · ' + dur(CD_HH_END - t.min) + ' left'; }
+    else if (open && t.min < CD_OPEN) { state = 'soon'; text = 'Starts today at 3:30 · in ' + dur(CD_OPEN - t.min); }
+    else { let k = 1; while (!CD_DAYS.includes((t.wd + k) % 7)) k++; text = 'Next happy hour: ' + (k === 1 ? 'tomorrow' : CD_NAMES[(t.wd + k) % 7]) + ' at 3:30'; }
+    live.textContent = text; live.dataset.state = state;
+  };
+  update(); setInterval(update, 30000);
+  if (!cal) return;
+  cal.addEventListener('click', () => {
+    let t; try { t = lvNow(); } catch (e) { const n = new Date(); t = {wd: n.getDay(), y: n.getFullYear(), mo: n.getMonth() + 1, d: n.getDate(), min: 0}; }
+    let k = CD_DAYS.includes(t.wd) && t.min < CD_HH_END ? 0 : 1;
+    while (!CD_DAYS.includes((t.wd + k) % 7)) k++;
+    const first = new Date(Date.UTC(t.y, t.mo - 1, t.d + k));
+    const ymd = first.toISOString().slice(0, 10).replace(/-/g, '');
+    const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
+    const ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Casa Dulce//Happy Hour//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VTIMEZONE', 'TZID:America/Los_Angeles',
+      'BEGIN:DAYLIGHT', 'TZOFFSETFROM:-0800', 'TZOFFSETTO:-0700', 'TZNAME:PDT', 'DTSTART:19700308T020000', 'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU', 'END:DAYLIGHT',
+      'BEGIN:STANDARD', 'TZOFFSETFROM:-0700', 'TZOFFSETTO:-0800', 'TZNAME:PST', 'DTSTART:19701101T020000', 'RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU', 'END:STANDARD',
+      'END:VTIMEZONE',
+      'BEGIN:VEVENT', 'UID:happy-hour-' + ymd + '@casadulcelv.com', 'DTSTAMP:' + stamp,
+      'DTSTART;TZID=America/Los_Angeles:' + ymd + 'T153000', 'DTEND;TZID=America/Los_Angeles:' + ymd + 'T180000',
+      'RRULE:FREQ=WEEKLY;BYDAY=WE,TH,FR,SA,SU',
+      'SUMMARY:Happy hour at Casa Dulce',
+      'LOCATION:Casa Dulce\\, 1561 S Commerce St\\, Las Vegas\\, NV',
+      'DESCRIPTION:Half-off drinks\\, 3:30 to 6. ' + location.origin + location.pathname,
+      'END:VEVENT', 'END:VCALENDAR'
+    ].join('\r\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([ics], {type: 'text/calendar;charset=utf-8'}));
+    a.download = 'casa-dulce-happy-hour.ics';
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+    const was = cal.textContent; cal.textContent = 'Added. See you there'; setTimeout(() => { cal.textContent = was; }, 2600);
+  });
+})();
+
+// reserve: plan the night, then book it or send the invite
+(() => {
+  const RESY_URL = ''; // paste the Resy booking link here when it's live; until then, booking goes to Instagram DMs
+  const DM = 'https://ig.me/m/casadulce.lv';
+  const root = document.querySelector('.rsv'); if (!root) return;
+  const q = s => root.querySelector(s);
+  const PLANS = {
+    hh:        {label: 'Happy hour',   order: 'Matcha Daddy and a Sparkling Mojito Refresher', seat: 'The terrace, in the sun', time: '3:30 to 6, drinks are half off'},
+    date:      {label: 'Date night',   order: "Monkey Business, then Abuela's Chocolate to share", seat: 'The banquette in the lounge', time: 'Evening, open until 10:30 pm'},
+    celebrate: {label: 'Celebrating',  order: 'A round of Jamaica Me Crazy, then flan and tres leches for the table', seat: 'The terrace, under the string lights', time: 'Doors at 3:30, open until 10:30 pm'},
+    because:   {label: 'Just because', order: 'El Clásico and a Churro sundae', seat: 'Up at the bar', time: 'Any time from 3:30 to 10:30 pm'}
+  };
+  const PARTY = {'1': 'Just you, and the best stool at the bar', '2': 'Table for two', '4': 'A table for three or four', '5': 'Five or more, so bring the crew'};
+  const st = {party: '2', day: null, plan: document.documentElement.getAttribute('data-mode') === 'day' ? 'hh' : 'date'};
+  let rel = {};   // weekday -> 'Today' / 'Tomorrow'
+
+  // order the day chips from the soonest open day, and label today / tomorrow
+  const dayWrap = q('.chips[data-key="day"]');
+  try {
+    const t = lvNow();
+    const start = CD_DAYS.includes(t.wd) && t.min < CD_CLOSE ? 0 : 1;
+    const order = [];
+    for (let k = start; order.length < 5; k++) { const wd = (t.wd + k) % 7; if (CD_DAYS.includes(wd)) { order.push(wd); if (k === 0) rel[wd] = 'Today'; else if (k === 1) rel[wd] = 'Tomorrow'; } }
+    order.forEach(wd => { const b = dayWrap.querySelector(`[data-v="${wd}"]`); if (rel[wd]) b.textContent = rel[wd]; dayWrap.appendChild(b); });
+    st.day = String(order[0]);
+  } catch (e) { st.day = '5'; }
+
+  const dayName = () => rel[+st.day] || CD_NAMES[+st.day];
+  const render = () => {
+    root.querySelectorAll('.chips').forEach(c => c.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === st[c.dataset.key]))));
+    const p = PLANS[st.plan];
+    q('[data-t-when]').textContent = dayName() + ' · ' + p.label;
+    q('[data-t-party]').textContent = PARTY[st.party];
+    q('[data-t-order]').textContent = p.order;
+    q('[data-t-seat]').textContent = st.party === '1' ? 'Up at the bar' : p.seat;
+    q('[data-t-time]').textContent = p.time;
+    let note = 'Walk-ins are welcome at the bar and on the terrace.';
+    if (st.party === '5') note = "Five or more? Message us and we'll set up the terrace, or take the whole house.";
+    else if (st.party === '1') note = 'Flying solo? Walk right in. The bar is yours.';
+    else if ((st.day === '5' || st.day === '6') && st.plan !== 'hh') note = 'Friday and Saturday nights fill by eight. Book the lounge ahead.';
+    else if (st.plan === 'hh') note = 'Walk-ins welcome. Arrive early for a spot on the terrace.';
+    q('[data-t-note]').textContent = note;
+  };
+  root.querySelectorAll('.chips').forEach(c => c.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    st[c.dataset.key] = b.dataset.v; render();
+  }));
+
+  const book = q('[data-book]');
+  if (RESY_URL) { book.href = RESY_URL; book.textContent = 'Book on Resy'; } else { book.href = DM; book.textContent = 'Message us to book'; }
+
+  const share = q('[data-share]');
+  share.addEventListener('click', async () => {
+    const p = PLANS[st.plan], d = dayName();
+    const when = d === 'Today' || d === 'Tomorrow' ? d.toLowerCase() : d;
+    const text = `You're invited to Casa Dulce, ${when} for ${p.label.toLowerCase()}. ${p.order} first. 1561 S Commerce St, Las Vegas.`;
+    const url = location.origin + location.pathname + '#reserve';
+    const done = msg => { const was = 'Send the invite'; share.textContent = msg; setTimeout(() => { share.textContent = was; }, 2400); };
+    if (navigator.share) { try { await navigator.share({title: 'Casa Dulce', text, url}); } catch (e) {} return; }
+    if (matchMedia('(pointer: coarse)').matches) { location.href = 'sms:?&body=' + encodeURIComponent(text + ' ' + url); return; }
+    try { await navigator.clipboard.writeText(text + ' ' + url); done('Invite copied'); }
+    catch (e) {
+      const ta = document.createElement('textarea'); ta.value = text + ' ' + url; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done('Invite copied'); } catch (_) {} ta.remove();
+    }
+  });
+  render();
 })();
 </script>
 </body>
