@@ -1056,6 +1056,49 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
   .mbar-status{font-size:.875rem}
   .eyebrow{font-size:.8125rem;letter-spacing:.18em}
 }
+
+/* ================= jobs ================= */
+.jobs{position:relative;isolation:isolate;overflow:hidden;padding:7.5rem 0}
+.jobs::before{content:"";position:absolute;top:-360px;left:-360px;right:0;bottom:0;z-index:-1;pointer-events:none;background:url(assets/terrazzo.svg) 0 0/360px 360px repeat;opacity:.07;animation:terrazzo-drift 130s linear infinite;animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.jobs::before{animation:none}}
+html[data-mode="day"] .jobs{background:#F4ECDD}
+.jobs-grid{display:grid;grid-template-columns:1fr 1fr;gap:4.4rem;align-items:start}
+.jobs p{font-size:1.125rem;line-height:1.7}
+.roles{list-style:none;margin:1.8rem 0;padding:0;border-top:1px solid var(--l-line)}
+.roles li{padding:1rem 0;border-bottom:1px solid var(--l-line);display:grid;gap:.2rem}
+.roles b{font-family:var(--display);font-weight:400;font-size:1.45rem}
+.roles span{font-size:1.0625rem;line-height:1.55}
+.jobs-fine{font-weight:500}
+.jobs-form{background:#FFFDF8;border:1.5px solid rgba(36,24,17,.22);border-radius:18px;padding:2.2rem 2.2rem 1.8rem;box-shadow:0 24px 50px rgba(36,24,17,.1)}
+.jobs-form h3{font-family:var(--display);font-weight:400;font-size:1.8rem;margin:0 0 1.3rem}
+.jobs-form fieldset{border:0;padding:0;min-width:0}
+.f-row{margin:0 0 1.15rem}
+.f-two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.jobs-form label,.jobs-form legend{display:block;font-size:.9375rem;font-weight:600;color:var(--l-fg);margin:0 0 .4rem;padding:0}
+.jobs-form label span{font-weight:400;color:var(--l-muted)}
+.jobs-form input[type=text],.jobs-form input[type=email],.jobs-form input[type=tel],.jobs-form textarea{width:100%;font:400 1.0625rem/1.4 var(--body);color:var(--l-fg);background:#fff;border:1.5px solid rgba(36,24,17,.45);border-radius:10px;padding:.8rem .9rem;min-height:50px}
+.jobs-form textarea{resize:vertical;min-height:120px}
+.jobs-form ::placeholder{color:#6B5847;opacity:1}
+.jobs-form input:focus-visible,.jobs-form textarea:focus-visible,.jobs-form .chips button:focus-visible,.f-check input:focus-visible{outline:3px solid #5C4115;outline-offset:2px;border-color:#5C4115}
+.jobs-form.tried :invalid{border-color:#9B2C1C}
+.jobs-form .chips button{min-height:44px;font-size:.98rem}
+.f-check{display:flex!important;align-items:center;gap:.65rem;font-size:1.0625rem!important;margin:.4rem 0 1.2rem!important;cursor:pointer}
+.f-check input{width:22px;height:22px;accent-color:#241811}
+.f-error{color:#9B2C1C;font-weight:600;font-size:1rem!important;margin:0 0 1rem}
+.f-help{font-size:.95rem!important;line-height:1.55!important;margin-top:1rem;color:var(--l-muted)}
+.f-help a{color:var(--l-fg);font-weight:600}
+.f-copy{background:none;border:0;padding:0;font:inherit;font-weight:600;color:var(--l-fg);text-decoration:underline;cursor:pointer}
+.jobs-external{display:inline-flex}
+.jobs-external[hidden]{display:none}
+.foot-base .age-note{flex-basis:100%;font-size:.875rem;color:rgba(239,230,210,.82)}
+@media(max-width:900px){.jobs-grid{grid-template-columns:1fr;gap:2.6rem}}
+@media(max-width:760px){
+  .jobs{padding:4.8rem 0}
+  .jobs p{font-size:1.0625rem}
+  .jobs-form{padding:1.6rem 1.25rem 1.4rem}
+  .f-two{grid-template-columns:1fr;gap:0}
+  .jobs-form .btn{width:100%;text-align:center}
+}
 </style>
 </head>
 <body>
@@ -1069,13 +1112,14 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
     <li><a href="#signatures">Signatures</a></li>
     <li><a href="#happy-hour">Happy Hour</a></li>
     <li><a href="#feed">Follow</a></li>
+    <li><a href="#jobs">Jobs</a></li>
   </ul>
   <div class="nav-right">
     <button class="mode-toggle" type="button" aria-label="Switch to the day look" title="Day / night look">
       <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
       <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
     </button>
-    <a class="btn btn-line nav-cta" href="#reserve">Reserve</a>
+    <a class="btn btn-line nav-cta" href="#visit">Visit</a>
     <button class="nav-burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span></span><span></span></button>
   </div>
 </nav>
@@ -1085,8 +1129,9 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
     <li><a href="#carta">Menu</a></li>
     <li><a href="#signatures">Signatures</a></li>
     <li><a href="#happy-hour">Happy Hour</a></li>
-    <li><a href="#reserve">Reserve</a></li>
+    <li><a href="#visit">Plan your visit</a></li>
     <li><a href="#feed">Follow along</a></li>
+    <li><a href="#jobs">Now hiring</a></li>
   </ul>
   <div class="mnav-foot">
     <a class="btn btn-solid" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Dulce+1561+S+Commerce+St+Las+Vegas+NV" target="_blank" rel="noopener">Get directions</a>
@@ -1138,12 +1183,11 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
   <div class="hero-inner">
     <p class="eyebrow"><span class="only-night">Now open · The Distrikt, Downtown Las Vegas</span><span class="only-day">Now open · Afternoons at The Distrikt</span></p>
     <h1><span class="only-night">Your Nightcap Just Got <span class="es">Sweeter</span></span><span class="only-day">Your Afternoon Just Got <span class="es">Sweeter</span></span></h1>
-    <p class="only-day">Craft coffee, matcha and Latin-inspired ice cream in the sunniest corner of Downtown. Happy hour runs 3:30 to 6, with half-off drinks.<span class="lg-only"> Espresso martinis are always on.</span></p>
+    <p class="only-day">Craft coffee, matcha and Latin-inspired ice cream in the sunniest corner of Downtown. Happy hour runs 3:30 to 6, with half off all cocktails.<span class="lg-only"> Espresso martinis are always on.</span></p>
     <p class="only-night">Dessert cocktails from top bartenders, chef-driven sweets and small-batch ice cream made for us in Mexico.<span class="lg-only"> The room you bring people to before everyone else finds out.</span></p>
     <div class="hero-cta">
-      <a class="btn btn-solid only-night" href="#reserve"><span class="lg-only">Reserve a seat</span><span class="sm-only">Reserve</span></a>
-      <a class="btn btn-solid only-day" href="#carta"><span class="lg-only">See the menu</span><span class="sm-only">The menu</span></a>
-      <a class="btn btn-line only-night" href="#carta"><span class="lg-only">See the menu</span><span class="sm-only">The menu</span></a>
+      <a class="btn btn-solid" href="#carta"><span class="lg-only">See the menu</span><span class="sm-only">The menu</span></a>
+      <a class="btn btn-line only-night" href="#visit"><span class="lg-only">Invite your crew</span><span class="sm-only">Invite</span></a>
       <a class="btn btn-line only-day" href="#happy-hour"><span class="lg-only">Happy hour · 3:30–6</span><span class="sm-only">Happy hour</span></a>
     </div>
   </div>
@@ -1196,9 +1240,9 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
     <div class="lc-private reveal">
       <div>
         <h3>Take the whole house.</h3>
-        <p>Birthdays, launches, the dinner after the dinner. Book the bar, the lounge and the terrace for your people, with our bar team pouring for you.</p>
+        <p>Birthdays, launches, the dinner after the dinner. Ask us about taking over the bar, the lounge and the terrace for your people, with our bar team pouring for you.</p>
       </div>
-      <a class="btn btn-solid" href="https://ig.me/m/casadulce.lv" target="_blank" rel="noopener">Plan a private night</a>
+      <a class="btn btn-solid" href="https://ig.me/m/casadulce.lv" target="_blank" rel="noopener">Ask about private nights</a>
     </div>
   </div>
 </section>
@@ -1406,8 +1450,8 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
       </article>
     </div>
     <div class="sec-cta reveal">
-      <a class="btn btn-solid" href="#reserve">Reserve a seat</a>
-      <a class="btn btn-line" href="#carta">See the full menu</a>
+      <a class="btn btn-solid" href="#carta">See the full menu</a>
+      <a class="btn btn-line" href="#visit">Invite your crew</a>
     </div>
   </div>
 </section>
@@ -1417,9 +1461,9 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
   <div class="wrap hh-grid">
     <div class="reveal">
       <p class="eyebrow">Happy Hour · Wednesday to Sunday</p>
-      <h2>Half-off drinks, 3:30 to 6.</h2>
+      <h2>Half off all cocktails, 3:30 to 6.</h2>
       <p class="hh-live" data-hh-live>Every day we're open</p>
-      <p>Bring the crew after work and try one more than you planned. Matcha on the terrace, espresso martinis at the bar, and the sun going down over the STRAT.</p>
+      <p>Bring the crew after work and try one more than you planned. A Matcha Daddy on the terrace, a frozen margarita at the bar, and the sun going down over the STRAT.</p>
       <p>Make it your standing plan. Add happy hour to your calendar and we'll see you this week.</p>
       <div class="sec-cta">
         <button class="btn btn-solid" type="button" data-hh-cal>Add it to my calendar</button>
@@ -1432,13 +1476,13 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
   </div>
 </section>
 
-<!-- ============ RESERVE ============ -->
-<section class="rsv sec-light" id="reserve">
+<!-- ============ PLAN YOUR VISIT ============ -->
+<section class="rsv sec-light" id="visit">
   <div class="wrap">
     <div class="sec-head reveal">
-      <p class="eyebrow">Reserve</p>
-      <h2>Save a seat. Bring someone.</h2>
-      <p>Plan your night in three taps, then book it or send the invite to whoever's coming.</p>
+      <p class="eyebrow">Plan your visit</p>
+      <h2>No reservations. Just show up.</h2>
+      <p>We're walk-in only, first come, first served. Plan your night in three taps and send the invite to whoever's coming.</p>
     </div>
     <div class="rsv-grid">
       <div class="rsv-builder reveal" role="group" aria-label="Plan your visit">
@@ -1475,7 +1519,7 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
         <p class="t-top">You're invited to</p>
         <p class="t-title">Casa Dulce</p>
         <p class="t-when" data-t-when>Friday · Date night</p>
-        <p class="t-party" data-t-party>Table for two</p>
+        <p class="t-party" data-t-party>The two of you</p>
         <dl>
           <div><dt>Order first</dt><dd data-t-order>Monkey Business, then Abuela's Chocolate to share</dd></div>
           <div><dt>Where to sit</dt><dd data-t-seat>The banquette in the lounge</dd></div>
@@ -1483,16 +1527,16 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
         </dl>
         <p class="t-addr">1561 S Commerce St · The Distrikt, Las Vegas</p>
         <div class="t-actions">
-          <a class="btn btn-solid" data-book href="https://ig.me/m/casadulce.lv" target="_blank" rel="noopener">Message us to book</a>
-          <button class="btn btn-line" type="button" data-share>Send the invite</button>
+          <button class="btn btn-solid" type="button" data-share>Send the invite</button>
+          <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Dulce+1561+S+Commerce+St+Las+Vegas+NV" target="_blank" rel="noopener">Get directions</a>
         </div>
-        <p class="t-note" data-t-note>Friday and Saturday nights fill by eight. Book the lounge ahead.</p>
+        <p class="t-note" data-t-note>Walk-ins only. First come, first served.</p>
       </div>
     </div>
     <div class="rsv-info reveal">
       <div>
         <h4>Hours</h4>
-        <p>Wednesday to Sunday, 3:30 to 10:30 pm<br>Happy hour 3:30 to 6, half-off drinks<br><span data-open-status class="open-now"></span></p>
+        <p>Wednesday to Sunday, 3:30 to 10:30 pm<br>Happy hour 3:30 to 6, half off all cocktails<br><span data-open-status class="open-now"></span></p>
       </div>
       <div>
         <h4>Find us</h4>
@@ -1500,7 +1544,7 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
       </div>
       <div>
         <h4>Big group or private night</h4>
-        <p>Message us and we'll set it up.<br><a href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">@casadulce.lv</a> · <a href="mailto:hello@casadulcelv.com">hello@casadulcelv.com</a></p>
+        <p>Message us and we'll talk it through.<br><a href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">@casadulce.lv</a> · <a href="mailto:hello@casadulcelv.com">hello@casadulcelv.com</a></p>
       </div>
     </div>
   </div>
@@ -1562,6 +1606,74 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
   </dialog>
 </section>
 
+<!-- ============ JOBS ============ -->
+<section class="jobs sec-light" id="jobs">
+  <div class="wrap jobs-grid">
+    <div class="reveal">
+      <p class="eyebrow">Now hiring · 21+</p>
+      <h2>Now hiring espresso martini lovers.</h2>
+      <p>We're building the team behind the bar and the counter. If you love hospitality, good coffee and a perfectly shaken martini, we'd like to meet you.</p>
+      <ul class="roles">
+        <li><b>Baristas</b><span>Lattes, matcha and the cold-foam tops we're known for.</span></li>
+        <li><b>Bartenders</b><span>Espresso martinis, frozen and fruity cocktails, built to order.</span></li>
+        <li><b>Espresso martini lovers</b><span>Hosts and servers who make every table feel like a regular's.</span></li>
+      </ul>
+      <p class="jobs-fine">Shifts run Wednesday to Sunday, afternoons and evenings. You must be 21 or older to apply.</p>
+    </div>
+    <div class="jobs-apply reveal">
+      <a class="btn btn-solid jobs-external" data-jobs-link href="#" target="_blank" rel="noopener" hidden>Apply now</a>
+      <form class="jobs-form" data-jobs-form novalidate>
+        <h3>Apply in two minutes</h3>
+        <div class="f-row">
+          <label for="j-name">Full name</label>
+          <input id="j-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="f-two">
+          <div class="f-row">
+            <label for="j-email">Email</label>
+            <input id="j-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="f-row">
+            <label for="j-phone">Phone <span>(optional)</span></label>
+            <input id="j-phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+        </div>
+        <fieldset class="f-row">
+          <legend>The role you want</legend>
+          <div class="chips" data-field="role">
+            <button type="button" data-v="Barista" aria-pressed="false">Barista</button>
+            <button type="button" data-v="Bartender" aria-pressed="false">Bartender</button>
+            <button type="button" data-v="Host / server" aria-pressed="false">Host or server</button>
+            <button type="button" data-v="Open to anything" aria-pressed="true">Open to anything</button>
+          </div>
+        </fieldset>
+        <fieldset class="f-row">
+          <legend>When you can work</legend>
+          <div class="chips" data-field="when" data-multi>
+            <button type="button" data-v="Weekday afternoons" aria-pressed="false">Weekday afternoons</button>
+            <button type="button" data-v="Weeknights" aria-pressed="false">Weeknights</button>
+            <button type="button" data-v="Weekends" aria-pressed="false">Weekends</button>
+          </div>
+        </fieldset>
+        <div class="f-row">
+          <label for="j-about">Tell us about you</label>
+          <textarea id="j-about" name="about" rows="4" required placeholder="Where you've worked, what you love to make, your go-to order"></textarea>
+        </div>
+        <div class="f-row">
+          <label for="j-link">Instagram or resume link <span>(optional)</span></label>
+          <input id="j-link" name="link" type="text" inputmode="url">
+        </div>
+        <label class="f-check"><input type="checkbox" name="age" required> <span>I'm 21 or older</span></label>
+        <p class="f-error" data-jobs-error role="alert" hidden></p>
+        <button class="btn btn-solid" type="submit">Send my application</button>
+        <p class="f-help" data-jobs-done hidden></p>
+        <p class="f-help">Your email app opens with your application ready to send to <a href="mailto:hello@casadulcelv.com">hello@casadulcelv.com</a>. Attach a resume if you have one.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+
 
 
 <div class="stone-band" aria-hidden="true"></div>
@@ -1569,7 +1681,7 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
 <div class="mbar" id="mbar">
   <p class="mbar-status"><i class="dot" aria-hidden="true"></i><span data-open-status="short">Wed–Sun · 3:30–10:30</span></p>
   <a class="mbar-btn" href="#carta">Menu</a>
-  <a class="mbar-btn solid" href="#reserve">Reserve</a>
+  <a class="mbar-btn solid" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Dulce+1561+S+Commerce+St+Las+Vegas+NV" target="_blank" rel="noopener">Directions</a>
 </div>
 
 <!-- ============ FOOTER ============ -->
@@ -1582,13 +1694,15 @@ html[data-mode="day"] .pillar h4{border-bottom-color:rgba(92,65,21,.45)}
         <li><a href="#carta">Menu</a></li>
         <li><a href="#signatures">Signatures</a></li>
         <li><a href="#happy-hour">Happy Hour</a></li>
-        <li><a href="#reserve">Reserve</a></li>
+        <li><a href="#visit">Visit</a></li>
+        <li><a href="#jobs">Jobs</a></li>
         <li><a href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">Instagram</a></li>
       </ul>
     </div>
     <div class="foot-base">
       <span>© 2026 Casa Dulce · 1561 S Commerce St, The Distrikt, Las Vegas · <span class="photo-credit">Photography from <a href="https://www.instagram.com/casadulce.lv/" target="_blank" rel="noopener">@casadulce.lv</a></span></span>
       <span class="es">Arrive sweet. Leave sweeter.</span>
+      <span class="age-note">Must be 21+ to purchase and consume alcohol.</span>
     </div>
   </div>
 </footer>
@@ -1680,7 +1794,7 @@ const Hero = (() => {
 
 // terrazzo pattern drifts only while its section is on screen
 (() => {
-  const els = document.querySelectorAll('.mf,.lc,.carta,.sigs,.hh,.rsv,.feed,footer');
+  const els = document.querySelectorAll('.mf,.lc,.carta,.sigs,.hh,.rsv,.feed,.jobs,footer');
   if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('pat-live')); return; }
   const o = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('pat-live', e.isIntersecting)), {rootMargin:'100px'});
   els.forEach(e => o.observe(e));
@@ -1814,7 +1928,7 @@ const Hero = (() => {
   addEventListener('scroll', upd, {passive:true}); upd();
 })();
 
-// Las Vegas clock shared by happy hour and the reserve builder
+// Las Vegas clock shared by happy hour and the visit planner
 const lvNow = () => {
   const parts = new Intl.DateTimeFormat('en-US', {timeZone:'America/Los_Angeles', weekday:'short', year:'numeric', month:'2-digit', day:'2-digit', hour:'numeric', minute:'numeric', hourCycle:'h23'}).formatToParts(new Date());
   const g = t => parts.find(p => p.type === t).value;
@@ -1857,7 +1971,7 @@ const CD_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
       'RRULE:FREQ=WEEKLY;BYDAY=WE,TH,FR,SA,SU',
       'SUMMARY:Happy hour at Casa Dulce',
       'LOCATION:Casa Dulce\\, 1561 S Commerce St\\, Las Vegas\\, NV',
-      'DESCRIPTION:Half-off drinks\\, 3:30 to 6. ' + location.origin + location.pathname,
+      'DESCRIPTION:Half off all cocktails\\, 3:30 to 6. ' + location.origin + location.pathname,
       'END:VEVENT', 'END:VCALENDAR'
     ].join('\r\n');
     const a = document.createElement('a');
@@ -1869,19 +1983,18 @@ const CD_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
   });
 })();
 
-// reserve: plan the night, then book it or send the invite
+// plan your visit (walk-in only): build the night, then send the invite
 (() => {
-  const RESY_URL = ''; // paste the Resy booking link here when it's live; until then, booking goes to Instagram DMs
   const DM = 'https://ig.me/m/casadulce.lv';
   const root = document.querySelector('.rsv'); if (!root) return;
   const q = s => root.querySelector(s);
   const PLANS = {
-    hh:        {label: 'Happy hour',   order: 'Matcha Daddy and a Sparkling Mojito Refresher', seat: 'The terrace, in the sun', time: '3:30 to 6, drinks are half off'},
+    hh:        {label: 'Happy hour',   order: 'A Matcha Daddy, then a frozen Jamaica Daiquiri', seat: 'The terrace, in the sun', time: '3:30 to 6, all cocktails half off'},
     date:      {label: 'Date night',   order: "Monkey Business, then Abuela's Chocolate to share", seat: 'The banquette in the lounge', time: 'Evening, open until 10:30 pm'},
     celebrate: {label: 'Celebrating',  order: 'A round of Jamaica Me Crazy, then flan and tres leches for the table', seat: 'The terrace, under the string lights', time: 'Doors at 3:30, open until 10:30 pm'},
     because:   {label: 'Just because', order: 'El Clásico and a Churro sundae', seat: 'Up at the bar', time: 'Any time from 3:30 to 10:30 pm'}
   };
-  const PARTY = {'1': 'Just you, and the best stool at the bar', '2': 'Table for two', '4': 'A table for three or four', '5': 'Five or more, so bring the crew'};
+  const PARTY = {'1': 'Just you, and the best stool at the bar', '2': 'The two of you', '4': 'Three or four of you', '5': 'Five or more, so bring the crew'};
   const st = {party: '2', day: null, plan: document.documentElement.getAttribute('data-mode') === 'day' ? 'hh' : 'date'};
   let rel = {};   // weekday -> 'Today' / 'Tomorrow'
 
@@ -1905,11 +2018,11 @@ const CD_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
     q('[data-t-order]').textContent = p.order;
     q('[data-t-seat]').textContent = st.party === '1' ? 'Up at the bar' : p.seat;
     q('[data-t-time]').textContent = p.time;
-    let note = 'Walk-ins are welcome at the bar and on the terrace.';
-    if (st.party === '5') note = "Five or more? Message us and we'll set up the terrace, or take the whole house.";
-    else if (st.party === '1') note = 'Flying solo? Walk right in. The bar is yours.';
-    else if ((st.day === '5' || st.day === '6') && st.plan !== 'hh') note = 'Friday and Saturday nights fill by eight. Book the lounge ahead.';
-    else if (st.plan === 'hh') note = 'Walk-ins welcome. Arrive early for a spot on the terrace.';
+    let note = 'Walk-ins only. First come, first served.';
+    if (st.party === '5') note = 'Five or more? Come early for the picnic tables on the terrace, or message us about a private night.';
+    else if (st.party === '1') note = 'Flying solo? The bar is yours.';
+    else if ((st.day === '5' || st.day === '6') && st.plan !== 'hh') note = 'Friday and Saturday nights fill by eight. Come early for the banquette.';
+    else if (st.plan === 'hh') note = 'Get there at 3:30 for a spot on the terrace.';
     q('[data-t-note]').textContent = note;
   };
   root.querySelectorAll('.chips').forEach(c => c.addEventListener('click', e => {
@@ -1917,15 +2030,13 @@ const CD_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
     st[c.dataset.key] = b.dataset.v; render();
   }));
 
-  const book = q('[data-book]');
-  if (RESY_URL) { book.href = RESY_URL; book.textContent = 'Book on Resy'; } else { book.href = DM; book.textContent = 'Message us to book'; }
 
   const share = q('[data-share]');
   share.addEventListener('click', async () => {
     const p = PLANS[st.plan], d = dayName();
     const when = d === 'Today' || d === 'Tomorrow' ? d.toLowerCase() : d;
-    const text = `You're invited to Casa Dulce, ${when} for ${p.label.toLowerCase()}. ${p.order} first. 1561 S Commerce St, Las Vegas.`;
-    const url = location.origin + location.pathname + '#reserve';
+    const text = `You're invited to Casa Dulce, ${when} for ${p.label.toLowerCase()}. Order first: ${p.order.replace(/^A /, 'a ')}. Walk-ins only, so come early. 1561 S Commerce St, Las Vegas.`;
+    const url = location.origin + location.pathname + '#visit';
     const done = msg => { const was = 'Send the invite'; share.textContent = msg; setTimeout(() => { share.textContent = was; }, 2400); };
     if (navigator.share) { try { await navigator.share({title: 'Casa Dulce', text, url}); } catch (e) {} return; }
     if (matchMedia('(pointer: coarse)').matches) { location.href = 'sms:?&body=' + encodeURIComponent(text + ' ' + url); return; }
@@ -1936,6 +2047,49 @@ const CD_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
     }
   });
   render();
+})();
+
+// jobs: compose the application as an email (or send people to a hosted form once there is one)
+(() => {
+  const JOBS_FORM_URL = ''; // paste a hosted application form link here (Google Form, Typeform, Workstream...) and the button goes straight to it
+  const TO = 'hello@casadulcelv.com';
+  const form = document.querySelector('[data-jobs-form]'), ext = document.querySelector('[data-jobs-link]');
+  if (!form) return;
+  if (JOBS_FORM_URL) { ext.href = JOBS_FORM_URL; ext.hidden = false; form.hidden = true; return; }
+  form.querySelectorAll('.chips').forEach(c => c.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (c.hasAttribute('data-multi')) b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+    else c.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  }));
+  const picked = f => [...form.querySelectorAll(`.chips[data-field="${f}"] button[aria-pressed="true"]`)].map(b => b.dataset.v).join(', ');
+  const err = form.querySelector('[data-jobs-error]'), done = form.querySelector('[data-jobs-done]');
+  form.addEventListener('submit', async e => {
+    e.preventDefault(); form.classList.add('tried');
+    const v = n => form.elements[n].value.trim();
+    const missing = [];
+    if (!v('name')) missing.push('your name');
+    if (!form.elements.email.checkValidity() || !v('email')) missing.push('a valid email');
+    if (!v('about')) missing.push('a few lines about you');
+    if (!form.elements.age.checked) missing.push('confirmation that you are 21 or older');
+    if (missing.length) { err.textContent = 'Please add ' + missing.join(', ') + '.'; err.hidden = false; return; }
+    err.hidden = true;
+    const role = picked('role') || 'Open to anything';
+    const body = [
+      'Name: ' + v('name'), 'Email: ' + v('email'), 'Phone: ' + (v('phone') || 'not given'),
+      'Role: ' + role, 'Availability: ' + (picked('when') || 'flexible'), 'Instagram or resume: ' + (v('link') || 'not given'),
+      '21 or older: yes', '', 'About me:', v('about')
+    ].join('\n');
+    const subject = 'Job application: ' + role + ' · ' + v('name');
+    const mail = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    form.dataset.mailto = mail; location.href = mail;
+    done.innerHTML = '';
+    done.append("Your email app should open with your application. If it didn't, ");
+    const copy = document.createElement('button'); copy.type = 'button'; copy.className = 'f-copy'; copy.textContent = 'copy your application';
+    copy.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(subject + '\n\n' + body); copy.textContent = 'copied'; } catch (_) { copy.textContent = 'copy failed'; }
+    });
+    done.append(copy, ' and email it to ' + TO + '.'); done.hidden = false;
+  });
 })();
 </script>
 </body>
